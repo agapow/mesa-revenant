@@ -144,13 +144,16 @@ void MesaConsoleApp::askForSchemes
 				break;
 			
 			case kCmd_SchemeList:
+			{
 				cout << endl;
 				cout << "The schemes currently collected are:" << endl;
 				for (long i = 0; i < theSize; i++)
 					cout << "   " << i + 1 << ". " << (iSchemeArr[i])->describe() << endl;
 				break;
+			}
 				
 			case kCmd_SchemeDelete:
+			{
 				if (theSize == 1)
 					theTarget = 1;
 				else
@@ -159,13 +162,17 @@ void MesaConsoleApp::askForSchemes
 				assert (theTarget <= theSize);
 				iSchemeArr.remove (theTarget - 1);
 				break;
+			}
 				
 			case kCmd_SchemeNull:
+			{
 				iSchemeArr.adopt (new NullCeScheme ());
 				Report ("Null scheme added");			
 				break;
+			}
 				
 			case kCmd_SchemeDiscRankedMarkov:
+			{
 				theColIndex = askDiscTraitCol ("Choose a discrete trait");
 				theStates = askForStates ("Edit states for ranked markovian evolution");
 				double theUpFreq = askDouble ("What is the upwards rate", 0.0, 1.0);
@@ -173,13 +180,16 @@ void MesaConsoleApp::askForSchemes
 				iSchemeArr.adopt (new RankedMarkovianCeScheme (theColIndex, theStates,
 					theUpFreq, theDownFreq));
 				break;
+			}
 				
 			case kCmd_SchemeDiscMarkov:
+			{
 				theColIndex = askDiscTraitCol ("Choose a discrete trait");
 				theStates = askForStates ("Edit states for markovian evolution");
 				double theFreq = askDouble ("What is the transition rate", 0, kAnswerBounds_None);
 				iSchemeArr.adopt (new MarkovianCeScheme (theColIndex, theStates, theFreq));
 				break;
+			}
 			
 			/*
 			case kCmd_SchemeBinary:
@@ -323,13 +333,16 @@ CharStateSet MesaConsoleApp::askForStates (const char* iPrompt)
 				break;
 				
 			case kCmd_StateList:
+			{
 				cout << endl;
 				cout << "The states currently collected are:" << endl;
 				for (long i = 0; i < theSize; i++)
 					cout << "   " << i + 1 << ". " << theStates[i] << endl;
 				break;
+			}
 
 			case kCmd_StateDelete:
+			{
 				theTarget = 0;
 				if (theSize == 1)
 					theTarget = 1;
@@ -339,8 +352,10 @@ CharStateSet MesaConsoleApp::askForStates (const char* iPrompt)
 				assert (theTarget <= theSize);
 				theStates.deleteState (theTarget - 1);
 				break;
+			}
 				
 			case kCmd_StateAdd:
+			{
 				theNewState = askString("Enter a single trait for the new state");
 				sbl::eraseFlankingSpace (theNewState);
 				if (theNewState.size() != 1)
@@ -355,11 +370,14 @@ CharStateSet MesaConsoleApp::askForStates (const char* iPrompt)
 					Report ("A new state has been added");
 				}
 				break;
+			}
 				
 			case kCmd_StateSort:
+			{
 				theStates.sort();
 				Report ("The states have been sorted");
 				break;
+			}
 								
 			default:
 				assert (false); // shouldn't reach here

@@ -1081,10 +1081,13 @@ void MesaConsoleApp::doPrefsMenu ()
 		switch (theUserCmd)
 		{
 			case kCmd_Return:
+			{
 				return;
 				break;
+			}
 				
 			case kCmd_PrefTimeGrain:
+			{
 				cout << "Currently set to: " << MesaGlobals::mPrefs.mTimeGrain << endl;
 				if (askYesNo ("Change"))
 				{
@@ -1093,8 +1096,10 @@ void MesaConsoleApp::doPrefsMenu ()
 					cout << "Time granularity now set to: " << MesaGlobals::mPrefs.mTimeGrain << endl;
 				}
 				break;
+			}
 
 			case kCmd_PrefSetCladeLabels:
+			{
 				theChoice = int (MesaGlobals::mPrefs.mCladeLabels);
 				cout << "Currently set to: " << kPrefCladeLabels_Cstrs[theChoice] << endl;
 				theChoice = askChoice ("Label as phylo, CAIC, or hierachy", "pch",
@@ -1102,16 +1107,20 @@ void MesaConsoleApp::doPrefsMenu ()
 				MesaGlobals::mPrefs.mCladeLabels = (pref_cladelabels_t) theChoice;
 				cout << "Now set to: " << kPrefCladeLabels_Cstrs[theChoice] << endl;
 				break;
+			}
 				
 			case kCmd_PrefPadMatrix:
+			{
 				theOptionIsOn = MesaGlobals::mPrefs.mPadNumericOutput;
 				cout << "Prettyprint matrices in output files was set to" <<
 					(theOptionIsOn? "true" : "false") << ", is now " <<
 					(theOptionIsOn? "false" : "true") << "." << endl;
 				MesaGlobals::mPrefs.mPadNumericOutput = (not theOptionIsOn);
 				break;
+			}
 
 			case kCmd_PrefPreserveNodes:
+			{
 				theChoice = int (MesaGlobals::mPrefs.mPreserveNodes);
 				cout << "Currently set to: " << kPrefPreserveNodes_Cstrs[theChoice] << endl;
 				theChoice = askChoice ("Preserve none, root, root children", "nrc",
@@ -1119,31 +1128,40 @@ void MesaConsoleApp::doPrefsMenu ()
 				MesaGlobals::mPrefs.mPreserveNodes = (pref_preservenodes_t) theChoice;
 				cout << "Now set to: " << kPrefPreserveNodes_Cstrs[theChoice] << endl;
 				break;
+			}
 			
 			case kCmd_PrefWriteTranslation:
+			{
 				theOptionIsOn = MesaGlobals::mPrefs.mWriteTransCmd;
 				cout << "Writing a translation cmd was set to" <<
 					(theOptionIsOn? "true" : "false") << ", is now " <<
 					(theOptionIsOn? "false" : "true") << "." << endl;
 				MesaGlobals::mPrefs.mWriteTransCmd = (not theOptionIsOn);
 				break;
+			}
 
 			case kCmd_PrefWriteTaxa:
+			{
 				theOptionIsOn = MesaGlobals::mPrefs.mWriteTaxaBlock;
 				cout << "Writing a taxa block was set to" <<
 					(theOptionIsOn? "true" : "false") << ", is now " <<
 					(theOptionIsOn? "false" : "true") << "." << endl;
 				MesaGlobals::mPrefs.mWriteTaxaBlock = (not theOptionIsOn);
 				break;
+			}
 								
 			case kCmd_PrefSetRandSeed:
+			{
 				long theSeed = askInteger ("Set the random number seed to");
 				setRandomSeed (theSeed);
 				break;
+			}
 	
 
 			default:
+			{
 				ObeyCmd (theUserCmd);			
+			}
 		}
 	}
 	while (theUserCmd != kCmd_Return);	
@@ -1511,20 +1529,27 @@ void MesaConsoleApp::doTaskMenu ()
 		switch (theUserCmd)
 		{
 			case kCmd_QueueProgram:
+			{
 				doProgramQueue ();
 				break;
+			}
 				
 			case kCmd_Return:
+			{
 				// leave the switch and drop out of the while
 				break;
+			}
 			
 			case kCmd_QueueDeleteAll:
+			{
 				mModel->mActionQueue.clear();
 				cout << endl;
 				Report ("Action queue emptied");
 				break;
+			}
 				
 			case kCmd_QueueDelete:
+			{
 				cout << endl;
 				long theNumActions = mModel->mActionQueue.size();
 				long theTargetIndex;
@@ -1540,15 +1565,19 @@ void MesaConsoleApp::doTaskMenu ()
 				mModel->mActionQueue.deleteElement (theTargetIndex - 1);
 				Report ("Action deleted from queue");
 				break;
+			}
 				
 			case kCmd_QueueGo:
 			case kCmd_QueueGoTrees:
 			case kCmd_QueueGoN:
 			case kCmd_QueueGoRunAndRestore:
+			{
 				doRunQueue (theUserCmd);
 				break;
+			}
 
 			case kCmd_QueueList:
+			{
 				cout << endl;
 				// mModel->mActionQueue.detailedReport (&cout);
 				ActionQueue* theQueueP = &(mModel->mActionQueue);
@@ -1566,9 +1595,12 @@ void MesaConsoleApp::doTaskMenu ()
 					cout << theQueueP->describe (i) << std::endl;
 				}
 				break;
+			}
 				
 			default:
+			{
 				assert (false);
+			}
 		}
 	}
 	while (theUserCmd != kCmd_Return);	
@@ -1620,16 +1652,21 @@ void MesaConsoleApp::doProgramQueue ()
 		switch (theUserCmd)
 		{
 			case kCmd_Return:
+			{
 				// leave the switch and drop out of the while
 				break;
+			}
 			
 			case kCmd_QueueDeleteAll:
+			{
 				mModel->mActionQueue.clear();
 				cout << endl;
 				Report ("Action queue emptied");
 				break;
+			}
 				
 			case kCmd_QueueDelete:
+			{
 				cout << endl;
 				long theNumActions = mModel->mActionQueue.size();
 				long theTargetIndex;
@@ -1645,15 +1682,19 @@ void MesaConsoleApp::doProgramQueue ()
 				mModel->mActionQueue.deleteElement (theTargetIndex - 1);
 				Report ("Action deleted from queue");
 				break;
+			}
 				
 			case kCmd_QueueGo:
 			case kCmd_QueueGoTrees:
 			case kCmd_QueueGoN:
 			case kCmd_QueueGoRunAndRestore:
+			{
 				doRunQueue (theUserCmd);
 				break;
+			}
 
 			case kCmd_QueueList:
+			{
 				cout << endl;
 				// mModel->mActionQueue.detailedReport (&cout);
 				ActionQueue* theQueueP = &(mModel->mActionQueue);
@@ -1671,8 +1712,10 @@ void MesaConsoleApp::doProgramQueue ()
 					cout << theQueueP->describe (i) << std::endl;
 				}
 				break;
+			}
 				
 			default:
+			{
 				// for all other actions ...
 				
 				// ... program into queue with appropriate message ...
@@ -1700,6 +1743,7 @@ void MesaConsoleApp::doProgramQueue ()
 						doTaskMacroMenu (theNewMacro);
 					}
 				}
+			}
 		}
 	}
 	while (theUserCmd != kCmd_Return);	
@@ -2033,32 +2077,38 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 			theRichCol = askSppRichnessCol ();
 			theActionP = (BasicAnalysis*) new CountExtantTaxaAnalysis (theRichCol);
 			break;
+		}
 
 		case kCmd_AnalAllTaxa:
 		{
 			theRichCol = askSppRichnessCol ();
 			theActionP = (BasicAnalysis*) new CountAllTaxaAnalysis (theRichCol);
 			break;
+		}
 
 		case kCmd_AnalGeneticDiv:
 		{
 			theActionP = (BasicAnalysis*) new GeneticDiversityAnalysis;
 			break;
+		}
 
 		case kCmd_AnalPhyloDiv:
 		{
 			theActionP = (BasicAnalysis*) new PhyloDiversityAnalysis;
 			break;
+		}
 
 		case kCmd_AnalJackknifeGd:
 		{
 			theActionP = (BasicAnalysis*) new JackknifeGeneticDivAnalysis;
 			break;
+		}
 			
 		case kCmd_AnalJackknifePd:
 		{
 			theActionP = (BasicAnalysis*) new JackknifePhyloDivAnalysis;
 			break;
+		}
 		
 		case kCmd_AnalBootstrapGd:
 		{
@@ -2067,8 +2117,8 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 			long theNumSamples = askLong ("How many samples in each replicate",
 				1, kAnswerBounds_None);
 			theActionP = (BasicAnalysis*) new BootstrapGeneticDivAnalysis (theNumReps, theNumSamples);
-		}
 		break;
+		}
 		
 		case kCmd_AnalBootstrapPd:
 		{
@@ -2077,8 +2127,8 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 			long theNumSamples = askLong ("How many sample in each replicate",
 				1, kAnswerBounds_None);
 			theActionP = (BasicAnalysis*) new BootstrapPhyloDivAnalysis (theNumReps, theNumSamples);
-		}
 		break;
+		}
 			
 		case kCmd_AnalShannonDiv:
 		{
@@ -2126,6 +2176,7 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 		{
 			theActionP = (BasicAnalysis*) new SiteComplementarityAnalysis;
 			break;
+		}
 			
 		case kCmd_AnalPhyloAgeTree:
 		{
@@ -2181,8 +2232,8 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 			theActionP = (BasicAnalysis*) new XNodeInfoAnalysis (theNodeSelectorP, theSelectionCount,
 				theCalcAges, theCalcTimeToParent, theCalcChildren, theCalcLeaves,
 				theCalcSubtree, theCalcSiblings, theCalcHeight, theCalcTimeToRoot);
-		}
 		break;
+		}
 			
 		/*
 		case kCmd_AnalListNodes:
@@ -2215,8 +2266,8 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 				theContCols.push_back (theNextContCol);
 			/* theActionP =  (BasicAnalysis*) new CaicAnalysis (theDiscreteData,
 				theContPredictorCol, theContCols); */
-		}
 		break;
+		}
 
 		case kCmd_AnalMacroCaic:
 		{
@@ -2303,6 +2354,7 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 		{
 			theActionP = (BasicAnalysis*) new UltrametricAnalysis;
 			break;
+		}
 
 		case kCmd_MacroRunOnce:
 		{
@@ -2469,15 +2521,15 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 				"Enter 3 params (A*x^B + C) for calculating prob. of pruning:");
 			theActionP = (BasicAction*) new PruneByTraitAction (theCharCol,
 				theParamA, theParamB, theParamC);		
-		}
 		break;
+		}
 		
 		case kCmd_RulePrunIf:
 		{
 			CharComparator theTest = askSppTest ("Define how taxa are to be selected for pruning");
 			theActionP = (BasicAction*) new PruneIfAction (theTest);		
-		}
 		break;
+		}
 
 		case kCmd_SysActionSetLabels:
 		{
@@ -2513,7 +2565,6 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 
 
 EvolRule* MesaConsoleApp::newRule (cmdId_t iUserCmd)
-//: return an evolutionary rule
 {
 	EvolRule*   theRuleP = NULL;
 	double		theRate = 0.0;

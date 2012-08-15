@@ -73,7 +73,7 @@ public:
 	{
 		assert (ioNameVec.size() == base_type::countRows ()); ///
 		for (long i = 0; i < base_type::countRows (); i++) ///
-			setRowName (i, ioNameVec[i].c_str());
+			this->setRowName (i, ioNameVec[i].c_str());
 	}
 
 	void collectColNames (stringvec_t& ioNameVec)
@@ -311,3 +311,5 @@ private:
 
 
 // *** END ***************************************************************/
+
+

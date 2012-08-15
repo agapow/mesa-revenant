@@ -262,7 +262,7 @@ public:
 	
 	// INTERNALS
 private:
-	int   mProb;
+	double   mProb;
 	
 	void validate ()
 	{

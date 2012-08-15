@@ -1,6 +1,6 @@
 
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c
 LDFLAGS=
 
 SOURCES=Action.cpp CaicWriter.cpp discretematrix.cpp \
@@ -15,14 +15,15 @@ SOURCES=Action.cpp CaicWriter.cpp discretematrix.cpp \
    NexusWriter.cpp RichnessReader.cpp xnexus.cpp \
    assumptionsblock.cpp CharEvolScheme.cpp EvolRule.cpp MesaUtils.cpp \
    Numerics.cpp setreader.cpp XRate.cpp \
-   basiccmdline.cpp CharStateSet.cpp Macro.cpp NclBlocks.cpp \
+   CharStateSet.cpp Macro.cpp NclBlocks.cpp \
    nxsdate.cpp SimGlobals.cpp \
    Bounds.cpp datablock.cpp main.cpp NclReader.cpp \
    nxsstring.cpp SystemAction.cpp \
    CaicReader.cpp discretedatum.cpp makedoc.cpp ncltest.cpp \
    Prune.cpp TabDataReader.cpp RandomService.cpp StringUtils.cpp \
    CaicCode.cpp CaicReader.cpp CaicWriter.cpp \
-   CommandMgr.cpp ConsoleApp.cpp ConsoleMenuApp.cpp 
+   CommandMgr.cpp ConsoleApp.cpp ConsoleMenuApp.cpp \
+	BasicScanner.cpp StreamScanner.cpp StringScanner.cpp 
 
 OBJECTS=$(SOURCES:.cpp=.o)
 

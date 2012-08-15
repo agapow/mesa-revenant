@@ -323,9 +323,9 @@ public:
 	{
 		MesaTree* theTreeP = getActiveTreeP ();
 		theTreeP->getLiveLeaves (oTargetNodes);
-		nodearr_t::size_type theKillNum = oTargetNodes.size() * mKillFrac;
+		nodearr_t::size_type theKillNum = nodearr_t::size_type (oTargetNodes.size() * mKillFrac);
 		random_shuffle (oTargetNodes.begin(), oTargetNodes.end());
-		oTargetNodes.resize (mKillFrac);
+		oTargetNodes.resize (theKillNum);
 	}
 		
 	// INTERNALS
