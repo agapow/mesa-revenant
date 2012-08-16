@@ -34,4 +34,6 @@ MeSA was written by Paul Agapow (pma@agapow.net). It can be downloaded from
 ``http://www.agapow.net``. It includes callback functions
 (written by Rich Hickey) and the Nexus Class Library (written by Paul Lewis).
 
+If you use this program, please cite:
+
 
