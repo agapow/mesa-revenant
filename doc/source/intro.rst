@@ -1,5 +1,8 @@
-MeSA - macroevolutionary simulation and analysis
-================================================
+About MeSA 
+===========
+
+What does it do?
+----------------
 
 MeSA is a program for exploring phylogenies and deep evolutionary history. To
 this end it offers tools and functions for:
@@ -12,8 +15,8 @@ this end it offers tools and functions for:
   or over the same tree repeatedly, for statistical purposes 
 
 
-Caveats
-~~~~~~~
+Caveats and limitations
+-----------------------
 
 * Documentation is still an ongoing work.
 * Having been recently ported from an old architecture, some bugs may have been
@@ -25,9 +28,10 @@ Caveats
 
 
 Credits
-~~~~~~~
+-------
 
-MeSA was written by Paul Agapow (pma@agapow.net). It includes callback functions
+MeSA was written by Paul Agapow (pma@agapow.net). It can be downloaded from
+``http://www.agapow.net``. It includes callback functions
 (written by Rich Hickey) and the Nexus Class Library (written by Paul Lewis).
 
 

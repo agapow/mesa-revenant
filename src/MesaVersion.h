@@ -27,12 +27,12 @@ Changes:
 
 // *** CONSTANTS & DEFINES
 
-const char kMesaAppTitle[] = 			"MESA";
-const char kMesaVersion[] = 			"1.11";
-const char kMesaVersionDate[] =		"September 2008";
+const char kMesaAppTitle[] = 			"MeSA";
+const char kMesaVersion[] = 			"1.12";
+const char kMesaVersionDate[] =		"August 2012";
 const char kMesaAuthor[] =				"Paul-Michael Agapow";
-const char kMesaAuthorAddress[] =	"Institute for Animal Health";
-const char kMesaAuthorEmail[] =		"<mailto://mesa@agapow.net>";
+const char kMesaAuthorAddress[] =	"Centre for Infections, Health Protection Agency (UK)";
+const char kMesaAuthorEmail[] =		"<mailto://pma@agapow.net>";
 const char kMesaAuthorWeb[] =			"<http://www.agapow.net/software/mesa/>";
 
 
