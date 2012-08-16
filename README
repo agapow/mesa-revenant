@@ -1,0 +1,33 @@
+MeSA - macroevolutionary simulation and analysis
+================================================
+
+MeSA is a program for exploring phylogenies and deep evolutionary history. To
+this end it offers tools and functions for:
+
+* analysing the shape and other metrics of trees
+* simulating ("growing") trees under complex evolutionary scenarios
+* pruning or otherwise manipulating trees to simulate the results of extinction
+  or conservation schemes 
+* repetition and pipelining of the above functions over a population of trees,
+  or over the same tree repeatedly, for statistical purposes 
+
+
+Caveats
+~~~~~~~
+
+* Documentation is still an ongoing work.
+* Having been recently ported from an old architecture, some bugs may have been
+  introduced.
+* MeSA is currently distributed only as source code that requires compiling on
+  a Unix-like system (including OSX).
+* Interacting and using the analysis queue is admittedly awkward on the
+  commandline.
+
+
+Credits
+~~~~~~~
+
+MeSA was written by Paul Agapow (pma@agapow.net). It includes callback functions
+(written by Rich Hickey) and the Nexus Class Library (written by Paul Lewis).
+
+
