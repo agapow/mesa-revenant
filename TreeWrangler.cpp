@@ -64,7 +64,7 @@ std::string TreeWrangler::getTreeName (size_type iIndex)
 
 
 // *** MUTATORS **********************************************************/
-#pragma mark -
+
 
 void TreeWrangler::seedTree ()
 {
@@ -120,7 +120,7 @@ void TreeWrangler::deleteTree (int iIndex)
 
 
 // *** TREE ACCESS
-#pragma mark -
+
 
 MesaTree& TreeWrangler::getActiveTree ()
 {
@@ -188,7 +188,7 @@ void TreeWrangler::calcTranslationTable (TranslationTable* iTableP)
 	
 
 // *** I/O ***************************************************************/
-#pragma mark -
+
 
 void TreeWrangler::summarise (std::ostream& ioOutStream)
 {
@@ -236,7 +236,7 @@ void TreeWrangler::detailedReport (std::ostream& ioOutStream)
 
 
 // *** DEPRECATED & DEBUG ***********************************************/
-#pragma mark -
+
 
 void TreeWrangler::assertValidIndex (size_type iIndex) const
 //: just a debug function to catch bad accesses
@@ -259,7 +259,7 @@ void TreeWrangler::validate ()
 }
 	
 // *** INTERNALS *********************************************************/
-#pragma mark -
+
 
 inline MesaTree& TreeWrangler::refActiveTree ()
 //: returns a reference to the active tree

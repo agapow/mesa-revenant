@@ -132,3 +132,4 @@ void StringScanner::UnreadChar (char iLastChar)
 SBL_NAMESPACE_STOP
 
 // *** END
+

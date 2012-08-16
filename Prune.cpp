@@ -38,7 +38,7 @@ std::string BasicPrune::describe ()
 
 void PruneN::execute ()
 {
-	int theAnswer = (int) MesaGlobals::mTreeDataP->countTaxa();
+	int theAnswer = (int) MesaGlobals::mTreeDataP->getActiveTreeP()->countAliveLeaves();
 }
 	
 	
@@ -55,7 +55,7 @@ std::string PruneN::initDesc ()
 
 void PruneFraction::execute ()
 {
-	int theAnswer = (int) MesaGlobals::mTreeDataP->countTaxa();
+	int theAnswer = (int) MesaGlobals::mTreeDataP->getActiveTreeP()->countAliveLeaves();
 }
 
 
@@ -72,7 +72,7 @@ std::string PruneFraction::initDesc ()
 
 void PruneChance::execute ()
 {
-	int theAnswer = (int) MesaGlobals::mTreeDataP->countTaxa();
+	int theAnswer = (int) MesaGlobals::mTreeDataP->getActiveTreeP()->countAliveLeaves();
 }
 	
 
@@ -94,7 +94,7 @@ PruneCharacter::~PruneCharacter ()
 	
 void PruneCharacter::execute ()
 {
-	int theAnswer = (int) MesaGlobals::mTreeDataP->countTaxa();
+	int theAnswer = (int) MesaGlobals::mTreeDataP->getActiveTreeP()->countAliveLeaves();
 }
 	
 

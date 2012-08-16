@@ -399,3 +399,4 @@ bool CaicCode::isPossNeighbourTipOf (CaicCode& ikRelative)
 SBL_NAMESPACE_STOP
 
 // *** END
+

@@ -19,9 +19,9 @@ SOURCES=Action.cpp CaicWriter.cpp discretematrix.cpp \
    nxsdate.cpp SimGlobals.cpp \
    Bounds.cpp datablock.cpp main.cpp NclReader.cpp \
    nxsstring.cpp SystemAction.cpp \
-   CaicReader.cpp discretedatum.cpp makedoc.cpp ncltest.cpp \
+   CaicReader.cpp discretedatum.cpp \
    Prune.cpp TabDataReader.cpp RandomService.cpp StringUtils.cpp \
-   CaicCode.cpp CaicReader.cpp CaicWriter.cpp \
+   CaicCode.cpp \
    CommandMgr.cpp ConsoleApp.cpp ConsoleMenuApp.cpp \
 	BasicScanner.cpp StreamScanner.cpp StringScanner.cpp 
 
@@ -40,3 +40,4 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:
 	rm -rf *.o
+
