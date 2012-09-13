@@ -39,6 +39,7 @@ To Do:
 #include <cstdlib>
 #include <cctype>
 #include "StringUtils.h"
+#include <cstdio>
 
 using std::atoi;
 using std::atol;

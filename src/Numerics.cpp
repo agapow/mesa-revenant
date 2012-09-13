@@ -97,6 +97,22 @@ double factorialGosper (long n)
 }
 
 /**
+Return the gamma function for argument.
+
+@param  n  Only works for 1 <= z <= 142, but does allow non-integral values.
+@todo      Expand to other types via template?
+@todo      Better way of getting pi constant?
+@credits   Borrowed from <http://mindprod.com/jgloss/factorial.html>.
+*/
+double gamma (double z)
+{
+	return std::exp (-z) * std::pow (z, z-0.5) * std::sqrt (2*pi) *
+		(1 + 1/(12 * z) + 1/(288 * z * z) - 139 / (51840 * z * z * z) -
+		571 / (2488320 * z * z * z * z));
+}
+
+
+/**
 Calculate a factorial via the gamma function.
 
 "Enjoys" the limitations of the gamma function itself. 
@@ -114,20 +130,7 @@ double factorialStirling (long n)
 	return std::sqrt (2 * n * pi) * std::pow (double (n), double (n)) * std::exp (-n);
 }
 
-/**
-Return the gamma function for argument.
 
-@param  n  Only works for 1 <= z <= 142, but does allow non-integral values.
-@todo      Expand to other types via template?
-@todo      Better way of getting pi constant?
-@credits   Borrowed from <http://mindprod.com/jgloss/factorial.html>.
-*/
-double gamma (double z)
-{
-	return std::exp (-z) * std::pow (z, z-0.5) * std::sqrt (2*pi) *
-		(1 + 1/(12 * z) + 1/(288 * z * z) - 139 / (51840 * z * z * z) -
-		571 / (2488320 * z * z * z * z));
-}
 
 
 

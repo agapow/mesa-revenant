@@ -17,6 +17,7 @@ Credits:
 
 #include "Macro.h"
 #include <vector>
+#include <ostream>
 
 
 // *** CONSTANTS AND DEFINES
