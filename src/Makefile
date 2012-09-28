@@ -3,6 +3,11 @@ CC=g++
 CFLAGS=-c
 LDFLAGS=
 
+INSTALL=/usr/local/bin/install -c
+
+BINDIR=/usr/local/bin
+PREFIX=/usr/local
+
 SOURCES=Action.cpp CaicWriter.cpp discretematrix.cpp \
    MesaConsoleApp.cpp nexusblock.cpp QueueElement.cpp TabReader.cpp \
    ActionQueue.cpp callback.cpp distancedatum.cpp \
@@ -40,4 +45,16 @@ $(EXECUTABLE): $(OBJECTS)
 
 clean:
 	rm -rf *.o $(EXECUTABLE)
+
+#install: all
+        #$(INSTALL) tar $(bindir)/$(binprefix)tar
+        #-test ! -f rmt || $(INSTALL) rmt /etc/rmt
+
+
+
+install: all 
+	install -m 0755 $(EXECUTABLE) $(PREFIX)/bin
+    
+$(phony install)
+
 
