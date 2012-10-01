@@ -24,7 +24,7 @@ About:
   logical and format errors encountered during scanning and reading in.
   These errors have the general form "Parse Error (<location>, <message>)"
   which are specified by the subclasses.
-  
+
 Changes:
 - 99.9.2: created.
 - 99.9.15: expanded built-in types, changed name to Exception from
@@ -34,14 +34,14 @@ Changes:
   file, causing many compilation problems. Also had GetMsg outside the
   definition but because it lead to problems being multiply included in
   files and I didn't want to do a .cpp file just for it, so it's now
-  inside the definition. 
+  inside the definition.
 - 00.3.1: this used to be a general header for Sibil but now has to be
   specifically included. (This allows Sibil.h to be the single obligate
   header, and trims a bit of fat.) Rehashed the class architecture and
   responsibilities as above.
-- 00.10.31: removed any responsibility for formatting messages and 
+- 00.10.31: removed any responsibility for formatting messages and
   presentation from Error and made them now just containers of information.
-  
+
 To Do:
 - Introduce namespaces
 
@@ -72,16 +72,16 @@ public:
 	Error	()
 		: mDesc ("general error")
 		{}
-		
+
 	Error	(const char* iWhat)
 		: mDesc (iWhat)
 		{}
 
    ~Error	() throw()
 		{}
-      
 
-// *** ACCESSORS		
+
+// *** ACCESSORS
    //virtual const char* what() const throw()
 	const char* what () const  throw()
 		{ return mDesc.c_str ();}
@@ -89,10 +89,10 @@ public:
 	std::string		mDesc;	// specific description of error
 	std::string		mFile;	// file the error was thrown from
 	int				mLine;	// the line number the error was thrown from
-	
+
 // *** DEPRECIATED & DEBUG
 
-// *** INTERNALS	
+// *** INTERNALS
 private:
 };
 
@@ -104,7 +104,7 @@ private:
 
 class ParseError : public Error
 //: thrown when there is a problem converting a representation into data
-{ 
+{
 public:
 	ParseError ()
 		: Error ("parse error"),
@@ -117,9 +117,9 @@ public:
 	ParseError (long iLineNum, const char* ikDesc)
 		: Error (ikDesc), mLineNum (iLineNum)
 		{}
-   
+
    ~ParseError () throw() {};
-	
+
 	std::string		mSource;
 	long				mLineNum;
 	long				mColNum;
@@ -129,7 +129,7 @@ public:
 
 class EndOfFileError : public ParseError
 //: thrown when an end of file is unexpectedly encountered
-{ 
+{
 public:
 	EndOfFileError ()
 		: ParseError ("end-of-file unexpectedly encountered")
@@ -142,7 +142,7 @@ public:
 
 class ExpectedError : public ParseError
 //: thrown when an unexpected symbol or token is encountered
-{ 
+{
 public:
 	ExpectedError ()
 		: ParseError ("encountered an unexpected symbol")
@@ -152,10 +152,10 @@ public:
 			mDesc = "expected \'";
 			mDesc += ikExpSymbol;
 			mDesc += "\'";
-			if (ikEncSymbol != "") // if encountered symbol supplied
+			if (strcmp (ikEncSymbol, "") != 0) // if encountered symbol supplied
 			{
 				mDesc += ", found \'";
-				mDesc += ikEncSymbol;			
+				mDesc += ikEncSymbol;
 				mDesc += "\' instead";
 			}
 		}
@@ -165,7 +165,7 @@ public:
 class FormatError : public ParseError
 //: thrown when source is an unknown or invalid format
 // TO DO: need better name
-{ 
+{
 public:
 	FormatError ()
 		: ParseError ("source is an unknown or invalid format")
@@ -173,14 +173,14 @@ public:
 	FormatError (const char* iMsg)
 		: ParseError (iMsg)
 		{}
-		
+
 };
 
 
 class ConversionError : public ParseError
 //: thrown when a conversion between types fails
 // TO DO: need better name
-{ 
+{
 public:
 	ConversionError ()
 		: ParseError ("cannot convert string to target type")
@@ -190,10 +190,10 @@ public:
 			mDesc = "cannot convert \'";
 			mDesc += ikSrc;
 			mDesc += "\'";
-			if (ikDest != "") // if encountered symbol supplied
+			if (strcmp (ikDest, "") != 0) // if encountered symbol supplied
 			{
 				mDesc += " to ";
-				mDesc += ikDest;			
+				mDesc += ikDest;
 			}
 		}
 };
@@ -205,7 +205,7 @@ public:
 
 class FileError : public Error
 //: Thrown when there is a general problem with an external file.
-{ 
+{
 public:
 	FileError ()
 		: Error ("file error"), mPath ("")
@@ -213,7 +213,7 @@ public:
 	FileError (const char* ikDesc, const char* ikFileName = "")
 		: Error (ikDesc), mPath (ikFileName)
 		{}
-   
+
    ~FileError () throw() {};
 
 	std::string		mPath;
@@ -224,7 +224,7 @@ public:
 
 class FileIOError : public FileError
 //: Thrown when an external file cannot be read or written to
-{ 
+{
 public:
 	FileIOError ()
 		: FileError ("file I/O error")
@@ -237,7 +237,7 @@ public:
 
 class FileReadError : public FileIOError
 //: thrown when an external file cannot be read from
-{ 
+{
 public:
 	FileReadError ()
 		: FileIOError ("could not read from file")
@@ -250,7 +250,7 @@ public:
 
 class FileWriteError : public FileIOError
 //: thrown when an external file cannot be written to
-{ 
+{
 public:
 	FileWriteError ()
 		: FileIOError ("could not write to file")
@@ -263,7 +263,7 @@ public:
 
 class FileOpenError : public FileIOError
 //: thrown when an external file cannot be opened
-{ 
+{
 public:
 	FileOpenError ()
 		: FileIOError ("could not open file for I/O")
@@ -278,7 +278,7 @@ public:
 
 class MissingFileError : public FileError
 //: thrown when an external file cannot be located.
-{ 
+{
 public:
 	MissingFileError ()
 		: FileError ("file could not be located")
@@ -287,7 +287,7 @@ public:
 		: FileError (ikDesc, ikFileName)
 		{}
    ~MissingFileError () throw() {};
-   
+
 };
 
 
@@ -296,7 +296,7 @@ public:
 
 class UnimplementedError : public Error
 //: thrown when a function is called but has not been written yet.
-{ 
+{
 public:
 	UnimplementedError ()
 		: Error ("unimplemented function or command")
@@ -309,7 +309,7 @@ public:
 
 class IndexError : public Error
 //: thrown when a container is accessed at an out of bounds location
-{ 
+{
 public:
 	IndexError ()
 		: Error ("container indexed at bad location")

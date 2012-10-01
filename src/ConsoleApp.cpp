@@ -78,12 +78,12 @@ ConsoleApp::ConsoleApp ()
 	mAppTitle = kDefaultAppTitle;
 	mAppVersion = kDefaultAppVersion;
 	mAppCredits = kDefaultAppCredit;
-	
+
 	// set screen layout to reasonable defaults
 	mScreenColsWidth = 75;
 	mAboutBoxWidth = 60;
 	mPromptWidth = 60;
-	mCmdsVisible = false;	
+	mCmdsVisible = false;
 	CalcAboutBoxIndent();
 }
 
@@ -94,7 +94,7 @@ ConsoleApp::~ConsoleApp ()
 
 
 // *** APPLICATION FLOW **************************************************/
-#pragma mark -
+
 void ConsoleApp::Startup ()
 {
 	ShowAboutBox ();
@@ -106,7 +106,7 @@ void ConsoleApp::Startup ()
 void ConsoleApp::Quit ()
 {
 	cout << endl << "Goodbye";
-	
+
 	// if a proper app title has been defined
 	if (mAppTitle != kDefaultAppTitle)
 		cout << " from " << mAppTitle;
@@ -115,7 +115,7 @@ void ConsoleApp::Quit ()
 
 
 // *** DISPLAY & APPEARANCE FUNCTIONS *************************************/
-#pragma mark -
+
 // *** ABOUT BOX WRANGLING
 
 void ConsoleApp::ShowAboutBox ()
@@ -129,12 +129,12 @@ void ConsoleApp::ShowAboutBox ()
 		(mAppCredits.length() <= (mAboutBoxWidth - 4)));
 	for (ulong i = 0; i < mAppInfo.size (); i++)
 		assert (mAppInfo[i].length() <= (mAboutBoxWidth - 4));
-		
+
 	// print title box
 	// print the top
 	cout << endl;
 	PrintAboutBorder ();
-	
+
 	// print title & version, then credits
 	if ((mAppTitle.length() + mAppVersion.length()) <= (mAboutBoxWidth - 4))
 	{
@@ -148,12 +148,12 @@ void ConsoleApp::ShowAboutBox ()
 		PrintAboutString (mAppTitle);
 		PrintAboutString (mAppVersion);
 	}
-	
+
 	// print blank line then credits
 	string theTmpStr ("");
 	PrintAboutString (theTmpStr);
 	PrintAboutString (mAppCredits);
-	
+
 	// print other info if there is any
 	if (0 < mAppInfo.size())
 	{
@@ -164,7 +164,7 @@ void ConsoleApp::ShowAboutBox ()
 			p++;
 		}
 	}
-	
+
 	// finish the box
 	PrintAboutBorder ();
 	cout << endl;
@@ -178,23 +178,23 @@ void ConsoleApp::CalcAboutBoxIndent ()
 
 void ConsoleApp::PrintAboutString (string& iContentString)
 {
-	uint	theLengthContent = (uint) iContentString.length(), 
+	uint	theLengthContent = (uint) iContentString.length(),
 			theSpaceBefore = (uint) (mAboutBoxWidth - 2 - theLengthContent) / 2,
 			theSpaceAfter = (uint) mAboutBoxWidth - 2 - theLengthContent - theSpaceBefore;
 
-	for (int i = 0; i < mAboutBoxIndent; i++)
+	for (uint i = 0; i < mAboutBoxIndent; i++)
 		cout << " ";
 	cout << "*";
-	
-	for (int i = 0; i < theSpaceBefore; i++)
+
+	for (uint i = 0; i < theSpaceBefore; i++)
 		cout << " ";
-		
+
 	cout << iContentString.c_str();
-	
-	for (int i = 0; i < theSpaceAfter; i++)
+
+	for (uint i = 0; i < theSpaceAfter; i++)
 		cout << " ";
-		
-	cout << "*" << endl;	
+
+	cout << "*" << endl;
 }
 
 void ConsoleApp::PrintAboutBorder ()
@@ -208,7 +208,6 @@ void ConsoleApp::PrintAboutBorder ()
 
 
 // *** SCREEN SETTINGS ***************************************************/
-#pragma mark -
 
 // how wide do you want the screen to go?
 void ConsoleApp::SetCols (unsigned int iColsWidth)
@@ -241,7 +240,6 @@ void ConsoleApp::SetCmdVisibility (bool iCmdsVisible)
 
 
 // *** QUESTION FORMATTING ***********************************************/
-#pragma mark -
 // This section is a bit of a mess due to the development of the question
 // functions using different arguments at different times. The string&
 // version should disappear some time.
@@ -289,7 +287,6 @@ string ConsoleApp::getAnswer ()
 }
 
 // *** UI FUNCTIONS ******************************************************/
-#pragma mark -
 
 // *** REPORT TO USER
 // Note all of these accept a naked c string or "..." as a parameter.
@@ -323,7 +320,7 @@ void ConsoleApp::ReportProgress (const char* iMsg)
 }
 
 void ConsoleApp::Report (const char* iMsgCStr)
-//: Send an informative line of text to output. 
+//: Send an informative line of text to output.
 // CHANGE (00.11.30): this no longer does anything with the text other
 // than terminate the line it is on. Previously, it ended sentences
 // and so forth, but this proved fiddly. (Sometimes, you're sending a
@@ -333,7 +330,7 @@ void ConsoleApp::Report (const char* iMsgCStr)
 	string				theMsgStr (iPrompt);
 	string				theLineTerminator;
 	string::size_type	theLen = theMsgStr.size();
-	
+
 	if (theLen == 0)
 		theLineTerminator = "";
 	else
@@ -342,13 +339,13 @@ void ConsoleApp::Report (const char* iMsgCStr)
 		if ((theLastChar == '.') or (theLastChar == '!') or
 			(theLastChar == '\n') or (theLastChar == '\r'))
 			theLineTerminator = "";
-		else		
+		else
 			theLineTerminator = ".";
 	}
 	cout << theMsgStr << theLineTerminator << endl;
 */
 	string   theMsg (iMsgCStr);
-	
+
 	if (mPromptWidth <= theMsg.length())
 	{
 		// the question is too long so we need to format/wrap it
@@ -370,12 +367,12 @@ void ConsoleApp::Report (const char* iMsgCStr)
 }
 
 void ConsoleApp::ReportRaw (const char* iPrompt)
-//: Send unedited string to output. 
+//: Send unedited string to output.
 {
 	cout << iPrompt;
 }
 
-#pragma mark -
+
 // *** QUESTION & ANSWER FUNCTIONS
 // Given a few parameters and a prompt string, these fxns pose a question
 // to the user, perform some basic bulletproofing and error checking and
@@ -385,7 +382,7 @@ void ConsoleApp::ReportRaw (const char* iPrompt)
 string ConsoleApp::askString (const char* iPromptCstr)
 {
 	string	thePromptStr (iPromptCstr);
-	
+
 	thePromptStr += "?";
 	printQuestion (&thePromptStr);
 
@@ -394,7 +391,7 @@ string ConsoleApp::askString (const char* iPromptCstr)
 	//string	theAnswerStr (a);
 
 	string theAnswerStr = getAnswer();
-	
+
 	return (theAnswerStr);
 }
 
@@ -405,7 +402,7 @@ char ConsoleApp::askChar (const char* iPromptCstr)
 	// build prompt
 	string thePromptStr = iPromptCstr;
 	thePromptStr += "?";
-	
+
 	// ask question & scoop up answer
 	printQuestion (&thePromptStr);
 	string theAnswer = getAnswer();
@@ -469,15 +466,15 @@ double ConsoleApp::askDoubleHelper
 		else if (iUpperSet)
 			thePromptStrm << iUpper << " or less";
 		else
-			assert (false);			
-		thePromptStrm << "]";	
+			assert (false);
+		thePromptStrm << "]";
 	}
 	string thePromptStr = thePromptStrm.str();
-	
+
 	// ask question, grab answer
 	bool   theAnswerIsBad;
 	double theAnswer;
-	do 
+	do
 	{
 		// get the user input
 		printQuestion (thePromptStr.c_str());
@@ -489,16 +486,16 @@ double ConsoleApp::askDoubleHelper
 			ReportError ("That's not a floating-point number or integer");
 			continue;
 		}
-		
+
 		// convert
 		theAnswer = toDouble (theAnswerStr);
-		
+
 		// if it's outside the bounds
 		if (((iLowerSet and (theAnswer < iLower)) or
 			 (iUpperSet and (iUpper < theAnswer))))
 		{
 			ReportError("That's outside the possible range");
-			continue;	
+			continue;
 		}
 		else
 			theAnswerIsBad = false;
@@ -585,15 +582,15 @@ long ConsoleApp::askLongHelper
 		else if (iUpperSet)
 			thePromptStrm << iUpper << " or less";
 		else
-			assert (false);			
-		thePromptStrm << "]";	
+			assert (false);
+		thePromptStrm << "]";
 	}
 	string thePromptStr = thePromptStrm.str();
-	
+
 	// ask question, grab answer
 	bool   theAnswerIsBad;
 	long theAnswer;
-	do 
+	do
 	{
 		// get the user input
 		printQuestion (thePromptStr.c_str());
@@ -605,17 +602,17 @@ long ConsoleApp::askLongHelper
 			ReportError ("That's not a integer");
 			continue;
 		}
-		
+
 		// convert
       ///@todo check
 		theAnswer = toLong (theAnswerStr);
-		
+
 		// if it's outside the bounds
 		if (((iLowerSet and (theAnswer < iLower)) or
 			 (iUpperSet and (iUpper < theAnswer))))
 		{
 			ReportError("That's outside the possible range");
-			continue;	
+			continue;
 		}
 		else
 			theAnswerIsBad = false;
@@ -637,11 +634,11 @@ double ConsoleApp::askDouble (const char* iPromptCstr)
 	// form & print question
 	string 		thePromptStr (iPromptCstr);
 	thePromptStr += "?";
-	printQuestion (thePromptStr.c_str());	
-	
+	printQuestion (thePromptStr.c_str());
+
 	// grab & validate answer
 	string		theAnswerStr = getAnswer();
-	
+
 	if (isWhole (theAnswerStr))
 	{
 		return double (toLong (theAnswerStr));
@@ -653,7 +650,7 @@ double ConsoleApp::askDouble (const char* iPromptCstr)
 	else
 	{
 		ReportError ("That's not a floating-point number or integer");
-		return (askDouble (iPromptCstr));	
+		return (askDouble (iPromptCstr));
 	}
 }
 */
@@ -664,13 +661,13 @@ double ConsoleApp::askDoubleWithBounds
 	double         theAnswer;
 	stringstream   thePromptStr;
 	char           theBuffer[64];
-	
+
 	std::sprintf (theBuffer, "%s? [%.4g to %.4g]", iPrompt, iLower, iUpper);
 //	thePromptStr.precision(4);
 //	thePromptStr << iPrompt << "? [" << iLower << "to" << iUpper << "]\0";
-//	theAnswer = askDouble ((thePromptStr.str()).c_str());	
-	theAnswer = askDouble (theBuffer);	
-	
+//	theAnswer = askDouble ((thePromptStr.str()).c_str());
+	theAnswer = askDouble (theBuffer);
+
 	if ((iLower <= theAnswer) and (theAnswer <= iUpper))
 	{
 		return theAnswer;
@@ -678,7 +675,7 @@ double ConsoleApp::askDoubleWithBounds
 	else
 	{
 		ReportError("That's outside the possible range");
-		return (askDoubleWithBounds (iPrompt, iLower, iUpper));	
+		return (askDoubleWithBounds (iPrompt, iLower, iUpper));
 	}
 }
 
@@ -706,7 +703,7 @@ bool ConsoleApp::askYesNo (const char* iPromptCstr)
 	{
 		ReportError ("The answer must be \'y\' or \'n\'");
 		return askYesNo (iPromptCstr);
-	}	
+	}
 }
 
 
@@ -742,7 +739,7 @@ bool ConsoleApp::askYesNo (const char* iPromptCstr, bool iCurrentState)
 	{
 		ReportError ("The answer must be \'y\' or \'n\'");
 		return askYesNo (iPromptCstr);
-	}	
+	}
 }
 
 
@@ -756,10 +753,10 @@ bool ConsoleApp::askEitherOr
 				theChoiceStr2 (&iChoice2,1);
 
 	thePromptStr += "? [" + theChoiceStr1 + theChoiceStr2 + "]";
-	
+
 	printQuestion (&thePromptStr);
 	string theAnswer = getAnswer();
-	
+
 	if (theAnswer == theChoiceStr1)
 	{
 		return true;
@@ -774,7 +771,7 @@ bool ConsoleApp::askEitherOr
 			+ "\' or \'" + theChoiceStr2 + "\'";
 		ReportError (theErrorStr.c_str());
 		return askEitherOr (iPromptCstr, iChoice1, iChoice2);
-	}	
+	}
 }
 
 /*
@@ -783,14 +780,14 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, char iDef
 // A simplification of askMultiChoice().
 {
 	// Preconditions & argument prep:
-	bool theIsCurrChoice = (iDefChoice != '\0');	
+	bool theIsCurrChoice = (iDefChoice != '\0');
 	if (theIsCurrChoice)
 		assert (isMemberOf (iDefChoice, iChoiceCstr));
 
 	// Main:
 	string thePrompt (iPromptCstr);
 	string theChoices (iChoiceCstr);
-	
+
 	thePrompt += "? [";
 	thePrompt += theChoices;
 	if (theIsCurrChoice)
@@ -799,10 +796,10 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, char iDef
 		thePrompt += iDefChoice;
 		thePrompt += "\']";
 	}
-	
+
 	printQuestion (thePrompt);
 	string theRawAnswerStr = getAnswer();
-	
+
 	if ((theRawAnswerStr == "") and theIsCurrChoice)
 	{
 		// if a blank answer, return default if possible
@@ -812,7 +809,7 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, char iDef
 		return theStrIndex;
 	}
 	else
-	{	
+	{
 		// we should have a one char answer
 		// is the answer 1 char and in string of choices?
 		if (theRawAnswerStr.length() == 1)
@@ -837,7 +834,7 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, int iDefC
 // A simplification of askMultiChoice().
 {
 	// Preconditions & argument prep:
-	bool theIsCurrChoice = (iDefChoice != -1);	
+	bool theIsCurrChoice = (iDefChoice != -1);
 	if (theIsCurrChoice)
 	{
 		assert (0 <= iDefChoice);
@@ -847,7 +844,7 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, int iDefC
 	// Main:
 	string thePrompt (iPromptCstr);
 	string theChoices (iChoiceCstr);
-	
+
 	thePrompt += "? [";
 	thePrompt += theChoices;
 	if (theIsCurrChoice)
@@ -860,7 +857,7 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, int iDefC
 
 	printQuestion (thePrompt);
 	string theRawAnswerStr = getAnswer();
-	
+
 	if ((theRawAnswerStr == "") and theIsCurrChoice)
 	{
 		// if a blank answer, return default if possible
@@ -870,7 +867,7 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, int iDefC
 		return theStrIndex;
 	}
 	else
-	{	
+	{
 		// we should have a one char answer
 		// is the answer 1 char and in string of choices?
 		if (theRawAnswerStr.length() == 1)
@@ -896,11 +893,11 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr)
 // To Do: strip whitespace off front and back of answer.
 {
 	string	thePromptStr = iPromptCstr;
-	
+
 	thePromptStr += "? [";
 	thePromptStr += iChoiceStr;
 	thePromptStr += "]";
-	
+
 	printQuestion (thePromptStr);
 	string theRawAnswerStr = getAnswer();
 
@@ -911,7 +908,7 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr)
 		if (isMemberOf (theRawAnswerStr[0], iChoiceStr))
 			return theRawAnswerStr[0];
 	}
-	
+
 	// if we get this far, the answer is bad
 	string theErrorStr = "The answer must be one of \'";
 	theErrorStr += iChoiceStr;
@@ -924,22 +921,22 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr, char
 // A variant of the above function with a default choice
 {
 	assert (isMemberOf (iCurrChoice, iChoiceStr));
-	
+
 	string	thePromptStr = iPromptCstr;
-	
+
 	thePromptStr += "? [";
 	thePromptStr += iChoiceStr;
 	thePromptStr += ", default \'";
 	thePromptStr += iCurrChoice;
 	thePromptStr += "\']";
-	
+
 	printQuestion (thePromptStr);
 	string theRawAnswerStr = getAnswer();
 
 	// if a blank answer, return default
 	if (theRawAnswerStr == "")
 		return iCurrChoice;
-		
+
 	// is the answer 1 char and in string of choices?
 	bool	theAnswerIsGood = false;
 	if (theRawAnswerStr.length() == 1)
@@ -947,7 +944,7 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr, char
 		if (isMemberOf (theRawAnswerStr[0], iChoiceStr))
 			return theRawAnswerStr[0];
 	}
-	
+
 	// if we get this far, the answer is bad
 	string theErrorStr = "The answer must be one of \'";
 	theErrorStr += iChoiceStr;
@@ -958,7 +955,6 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr, char
 
 
 // *** DEPRECATED & DEBUG FUNCTIONS *************************************/
-#pragma mark -
 
 /*
 void ConsoleApp::AskStringQuestion (const char* iPrompt, char* oAnswer)
@@ -1004,7 +1000,7 @@ char ConsoleApp::AskMultiChoice (const char *iPromptCstr, char *iChoiceStr, char
 
 long ConsoleApp::askInteger (const char* iPromptCstr)
 // Changed from the above function so as to allow the input of negative
-// numbers and get away from magic arguments	
+// numbers and get away from magic arguments
 // To Do: should really bullet proof the answer to see it's an int
 // Gotcha: if you try and catch the answer with "cin >> theAnswerInt",
 // the eoln is left dangling on the input, as it's not part of an integer,
@@ -1016,7 +1012,7 @@ long ConsoleApp::askInteger (const char* iPromptCstr)
 
 	thePromptStr << iPromptCstr << "?\0";
 	// To do: honestly, there has to be a better way ...
-	printQuestion ((thePromptStr.str()).c_str());	
+	printQuestion ((thePromptStr.str()).c_str());
 	string theAnswerStr = getAnswer();
 	theAnswer = atol (theAnswerStr.c_str());
 	return theAnswer;
@@ -1033,14 +1029,14 @@ long ConsoleApp::askIntegerWithMax (const char* iPromptCstr, long iMax)
 	thePromptStr << iPromptCstr << "? [" << iMax << "-]\0";
 	printQuestion ((thePromptStr.str()).c_str());
 	try
-	{	
+	{
 		theAnswerStr = getAnswer ();
-		
+
 		if (theAnswerStr == "")
 			throw;
-			
+
 		theAnswer = atol (theAnswerStr.c_str());
-		
+
 		if (theAnswer <= iMax)
 			return theAnswer;
 		else
@@ -1049,9 +1045,9 @@ long ConsoleApp::askIntegerWithMax (const char* iPromptCstr, long iMax)
 	catch (...)
 	{
 		ReportError("That's outside the possible range");
-		return (askIntegerWithMax (iPromptCstr, iMax));	
+		return (askIntegerWithMax (iPromptCstr, iMax));
 	}
-	
+
 	return 0; // just to shut up compiler
 }
 
@@ -1063,10 +1059,10 @@ long ConsoleApp::askIntegerWithMin (const char* iPromptCstr, long iMin)
 	stringstream 		thePromptStr;
 
 	thePromptStr << iPromptCstr << "? [" << iMin << "+]\0";
-	printQuestion ((thePromptStr.str()).c_str());	
+	printQuestion ((thePromptStr.str()).c_str());
 	string theAnswerStr = getAnswer();
 	theAnswer = atol (theAnswerStr.c_str());
-	
+
 	if (iMin <= theAnswer)
 	{
 		return theAnswer;
@@ -1074,7 +1070,7 @@ long ConsoleApp::askIntegerWithMin (const char* iPromptCstr, long iMin)
 	else
 	{
 		ReportError("That's below the possible range");
-		return (askIntegerWithMin (iPromptCstr, iMin));	
+		return (askIntegerWithMin (iPromptCstr, iMin));
 	}
 }
 
@@ -1086,10 +1082,10 @@ long ConsoleApp::askIntegerWithBounds (const char* iPromptCstr, long iMin, long 
 	stringstream 		thePromptStr;
 
 	thePromptStr << iPromptCstr << "? [" << iMin << "-" << iMax << "]\0";
-	printQuestion ((thePromptStr.str()).c_str());	
+	printQuestion ((thePromptStr.str()).c_str());
 	string theAnswerStr = getAnswer();
 	theAnswer = atol (theAnswerStr.c_str());
-	
+
 	if ((iMin <= theAnswer) and (theAnswer <= iMax) and sbl::isWhole (theAnswerStr))
 	{
 		return theAnswer;
@@ -1097,7 +1093,7 @@ long ConsoleApp::askIntegerWithBounds (const char* iPromptCstr, long iMin, long 
 	else
 	{
 		ReportError("That's outside the possible range");
-		return (askIntegerWithBounds (iPromptCstr, iMin, iMax));	
+		return (askIntegerWithBounds (iPromptCstr, iMin, iMax));
 	}
 }
 

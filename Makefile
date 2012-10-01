@@ -1,4 +1,4 @@
-PACKAGE = jupiter
+PACKAGE = mesa
 VERSION = 1.9.5
 TAR_NAME = $(PACKAGE)
 DIST_DIR = $(TAR_NAME)-$(VERSION)
