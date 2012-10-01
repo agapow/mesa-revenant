@@ -37,7 +37,7 @@ EXECUTABLE=mesa
 
 all: $(SOURCES) $(EXECUTABLE)
 	
-$(EXECUTABLE): $(OBJECTS) 
+$(EXECUTABLE) $(PACKAGE): $(OBJECTS) 
 	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 .cpp.o:
