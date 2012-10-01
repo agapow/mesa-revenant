@@ -10,7 +10,7 @@ Credits:
 About:
 - A simple way of creating, tracking and manipulating phylogenetic codes,
   as used in the CAIC suite of programs. [Purvis, 1995 #850]
-  
+
 Changes:
 - (99.12.10) created.
 - (00.9.21) created again.
@@ -102,12 +102,12 @@ bool CaicCode::isParentOf (CaicCode& ikChild)
 	{
 		return isAncestorOf (ikChild);
 	}
-	
+
 	return false;
 }
 
 bool CaicCode::isChildOf (CaicCode& ikParent)
-//: is this code a child of the parameter code? 
+//: is this code a child of the parameter code?
 // Literally, are the initial (length-1) chars of this code equal to the
 // whole parameter code?
 {
@@ -119,18 +119,18 @@ bool CaicCode::isAncestorOf (CaicCode& ikDescendant)
 // Literally, does this code form the initial part of the parameter?
 {
 	string	theChildCode = ikDescendant.str();
-	
+
 	if (mCode.length() < theChildCode.length())
 	{
-		for (int i = 0; i < mCode.length(); i++)
+		for (uint i = 0; i < mCode.length(); i++)
 		{
 			if (mCode[i] != theChildCode[i])
-				return false;	
+				return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -146,19 +146,19 @@ bool CaicCode::isSiblingOf (CaicCode& ikSibling)
 // That is, do they share all but the last letter of their code?
 {
 	string	theSiblingCode = ikSibling.str();
-	
+
 	// if it could be the immediate parent
 	if (mCode.length() == theSiblingCode.length())
 	{
-		for (int i = 0; i < (mCode.length() - 1); i++)
+		for (uint i = 0; i < (mCode.length() - 1); i++)
 		{
 			if (mCode[i] != theSiblingCode[i])
-				return false;	
+				return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -195,8 +195,8 @@ void CaicCode::increment ()
 	else // incrementing a letter
 	{
 		string::size_type theFinalIndex = mCode.size() - 1;
-		mCode[theFinalIndex] = nextChar (mCode[theFinalIndex]);		
-	}		
+		mCode[theFinalIndex] = nextChar (mCode[theFinalIndex]);
+	}
 }
 
 /**
@@ -245,7 +245,7 @@ char CaicCode::popFront ()
 Convert a clade index into the corresponding single letter CAIC code.
 
 The ordering of CAIC codes has been somewhat inconsistent, so
-this is what we are settling upon. The code for an empty tree is 
+this is what we are settling upon. The code for an empty tree is
 undefined. The code for the root is a blank string "". The code for
 the 1st node of the root is "A", the 2nd "B" and so on. The code for
 the 1st node of the 1st node of the root is "AA", the 2nd node of the
@@ -260,7 +260,7 @@ char CaicCode::indexToChar (CaicCode::size_type iCladeIndex)
 {
 	// preconditions:
 	assert (0 <= iCladeIndex);
-	
+
 	// Main:
 	if (iCladeIndex < 26)
 		return 'A' + iCladeIndex;
@@ -280,7 +280,7 @@ size_type CaicCode::charToIndex (char iCladeChar)
 {
 	// Preconditions:
 	assert ('A' <= iCladeChar);
-	
+
 	// Main:
 	size_type theIndex = -1;
 	if (iCladeChar < 'Z')
@@ -292,7 +292,7 @@ size_type CaicCode::charToIndex (char iCladeChar)
 		assert (iCladeChar == '-');
 		theIndex = 52;
 	}
-	
+
 	// Postconditions & return:
 	assert (0 <= theIndex);
 	assert (theIndex <= 52);
@@ -311,7 +311,7 @@ char CaicCode::nextChar (char iCladeChar)
 	// note this won't catch all cases of bad codes
 	assert ('A' <= iCladeChar);
 	assert (iCladeChar <= '-');
-	
+
 	// Main:
 	if (('A' <= iCladeChar) and (iCladeChar < 'Z'))
 		return iCladeChar + 1;
@@ -319,7 +319,7 @@ char CaicCode::nextChar (char iCladeChar)
 		return 'a';
 	else if (('a' <= iCladeChar) and (iCladeChar < 'z'))
 		return iCladeChar + 1;
-	else 
+	else
 	{
 		assert ((iCladeChar == 'Z') or (iCladeChar == '-'));
 		return '-';
@@ -328,7 +328,6 @@ char CaicCode::nextChar (char iCladeChar)
 
 
 // *** AUXILLIARY & HELPER FXNS ******************************************/
-#pragma mark -
 
 /**
 Stream the code to output as a simple string.
@@ -341,7 +340,6 @@ std::ostream& operator<< (std::ostream& ioStream, CaicCode& iCode)
 
 
 // *** DEPRECATED & TEST FUNCTIONS **************************************/
-#pragma mark -
 
 /*
 
@@ -359,7 +357,7 @@ bool CaicCode::isPossNeighbourTipOf (CaicCode& ikRelative)
 	{
 		return false;
 	}
-	
+
 	// if siblings, are your codes next to each other?
 	if (IsSiblingOf(ikRelative))
 	{
@@ -370,27 +368,27 @@ bool CaicCode::isPossNeighbourTipOf (CaicCode& ikRelative)
 		else
 			return false;
 	}
-	
+
 	// otherwise we are going to have to compare unit by unit
 	string theShortCode = mCode;
 	string theLongCode = ikRelative.str();
 	if (theLongCode.size() < theShortCode.size())
 		Swap (theLongCode, theShortCode);
-		
+
 	string	theSiblingCode = ikSibling.str();
-	
+
 	// if it could be the immediate parent
 	if (mCode.length() == theSiblingCode.length())
 	{
 		for (int i = 0; i < mCode.length(); i++)
 		{
 			if (mCode[i] != theSiblingCode[i])
-				return false;	
+				return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	return false;
 }
 */

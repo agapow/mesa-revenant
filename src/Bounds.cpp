@@ -13,7 +13,6 @@ About:
 **************************************************************************/
 
 // *** INCLUDES
-#pragma mark "Includes"
 
 #include "Bounds.h"
 #include <cassert>
@@ -26,7 +25,6 @@ SBL_NAMESPACE_START
 // *** CLASS DECLARATION *************************************************/
 
 // *** LIFECYCLE
-#pragma mark -
 
 Bounds::Bounds ()
 //: default ctor, that sets Bounds as open-ended
@@ -34,27 +32,27 @@ Bounds::Bounds ()
 {
 
 }
-	
+
 Bounds::Bounds (double iLower, double iUpper)
 //: ctor that sets upper and lower bounds on Bounds
 : mLower (iLower), mUpper (iUpper), mLowerSet (true), mUpperSet (true)
 {
 	assert (iLower <= iUpper);
-}		
+}
 
 Bounds::Bounds (unbounded_t iLower, double iUpper)
 //: ctor that sets upper and lower bounds on Bounds
 : mUpper (iUpper), mLowerSet (false), mUpperSet (true)
 {
 	iLower = iLower; // just to shut compiler up
-}		
+}
 
 Bounds::Bounds (double iLower, unbounded_t iUpper)
 //: ctor that sets upper and lower bounds on Bounds
 : mLower (iLower), mLowerSet (true), mUpperSet (false)
 {
 	iUpper = iUpper; // just to shut compiler up
-}		
+}
 
 
 // *** ACCESSORS
@@ -112,7 +110,6 @@ bool Bounds::isInside (double iVal)
 
 
 // *** MUTATORS
-#pragma mark -
 
 void Bounds::setUpper (double iVal)
 //: set an upper bound on the Bounds
@@ -137,14 +134,14 @@ void Bounds::unsetUpper ()
 {
 	mUpperSet = false;
 }
-	
+
 void Bounds::unsetLower ()
 //: remove lower bound (if any) and give the Bounds an open lower end
 {
 	mLowerSet = false;
 }
-	
-	
+
+
 // *** DEPRECIATE & DEBUG
 #pragma mark -
 

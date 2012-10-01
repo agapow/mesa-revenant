@@ -27,15 +27,15 @@ Changes:
   cannot be guaranteed in derived classes. For example, Unread fxns have
   unpredictable semantics. What does it mean to "unread" a character?
   What if this character was not the char that was originally read off?
-  How does it cope with information that has been filtered out of the 
+  How does it cope with information that has been filtered out of the
   input (like comments)? Thus unread has been depreciated in favour of
   Peek() and Goto().
 - 00.3.13: - Keeping track of line counts is a great hassle. It means that
   Goto must step over every char between the current and new positions to
   keep track  of how the line number changes. It strikes me that line number
   is called  for usually in error conditions, while Goto is called quite
-  frequently. Maybe GetLineIndex() should calculate it on the fly. 
-   
+  frequently. Maybe GetLineIndex() should calculate it on the fly.
+
 To Do:
 - Should it throw when it reaches the end of file? How do we handle eof?
 - Correct treatment of copy & assignment constructors?
@@ -62,7 +62,7 @@ To Do:
   fxns to return the sucess status, & rely on PeekChar to find out the
   terminating condition; (2) have a "Throw On EOF" flag that can be set
   during reading units that connot end abruptly.
-  
+
 **************************************************************************/
 
 
@@ -114,7 +114,7 @@ eoln_t BasicScanner::DetectEoln ()
 	eoln_t	theResult = kEoln_Unknown;
 	char		theInChar;
 	posn_t	thePosn	= Rewind();	// bookmark posn & goto beginning
-	
+
 	while (GetChar (theInChar) and not isDetected)
 	{
 		switch (theInChar)
@@ -142,29 +142,29 @@ eoln_t BasicScanner::DetectEoln ()
 					// DBG_MSG("detecteoln kEoln_Unknown");
 				}
 				break;
-				
+
 			case '\r':
 				isDetected = true;
 				theResult = kEoln_Mac;				// \r is unix
 				// DBG_MSG("detecteoln kEoln_Mac");
 				break;
-				
+
 			default:
 				// do nothing
 				// DBG_MSG("detecteoln default");
 				break;
 		}
 	}
-	
+
 	// if you reach here without detection, it's a mystery
 	Goto (thePosn);
 	mEolnType = theResult;
 	return theResult;
-}		
+}
 
 
 uint BasicScanner::GetLineIndex ()
-{ 
+{
 	posn_t	theCurrPosn = Rewind ();
 	uint		theNumCr = 0;
 	uint		theNumLf = 0;
@@ -173,18 +173,18 @@ uint BasicScanner::GetLineIndex ()
 	while (GetPosn() != theCurrPosn)
 	{
 		char	theCurrChar;
-		
+
 		GetChar (theCurrChar);
-		
+
 		if (theCurrChar == '\r')
 			theNumCr++;
 		else if (theCurrChar == '\n')
 			theNumLf++;
 	}
-	
+
 	// based on above totals and type of line-ending, how many lines?
 	uint theNumLines = 0;
-	
+
 	switch (mEolnType)
 	{
 		case kEoln_Unknown:
@@ -195,11 +195,11 @@ uint BasicScanner::GetLineIndex ()
 			else
 				theNumLines = 0;
 			break;
-			
+
 		case kEoln_Dos:
 			theNumLines = (theNumCr + 1);
 			break;
-			
+
 		case kEoln_Mac:
 			theNumLines = (theNumCr + 1);
 			break;
@@ -208,11 +208,11 @@ uint BasicScanner::GetLineIndex ()
 			theNumLines = (theNumLf + 1);
 			break;
 
-		default:					
+		default:
 			assert (false);	// shouldn't get here
 	}
-	
-	return theNumLines;			// to keep compiler quiet			
+
+	return theNumLines;			// to keep compiler quiet
 }
 
 
@@ -226,7 +226,7 @@ uint BasicScanner::GetLineIndex ()
 // out of data or other circumstances conspire to prevent data being read.
 // Changes: 00.3.9 - changed this from _the_ reading primitive (which is
 // now GetChar) to the call that delivers the filtered output, that which
-// is stripped of comments etc. Thus ReadChar can now be defined in the 
+// is stripped of comments etc. Thus ReadChar can now be defined in the
 // abstract base class, and need not be defined for all derived classes.
 // This is the call that all high-level reading functions should use -
 // direct calls to GetChar() are verboten.
@@ -234,7 +234,7 @@ uint BasicScanner::GetLineIndex ()
 // helper functions for clarity.
 // !! Changes: 00.3.17 - set char to NULL in failure conditions, so that if
 // the return status is ignored, the failure won't be quiet.
-// !! Changes: 00.3.17 - allow comments to be space 
+// !! Changes: 00.3.17 - allow comments to be space
 // !! To Do: maybe there should be a "compress space" flag where
 // contiguous sequences of spaces are compressed into one.
 // !! To Do: what about nested and line comments?
@@ -244,13 +244,13 @@ bool BasicScanner::ReadChar (char& oCurrChar)
 	if (IsCommentDelim (mStartComment))
 	{
 		SkipWhileComment();
-	
+
 		// allows comments to be whitespace & interrupt tokens
 		if (mCommentsAreSpace == true)
 		{
 			if (0 < mSpace.length())
 				oCurrChar = mSpace[0];
-			else 
+			else
 				oCurrChar = ' ';
 		}
 	}
@@ -278,8 +278,8 @@ bool BasicScanner::ReadChar (char& oCurrChar)
 // If no stopComment is defined an error is thrown, because no stop can be
 // found. If no startComment is defined, that's alright because that means
 // no comment can ever be started.
-// !! Note: if an end of source is encountered before the identity of a 
-// delimiter is established, the delimiter is not detected. This is a 
+// !! Note: if an end of source is encountered before the identity of a
+// delimiter is established, the delimiter is not detected. This is a
 // probable error condition, but we wait until we directly encounter the
 // end of source before panicking. If end-of-source is encountered before
 // a comment is closed, this is an error (according to C++ behaviour).
@@ -288,11 +288,11 @@ void BasicScanner::SkipWhileComment ()
 	// if the current posn does not or cannot herald a comment, return
 	if ((0 == mStartComment.length()) or (not IsCommentDelim (mStartComment)))
 		return;
-	
+
 	// now we are starting a comment - consume the start
 	DBG_BLOCK(std::string dbgStart);
 	char	theNextChar;
-	
+
 	for (int i = 0; i < mStartComment.length(); i++)
 	{
 		char theNextChar;
@@ -300,12 +300,12 @@ void BasicScanner::SkipWhileComment ()
 		DBG_BLOCK(dbgStart += theNextChar);
 	}
 	DBG_BLOCK(assert (dbgStart == mStartComment));
-	
+
 	// look for the comment end
 	if (0 == mStopComment.size())
 		throw ParseError ("no comment stop defined");
-		
-	bool theStopIsFound = false;	
+
+	bool theStopIsFound = false;
 	do
 	{
 		// found it! stop here!
@@ -316,7 +316,7 @@ void BasicScanner::SkipWhileComment ()
 		}
 	}
 	while  (GetChar(theNextChar));
-	
+
 	// if the end isn't found, we have a run on comment or unexpected
 	// end of source. Throw.
 	if (theStopIsFound == false)
@@ -332,7 +332,7 @@ void BasicScanner::SkipWhileComment ()
 		DBG_BLOCK(dbgStop += theNextChar);
 	}
 	DBG_BLOCK(assert (dbgStop == mStopComment));
-}	
+}
 
 
 // IS COMMENT DELIMITER
@@ -342,7 +342,7 @@ void BasicScanner::SkipWhileComment ()
 // completed in full. If it is interrupted by end of source, it does not
 // count. It is left to higher functions like SkipComment() to handle
 // these error conditions. (You never know where this fxn will be called
-// from.) 
+// from.)
 // !! Note: this way of processing comments is definitely less efficient
 // but it has greater clarity and is more robust to changes. Also it means
 // the function only returns from one location (not counting
@@ -367,13 +367,13 @@ bool BasicScanner::IsCommentDelim (std::string& theDelim)
 		if (not GetChar (theNextChar))
 			break;
 
-		// if the input doesn't match delimiter, break 
+		// if the input doesn't match delimiter, break
 		theTarget += theNextChar;
 		assert (*(theTarget.end() - 1) == theNextChar);
 		if (theDelim.compare (0, theTarget.length(), theTarget) != 0)
 			break;
 	}
-	
+
 	if (theTarget == theDelim)
 	{
 		// we found a comment delim
@@ -383,7 +383,7 @@ bool BasicScanner::IsCommentDelim (std::string& theDelim)
 
 	// in any event, rollback to start of delimiter
 	Goto (theStartPosn);
-	
+
 	return theSucess;
 }
 
@@ -433,7 +433,7 @@ posn_t BasicScanner::Wind ()
 char BasicScanner::ConsumeWhile (const char *iCharSet)
 {
 	char theInChar;
-	
+
 	// while the source still has something in it
 	while (ReadChar (theInChar))
 	{
@@ -445,20 +445,20 @@ char BasicScanner::ConsumeWhile (const char *iCharSet)
 			return theInChar;
 		}
 	}
-	
+
 	// if you reach here, you've hit the end of the file
 	return theInChar;
 }
 
 
 // CONSUME UNTIL
-// Keep consuming until you meet one of these characters. Reset to just 
+// Keep consuming until you meet one of these characters. Reset to just
 // before character. Tested 99.10.8
 // To Do: what happens if it never finds the token?
 void BasicScanner::ConsumeUntil (const char *iCharSet)
 {
 	char theInChar;
-	
+
 	// while the source still has something in it
 	while (ReadChar (theInChar))
 	{
@@ -468,7 +468,7 @@ void BasicScanner::ConsumeUntil (const char *iCharSet)
 			// rollback & return
 			UnreadChar (theInChar);
 			return;
-		} 
+		}
 	}
 }
 
@@ -484,7 +484,7 @@ void BasicScanner::ConsumeUntilToken (const char *iToken, bool iEatStop)
 	int 	theTokenLen = (int) strlen (iToken);
 	char	theInChar;
 	assert (0 < theTokenLen);
-	
+
 	while (ReadChar (theInChar))
 	{
 		// if found the first letter of the token
@@ -510,13 +510,13 @@ void BasicScanner::ConsumeUntilToken (const char *iToken, bool iEatStop)
 					Goto (thePosn);
 				return;
 			}
-		} 
+		}
 	}
 }
 
 
 // CONSUME SPACE
-// Keep eating whitespace until you find something that isn't. Note this 
+// Keep eating whitespace until you find something that isn't. Note this
 // only copes with the printables & common whitespace.
 // Changes: 00.3.8 - now returns terminating char
 char BasicScanner::ConsumeSpace ()
@@ -531,31 +531,31 @@ char BasicScanner::ConsumeSpace ()
 void BasicScanner::ConsumeLine ()
 {
 	char theInChar;
-	
+
 	switch (mEolnType)
 	{
 		case kEoln_Unknown:
 			ConsumeUntil ("\n\r");
 			ReadChar (theInChar);
 			break;
-			
+
 		case kEoln_Dos:
 			ConsumeUntil ("\n");
 			ReadChar (theInChar);
 			ReadChar (theInChar);
 			assert (theInChar == '\r');
 			break;
-			
+
 		case kEoln_Mac:
 			ConsumeUntil ("\r");
 			ReadChar (theInChar);
 			break;
-			
+
 		case kEoln_Unix:
 			ConsumeUntil ("\n");
 			ReadChar (theInChar);
 			break;
-			
+
 		default:
 			assert (false);
 			break;
@@ -571,11 +571,11 @@ void BasicScanner::ConsumeLine ()
 // READ FORMAT (string&, const char*)
 // Read format and store token in single string. Throw if it doesn't
 // match the obligate parts of the the format supplied.
-// !! To Do: expand to include 
+// !! To Do: expand to include
 void BasicScanner::ReadFormat (std::string& oToken, const char* ikFormat)
 {
 	uint theFormatLen = strlen(ikFormat);
-	
+
 	for (uint i = 0; i < theFormatLen; i++)
 	{
 		char theTokenType = ikFormat[i];
@@ -591,7 +591,7 @@ void BasicScanner::ReadFormat (std::string& oToken, const char* ikFormat)
 					throw ExpectedError("tab", (std::string(1,theInChar)).c_str());
 				break;
 			}
-			
+
 			case 'w':
 			{
 				char theInChar;
@@ -602,12 +602,12 @@ void BasicScanner::ReadFormat (std::string& oToken, const char* ikFormat)
 					throw ExpectedError("expected tab");
 				break;
 			}
-		
+
 			default:
 				assert(false);
 		}
-	
-	}	
+
+	}
 }
 
 
@@ -618,7 +618,7 @@ void BasicScanner::ReadFormat
 (std::vector<std::string>& oTokenVector, const char* ikFormat)
 {
 	uint theFormatLen = strlen(ikFormat);
-	
+
 	for (uint i = 0; i < theFormatLen; i++)
 	{
 		char theTokenType = ikFormat[i];
@@ -634,7 +634,7 @@ void BasicScanner::ReadFormat
 					throw ExpectedError("expected tab");
 				break;
 			}
-			
+
 			case 'w':
 			{
 				char theInChar;
@@ -645,18 +645,17 @@ void BasicScanner::ReadFormat
 					throw ExpectedError("expected tab");
 				break;
 			}
-		
+
 			default:
 				assert(false);
 		}
-	}	
+	}
 }
 
 
 // *** READ PRIMITIVES
-#pragma mark -
 
-// IS MEMBER 
+// IS MEMBER
 // Is the testchar (2nd arg) found in the first set (1st arg)? If
 // so return true. Note there is an equivalent function in StringUtils but
 // we put this here for cohesion.
@@ -702,7 +701,7 @@ char BasicScanner::Read
 {
 	char theInChar;
 	ioToken = "";		// purge buffer
-	
+
 	// while the source still has something in it
 	while (ReadChar (theInChar))
 	{
@@ -719,7 +718,7 @@ char BasicScanner::Read
 			ioToken.append (1, theInChar);
 		}
 	}
-	
+
 	// If you get here, the read has been terminated by the end of source.
 	return 127;
 }
@@ -746,13 +745,13 @@ void 	BasicScanner::ReadLine (std::string& ioLine, bool iEatSpace)
 {
 	char theInChar, theTmpChar;
 	ioLine = "";		// purge buffer
-	
+
 	if (iEatSpace)
 		ConsumeSpace();
-		
+
 	switch (mEolnType)
 	{
-		case kEoln_Unknown: 
+		case kEoln_Unknown:
 			// DBG_MSG("readline kEoln_Unknown");
 			theTmpChar = Read (ioLine, "\n\r");
 			// DBG_MSG("testing " << theTmpChar  << (int) theTmpChar << " '" << ioLine << "' " << ioLine.size());
@@ -771,7 +770,7 @@ void 	BasicScanner::ReadLine (std::string& ioLine, bool iEatSpace)
 					assert (false);
 			}
 			break;
-			
+
 		case kEoln_Dos:
 			// DBG_MSG("readline kEoln_Dos");
 			Read (ioLine, "\n");
@@ -779,27 +778,27 @@ void 	BasicScanner::ReadLine (std::string& ioLine, bool iEatSpace)
 			ReadChar (theInChar);
 			assert (theInChar == '\r');
 			break;
-			
+
 		case kEoln_Mac:
 			// DBG_MSG("readline kEoln_mac");
 			Read (ioLine, "\r");
 			ReadChar (theInChar);
 			assert (theInChar == '\r');
 			break;
-			
+
 		case kEoln_Unix:
 			// DBG_MSG("readline kEoln_Unix");
 			Read (ioLine, "\n");
 			ReadChar (theInChar);
 			assert (theInChar == '\n');
 			break;
-			
+
 		default:
 			// DBG_MSG("readline default");
 			assert (false);
 			break;
 	}
-	
+
 	if (iEatSpace)
 	{
 		int theLastCharPosn = (int) ioLine.find_last_not_of (mSpace);
@@ -820,7 +819,7 @@ void 	BasicScanner::ReadLine
 
 	if (iEatSpace)
 		ConsumeSpace();
-			
+
 	switch (mEolnType)
 	{
 		case kEoln_Unknown:
@@ -838,7 +837,7 @@ void 	BasicScanner::ReadLine
 					// if stopped by eoln, consume it
 					if (ReadChar (theInChar) and (theInChar != '\r'))
 						UnreadChar (theInChar);
-				}			
+				}
 				else if (theInChar == '\r')
 				{
 					// if Mac eoln, consume by doing nothing
@@ -847,7 +846,7 @@ void 	BasicScanner::ReadLine
 					assert (false);
 			}
 			break;
-			
+
 		case kEoln_Dos:
 			theDelimiters += "\n";
 			Read (ioLine, theDelimiters.c_str());
@@ -863,9 +862,9 @@ void 	BasicScanner::ReadLine
 					// if stopped by eoln, consume it
 					ReadChar (theInChar);
 				}
-			}		
+			}
 			break;
-			
+
 		case kEoln_Mac:
 			theDelimiters += "\r";
 			Read (ioLine, theDelimiters.c_str());
@@ -873,7 +872,7 @@ void 	BasicScanner::ReadLine
 			if (ReadChar (theInChar) and isMemberOf (iDelimiters, theInChar))
 				UnreadChar (theInChar);
 			break;
-			
+
 		case kEoln_Unix:
 			theDelimiters += "\n";
 			Read (ioLine, theDelimiters.c_str());
@@ -881,12 +880,12 @@ void 	BasicScanner::ReadLine
 			if (ReadChar (theInChar) and isMemberOf (iDelimiters, theInChar))
 				UnreadChar (theInChar);
 			break;
-			
+
 		default:
 			assert (false);
 			break;
 	}
-	
+
 	if (iEatSpace)
 	{
 		ulong theLastCharPosn = ioLine.find_last_not_of (mSpace);
@@ -911,12 +910,12 @@ char 	BasicScanner::ReadToken
 
 
 // READ WHILE
-// Keep building string while these characters are in the stream. 
+// Keep building string while these characters are in the stream.
 void BasicScanner::ReadWhile (std::string& ioToken, const char* iCharSet)
 {
 	char theInChar;
 	ioToken = "";		// purge buffer
-	
+
 	// while the source still has something in it
 	while (ReadChar (theInChar))
 	{
@@ -940,9 +939,9 @@ void BasicScanner::ReadWhile (std::string& ioToken, const char* iCharSet)
 void BasicScanner::ReadOne (std::string& ioToken, const char* iCharSet)
 {
 	char theInChar;
-	
+
 	ReadChar (theInChar);
-	
+
 	// check for problem
 	if (isMemberOf (iCharSet, theInChar))
 	{
@@ -957,9 +956,9 @@ void BasicScanner::ReadOne (std::string& ioToken, const char* iCharSet)
 		theErrorStr += "\", expected one of \"";
 		theErrorStr += iCharSet;
 		theErrorStr += "\"";
-		
+
 		throw ParseError(theErrorStr.c_str());
-	}	
+	}
 }
 
 
@@ -969,9 +968,9 @@ void BasicScanner::ReadOne (std::string& ioToken, const char* iCharSet)
 void BasicScanner::ReadOneOrNone (std::string& ioToken, const char* iCharSet)
 {
 	char theInChar;
-	
+
 	ReadChar (theInChar);
-	
+
 	// if it's not a member of the set
 	// check for problem
 	if (isMemberOf (iCharSet, theInChar))
@@ -989,7 +988,7 @@ void BasicScanner::ReadOneOrNone (std::string& ioToken, const char* iCharSet)
 
 // READ UNTIL
 // Keep building string until these characters are in the stream. Normally
-// this will read up until a delimiter and then stop _before_ the 
+// this will read up until a delimiter and then stop _before_ the
 // delimiter.
 // Changes: 00.3.7 - introduced EatDelimiter option and fxn returning
 // the exact delimiter than stops it.
@@ -998,7 +997,7 @@ char BasicScanner::ReadUntil
 {
 	char theInChar;
 	ioToken = "";		// purge buffer
-	
+
 	// while the source still has something in it
 	while (ReadChar (theInChar))
 	{
@@ -1015,7 +1014,7 @@ char BasicScanner::ReadUntil
 			ioToken.append (1, theInChar);
 		}
 	}
-	
+
 	// just to keep the compiler quiet and catch errors - we should
 	// never get to this point.
 	assert (false);
@@ -1040,11 +1039,11 @@ void BasicScanner::PeekToken	(std::string& oToken)
 
 // READ NUMBER TOKEN
 // Return any number tokenized.  Note that these numbers may start with + or
-// -. 
+// -.
 void BasicScanner::ReadNumberToken (std::string& ioToken)
 {
 	std::string	theIntPortion, thePoint, theFraction;
-	
+
 	ReadIntToken (theIntPortion);
 	ReadWhile (thePoint, ".");
 	ReadWhile (theFraction, "0123456789");
@@ -1055,11 +1054,11 @@ void BasicScanner::ReadNumberToken (std::string& ioToken)
 
 // READ INTEGER TOKEN
 // Return any integer tokenized.  Note that these numbers may start with +
-// or -. 
+// or -.
 void BasicScanner::ReadIntToken (std::string& ioToken)
 {
 	std::string	theSign, theNumber, thePoint, theFraction;
-	
+
 	ReadOneOrNone (theSign, "-+");
 	ReadWhile (theNumber, "0123456789");
 
@@ -1072,12 +1071,12 @@ void BasicScanner::ReadIntToken (std::string& ioToken)
 
 // READ INT
 // Return the integer representation of a string. Note that these numbers
-// may start with + or -. 
+// may start with + or -.
 // To Do: should I really be consuming space at the beginning of these?
 int BasicScanner::ReadInt ()
 {
 	std::string	theToken;
-	
+
 	ReadToken (theToken);
 	char** theEndOfNumber = NULL;
 	long int theAnswer = std::strtol (theToken.c_str(), theEndOfNumber, 0);
@@ -1100,7 +1099,7 @@ int BasicScanner::ReadInt ()
 double BasicScanner::ReadDbl ()
 {
 	std::string	theSign, theInt, thePoint, theFraction, theE, theExponent;
-	
+
 	ConsumeSpace ();
 	ReadWhile (theSign, "-+");
 	ReadWhile (theInt, "0123456789");
