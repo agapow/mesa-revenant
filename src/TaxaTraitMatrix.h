@@ -15,7 +15,7 @@ Changes:
 - 01.1.25: coded.
 
 To Do:
-- 
+-
 
 **************************************************************************/
 
@@ -49,7 +49,7 @@ public:
 	// PUBLIC TYPE INTERFACE
 	typedef typename sbl::LabelledSimpleMatrix<X>	base_type;
 	typedef typename base_type::size_type				size_type;
-	
+
 	// LIFECYCLE
 	TaxaTraitMatrix ()
 		: mDataTypeStr (""), mCharPrefix ("trait_")
@@ -57,7 +57,7 @@ public:
 	TaxaTraitMatrix (const char* iBlockIdStr, const char* iCharPrefix)
 		: mDataTypeStr (iBlockIdStr), mCharPrefix (iCharPrefix)
 		{}
-	
+
 	// ACCESSORS
 	size_type countTaxa ()
 		{ return base_type::countRows(); }
@@ -82,7 +82,7 @@ public:
 		std::back_insert_iterator<stringvec_t> theOutputIter (ioNameVec);
 		base_type::getColNames (theOutputIter);
 	}
-	
+
 	template <typename OUTITER>
 	void getRowNames (OUTITER iOutIter)
 	{
@@ -92,7 +92,7 @@ public:
 			iOutIter++;
 		}
 	}
-		
+
 	X& getData (const char* iRowName, size_type iColIndex)
 	// TO DO: use binary search
 	// NOTE: assertion of indexes takes place in base class
@@ -100,8 +100,8 @@ public:
 		size_type theRowIndex = base_type::findRowNameIndex (iRowName);
 		return at(theRowIndex, iColIndex);
 	}
-	
-	
+
+
 	// MUTATORS
 	void resize (size_type iNewRows, size_type iNewCols, const X& iNewVal = X())
 	{
@@ -113,7 +113,7 @@ public:
 			setColName (i, (concatIntToString (mCharPrefix.c_str(), i + 1)).c_str());
 		}
 	}
-	
+
 	void cloneRow (const char* iOrigName, const char* iNewName)
 	//: duplicate the named row under the new name
 	// if table is empty, don't worry about it
@@ -132,8 +132,8 @@ public:
 				(*this)[theNewRowIndex][i] = (*this)[theOrigIndex][i];
 		}
 	}
-	
-	
+
+
 	void addCols (size_type iColIncr, const X& iNewVal = X())
 	//: increase the number of columns by this increment & give default name
 	{
@@ -145,7 +145,7 @@ public:
 	{
 		this.deleteRow (ikTaxaLabel);
 	}
-	
+
 	void shuffleTrait (colIndex_t iIndex)
 	{
 		// for every taxa
@@ -155,9 +155,9 @@ public:
 			// swap with a taxa after it
 			int theNewRow = int (MesaGlobals::mRng.UniformWhole (i, theNumTaxa - 1));
 			std::swap ((*this)[i][iIndex], (*this)[theNewRow][iIndex]);
-		}	
+		}
 	}
-	
+
 	void shuffleAllTraits ()
 	{
 		int theNumTraits = base_type::countCols ();
@@ -166,7 +166,7 @@ public:
 			shuffleTrait (i);
 		}
 	}
-	
+
 
 	// I/O
 	void summarise (std::ostream& ioOutStream)
@@ -181,14 +181,14 @@ public:
 		{
 			bool	theSingleChar = (1 == countChars());
 			bool	theSingleTaxa = (1 == countTaxa());
-			
+
 			ioOutStream << "There " << (theSingleChar ? "is " : "are ") <<
-				countChars() << " " << mDataTypeStr << " trait" << 
+				countChars() << " " << mDataTypeStr << " trait" <<
 				(theSingleChar ? "" : "s") << " listed for " << countTaxa() <<
 				(theSingleTaxa ? " taxon" : " taxa.") << std::endl;
 		}
 	}
-	
+
 	void detailedReport (std::ostream& ioOutStream)
 	{
 		summarise (ioOutStream);
@@ -208,14 +208,14 @@ public:
 	void reportMatrix (std::ostream& ioOutStream)
 	// note the matrix is indented
 	{
-		// gather string representations of the data		
+		// gather string representations of the data
 		sbl::SimpleMatrix<std::string> 	theNumberMatrix;
 		std::string::size_type			theMaxDataLen = 0;
 		size_type					theNumTaxa = countTaxa ();
 		size_type					theNumChars = countChars ();
 
 		theNumberMatrix.resize (theNumTaxa, theNumChars);
-		
+
 		for (size_type i = 0; i < theNumTaxa; i++)
 		{
 			for (size_type j = 0; j < theNumChars; j++)
@@ -230,7 +230,7 @@ public:
 			}
 		}
 		assert (0 < theMaxDataLen);
-		
+
 		// ... and pad them
 		/*
 		for (ContTraitMatrix::size_type i = 0; i < theNumTaxa; i++)
@@ -241,16 +241,16 @@ public:
 			}
 		}
 		*/
-		
+
 		// get the max length of a taxa name
 		int theMaxNameLen = base_type::getMaxLenRowName ();
-		
+
 		// print them out
 		for (sbl::SimpleMatrix<std::string>::size_type i = 0; i < theNumTaxa; i++)
 		{
 			// print the taxa name in a set width
 			ioOutStream << "   " << std::setw (theMaxNameLen + 3) << base_type::getRowName (i);
-				
+
 			for (sbl::SimpleMatrix<std::string>::size_type j = 0; j < theNumChars; j++)
 			{
 				// print every row in a set width
@@ -258,20 +258,20 @@ public:
 			}
 			// terminate the row
 			ioOutStream << std::endl;
-		}	
+		}
 	}
 
 
 	// DEPRECIATED & DEBUG
-	
+
 	void validate ()
 		{}
-		
+
 	// INTERNALS
 protected:
 	std::string		mDataTypeStr;
 	std::string		mCharPrefix;
-	
+
 private:
 };
 
@@ -304,9 +304,9 @@ public:
 	{
 		// Preconditions:
 		assert (0 <= iIndex);
-		assert (iIndex < countChars());
-		
-		// Main: 
+		assert ((unsigned int) iIndex < (unsigned int) countChars());
+
+		// Main:
 		std::string theTraitName = getColName (iIndex);
 		return (theTraitName.compare (0, 4, "site") == 0);
 	}
@@ -314,20 +314,19 @@ public:
 	void listSiteTraits (std::vector<colIndex_t>& theIndices)
 	{
 		colIndex_t theNumContTraits = countChars();
-		int theNumSites = 0;
 		for (colIndex_t i = 0; i < theNumContTraits; i++)
 		{
 			if (isSiteTrait (i))
 				theIndices.push_back(i);
-		}	
+		}
 	}
 
 	std::string getSiteName (int iIndex)
 	{
 		// Preconditions:
 		assert (isSiteTrait (iIndex));
-		
-		// Main: 
+
+		// Main:
 		std::string theTraitName = getColName (iIndex);
 		return (std::string (theTraitName.begin() + 5, theTraitName.end()));
 	}
@@ -339,14 +338,14 @@ public:
 		int theNumSiteTraits = countSiteTraits();
 		if (0 < theNumSiteTraits)
 		{
-			ioOutStream << theNumSiteTraits << " of these " << 
+			ioOutStream << theNumSiteTraits << " of these " <<
 				((theNumSiteTraits == 1) ? "is a site" : "are sites") <<
 				"." << std::endl;
 		}
 	}
-	
+
 	// DEPRECIATED & DEBUG
-	
+
 	CharStateSet   mStates;
 	// INTERNALS
 private:
@@ -358,12 +357,12 @@ class DiscTraitMatrix : public TaxaTraitMatrix <disctrait_t>
 public:
 	// PUBLIC TYPE INTERFACE
 	typedef TaxaTraitMatrix <disctrait_t>	base_type;
-	
+
 	// LIFECYCLE
 	DiscTraitMatrix ()
 		: base_type ("discrete", "dchar_")
 		{}
-	
+
 	void gatherCharStates ()
 	{
 		size_type theNumTaxa = countTaxa ();
@@ -373,7 +372,7 @@ public:
 			for (size_type j = 0; j < theNumChars; j++)
 			{
 				disctrait_t theChar = at (i, j);
-				if ((not mStates.isMember (theChar)) and 
+				if ((not mStates.isMember (theChar)) and
 					(theChar != "?") and
 					(theChar != "-"))
 					mStates.addState (theChar);
@@ -383,9 +382,9 @@ public:
 	}
 
 	CharStateSet mStates;
-	
+
 	// DEPRECIATED & DEBUG
-	
+
 	// INTERNALS
 private:
 };

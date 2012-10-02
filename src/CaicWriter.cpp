@@ -11,7 +11,7 @@ To Do:
 - richness file
 - unknown data
 - the branchlength 2 problem
-  
+
 **************************************************************************/
 
 
@@ -32,47 +32,47 @@ void CaicWriter::writeData
 (ContTraitMatrix& iContWrangler, DiscTraitMatrix& iDiscWrangler)
 {
 	// Preconditions:
-	
+
 	// Main:
 	// gather & sort species names
 	stringvec_t theSppNames;
 	ContTraitMatrix::size_type theNumContRows = iContWrangler.countRows ();
-	ContTraitMatrix::size_type theNumDiscRows = iDiscWrangler.countRows ();
+	DiscTraitMatrix::size_type theNumDiscRows = iDiscWrangler.countRows ();
 	if (theNumContRows < theNumDiscRows)
 	{
-		for (long i = 0; i < theNumDiscRows; i++)
+		for (DiscTraitMatrix::size_type i = 0; i < theNumDiscRows; i++)
 		{
 			theSppNames.push_back (iDiscWrangler.getRowName (i));
 		}
 	}
 	else
 	{
-		for (long i = 0; i < theNumContRows; i++)
+		for (ContTraitMatrix::size_type i = 0; i < theNumContRows; i++)
 		{
 			theSppNames.push_back (iContWrangler.getRowName (i));
 		}
-	}	
+	}
 	sort (theSppNames.begin(), theSppNames.end());
 
 	// print out data
 	ContTraitMatrix::size_type theNumContCols = iContWrangler.countCols ();
 	DiscTraitMatrix::size_type theNumDiscCols = iDiscWrangler.countCols ();
-	
+
 	// print out col titles
 	(*mDataStreamP) << "Spp names";
-	for (long i = 0; i < theNumContCols; i++)
+	for (ContTraitMatrix::size_type i = 0; i < theNumContCols; i++)
 		(*mDataStreamP) << "\t" << iContWrangler.getColName (i);
-	for (long i = 0; i < theNumDiscCols; i++)
+	for (DiscTraitMatrix::size_type i = 0; i < theNumDiscCols; i++)
 		(*mDataStreamP) << "\t" << iDiscWrangler.getColName (i);
 	(*mDataStreamP)  << endl;
-	
+
 	// print out data
 	stringvec_t::iterator p;
 	for (p = theSppNames.begin(); p != theSppNames.end(); p++)
 	{
 		// print out spp name
 		(*mDataStreamP) << *p;
-		
+
 		// print out cont data
 		for (long i = 0; i < theNumContCols; i++)
 		{
@@ -94,7 +94,7 @@ void CaicWriter::writeData
 			// 	theDiscStr = "-9";
 			(*mDataStreamP) << "\t" << theDiscStr;
 		}
-		
+
 		(*mDataStreamP) << endl;
 	}
 
@@ -106,7 +106,7 @@ void CaicWriter::writeTrees (TreeWrangler& iWrangler)
 // TO DO: make sure minimum length is 2.0
 
 	MesaTree* theTreeP = iWrangler.getActiveTreeP ();
-	
+
 	// gather & sort the caic codes
 	stringvec_t theCaicCodes;
 	for (nodeiter_t q = theTreeP->begin(); q != theTreeP->end(); q++)
@@ -127,10 +127,10 @@ void CaicWriter::writeTrees (TreeWrangler& iWrangler)
 		else
 			(*mBlenStreamP) << theTreeP->getTimeFromNodeToParent (theCurrNode);
 		// write age
-		(*mBlenStreamP) << "\t"; 
-		// (*mBlenStreamP) << theTreeP->getTimeSinceNodeOrigin (theCurrNode) << endl; 
-		(*mBlenStreamP) << theTreeP->getTimeSinceNodeTerminus (theCurrNode) << endl; 
-		
+		(*mBlenStreamP) << "\t";
+		// (*mBlenStreamP) << theTreeP->getTimeSinceNodeOrigin (theCurrNode) << endl;
+		(*mBlenStreamP) << theTreeP->getTimeSinceNodeTerminus (theCurrNode) << endl;
+
 		// do phyl file
 		if (theTreeP->isLeaf (theCurrNode))
 		{
@@ -138,7 +138,7 @@ void CaicWriter::writeTrees (TreeWrangler& iWrangler)
 			(*mPhylStreamP) << theTreeP->getLeafName(theCurrNode) << endl;
 		}
 	}
-	
+
 }
 
 

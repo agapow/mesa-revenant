@@ -33,7 +33,6 @@ typedef  CaicCode::size_type   size_type;
 
 
 // *** LIFECYCLE ********************************************************/
-#pragma mark -
 
 /// Default constructor, initialises code as root.
 CaicCode::CaicCode ()
@@ -65,7 +64,6 @@ void CaicCode::init (const char* iCodeCstr)
 
 
 // *** ACCESSORS ********************************************************/
-#pragma mark -
 
 bool CaicCode::operator == (const std::string& ikString)
 {
@@ -179,7 +177,6 @@ const std::string& CaicCode::str	() const
 
 
 // *** MUTATORS **********************************************************/
-#pragma mark -
 
 /**
 'Tick' over to next code in CAIC order.
@@ -236,7 +233,6 @@ char CaicCode::popFront ()
 }
 
 // *** CLASS UTILITY FXNS ************************************************/
-#pragma mark -
 // The below three functions encapsulate the essential behaviour of CAIC
 // codes (the progression / ordering of characters). They are also static
 // so these calculations are available from outside CaicCode objects.

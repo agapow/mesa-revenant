@@ -29,7 +29,6 @@ To Do:
 
 
 // *** INCLUDES
-#pragma mark Includes
 
 #include "ConsoleApp.h"
 #include <iostream>
@@ -59,7 +58,6 @@ SBL_NAMESPACE_START
 
 
 // *** CONSTANTS & DEFINES
-#pragma mark Constants
 
 const string kDefaultAppTitle 	= "Standard Console App";
 const string kDefaultAppVersion	= "0.1";
@@ -199,9 +197,9 @@ void ConsoleApp::PrintAboutString (string& iContentString)
 
 void ConsoleApp::PrintAboutBorder ()
 {
-	for (int i = 0; i < mAboutBoxIndent; i++)
+	for (uint i = 0; i < mAboutBoxIndent; i++)
 		cout << " ";
-	for (int i = 0; i < mAboutBoxWidth; i++)
+	for (uint i = 0; i < mAboutBoxWidth; i++)
 		cout << "*";
 	cout << endl;
 }
@@ -838,7 +836,7 @@ int ConsoleApp::askChoice (const char *iPromptCstr, char *iChoiceCstr, int iDefC
 	if (theIsCurrChoice)
 	{
 		assert (0 <= iDefChoice);
-		assert (iDefChoice < std::strlen (iChoiceCstr));
+		assert ((uint) iDefChoice < std::strlen (iChoiceCstr));
 	}
 
 	// Main:
@@ -902,7 +900,6 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr)
 	string theRawAnswerStr = getAnswer();
 
 	// is the answer 1 char and in string of choices?
-	bool	theAnswerIsGood = false;
 	if (theRawAnswerStr.length() == 1)
 	{
 		if (isMemberOf (theRawAnswerStr[0], iChoiceStr))
@@ -938,7 +935,6 @@ char ConsoleApp::askMultiChoice (const char *iPromptCstr, char *iChoiceStr, char
 		return iCurrChoice;
 
 	// is the answer 1 char and in string of choices?
-	bool	theAnswerIsGood = false;
 	if (theRawAnswerStr.length() == 1)
 	{
 		if (isMemberOf (theRawAnswerStr[0], iChoiceStr))

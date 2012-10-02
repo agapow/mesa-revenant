@@ -21,13 +21,11 @@ using std::string;
 
 
 // *** CONSTANTS & DEFINES
-#pragma mark "Constants & Defines"
 
 typedef SpCharEvolRule::size_type   size_type;
 
 
 // *** CLASS DECLARATION *************************************************/
-#pragma mark -
 
 bool SpCharEvolRule::isTriggered
 // (EvolRule* iFiringRuleP, nodeiter_t& ioFiringLeaf)
@@ -43,8 +41,7 @@ bool SpCharEvolRule::isTriggered
 
 
 
-// *** SYMMETRICAL SPECIATIONAL TRAIT EVOLUTION **************************/	
-#pragma mark -
+// *** SYMMETRICAL SPECIATIONAL TRAIT EVOLUTION **************************/
 
 void SymmetricSceRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 {
@@ -52,12 +49,12 @@ void SymmetricSceRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 	MesaTree* theTreeP = getActiveTreeP();
 	nodeiter_t iNode = iNodes[0];
 	assert (theTreeP->countChildren (iNode) == 2);
-	
+
 	// Main:
 	iTime = 0.0;
 	nodeiter_t iNode1 = theTreeP->getChild (iNode, 0);
 	nodeiter_t iNode2 = theTreeP->getChild (iNode, 1);
-	
+
 	SchemeArr::iterator p;
 	for (p = mSchemes.begin(); p != mSchemes.end(); p++)
 	{
@@ -65,9 +62,9 @@ void SymmetricSceRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 		theSchemeP->evolveChars (iNode1, iTime);
 		theSchemeP->evolveChars (iNode2, iTime);
 	}
-	
+
 	iNodes[0] = iNode;
-}	
+}
 
 void SymmetricSceRule::adoptScheme (SchemeArr& iSchemeArr)
 {
@@ -84,7 +81,7 @@ const char* SymmetricSceRule::describe (size_type iIndex)
 {
 	assert (0 <= iIndex);
 	assert (iIndex < deepSize());
-	
+
 	size_type theSetSize = mSchemes.size();
 
 	if (iIndex == 0)
@@ -105,7 +102,7 @@ const char* SymmetricSceRule::describe (size_type iIndex)
 	else
 	{
 		// should never get here
-		assert (false); 
+		assert (false);
 		return ""; // just to shut compiler up
 	}
 }
@@ -114,7 +111,7 @@ void SymmetricSceRule::deleteElement (size_type iIndex)
 {
 	assert (0 < iIndex); // because you can't delete self
 	assert (iIndex <= mSchemes.size());
-	
+
 	if (iIndex == 1)
 		mSchemes.removeAll ();
 	else
@@ -130,7 +127,7 @@ size_type SymmetricSceRule::getDepth (size_type iIndex)
 {
 	assert (0 <= iIndex);
 	assert (iIndex < deepSize());
-	
+
 	size_type theSetSize = mSchemes.size();
 
 	if (iIndex == 0)
@@ -151,22 +148,21 @@ size_type SymmetricSceRule::getDepth (size_type iIndex)
 	else
 	{
 		// should never get here
-		assert (false); 
+		assert (false);
 		return -13; // just to shut compiler up
 	}
 }
-	
+
 
 // *** ASSYMETRICAL SPECIATIONAL TRAIT EVOLUTION *************************/
-#pragma mark -
-	
+
 void AsymmetricSceRule::commitAction (nodearr_t& iNodeArr, mesatime_t iTime)
 {
 	// Preconditions:
 	MesaTree* theTreeP = getActiveTreeP();
 	nodeiter_t iNode = iNodeArr[0];
 	assert (theTreeP->isNodeBifurcating (iNode));
-	
+
 	// Main:
 	iTime = 0.0;
 	nodeiter_t iNode1 = theTreeP->getChild (iNode, 0);
@@ -186,10 +182,10 @@ void AsymmetricSceRule::commitAction (nodearr_t& iNodeArr, mesatime_t iTime)
 		TraitEvolScheme* theSchemeP = *p;
 		theSchemeP->evolveChars (iNode2, iTime);
 	}
-	
+
 	iNodeArr[0] = iNode;
 }
-	
+
 void AsymmetricSceRule::adoptScheme (int iSide, SchemeArr& iSchemeArr)
 {
 	assert ((iSide == 0) or (iSide == 1));
@@ -206,7 +202,7 @@ const char* AsymmetricSceRule::describe (size_type iIndex)
 {
 	assert (0 <= iIndex);
 	assert (iIndex < deepSize());
-	
+
 	size_type theFirstSetSize = mSchemes[0].size();
 	size_type theSecondSetSize = mSchemes[1].size();
 
@@ -238,7 +234,7 @@ const char* AsymmetricSceRule::describe (size_type iIndex)
 	else
 	{
 		// should never get here
-		assert (false); 
+		assert (false);
 		return ""; // just to shut compiler up
 	}
 }
@@ -247,7 +243,7 @@ void AsymmetricSceRule::deleteElement (size_type iIndex)
 {
 	assert (0 <= iIndex);
 	assert (iIndex < deepSize());
-	
+
 	size_type theFirstSetSize = mSchemes[0].size();
 	size_type theSecondSetSize = mSchemes[1].size();
 
@@ -279,16 +275,16 @@ void AsymmetricSceRule::deleteElement (size_type iIndex)
 	else
 	{
 		// should never get here
-		assert (false); 
+		assert (false);
 	}
 }
-	
+
 
 size_type AsymmetricSceRule::getDepth (size_type iIndex)
 {
 	assert (0 <= iIndex);
 	assert (iIndex < deepSize());
-	
+
 	size_type theFirstSetSize = mSchemes[0].size();
 	size_type theSecondSetSize = mSchemes[1].size();
 
@@ -320,11 +316,11 @@ size_type AsymmetricSceRule::getDepth (size_type iIndex)
 	else
 	{
 		// should never get here
-		assert (false); 
+		assert (false);
 		return -13; // just to shut compiler up
 	}
 }
-	
+
 size_type AsymmetricSceRule::deepSize ()
 {
 	size_type theFirstSetSize = mSchemes[0].size();
@@ -335,7 +331,6 @@ size_type AsymmetricSceRule::deepSize ()
 
 
 // *** PARENTAL SPECIATIONAL TRAIT EVOLUTION *****************************/
-#pragma mark -
 
 // I/O
 const char* TerminalCharEvolRule::describeRule ()
@@ -349,8 +344,8 @@ void TerminalCharEvolRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 	assert (0.0 <= iTime);
 	nodeiter_t iNode = iNodes[0];
 	MesaTree* theTreeP = getActiveTreeP();
-	assert (theTreeP != NULL);	
-	
+	assert (theTreeP != NULL);
+
 	// Main:
 	// get time to Parent
 	iTime = theTreeP->getTimeFromNodeToParent (iNode);
@@ -362,7 +357,7 @@ void TerminalCharEvolRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 	}
 
 	iNodes[0] = iNode;
-}	
+}
 
 bool TerminalCharEvolRule::isTriggered
 // (EvolRule* iFiringRuleP, nodeiter_t& ioFiringLeaf)
@@ -380,26 +375,25 @@ bool TerminalCharEvolRule::isTriggered
 	//	return false;
 
 	// ioFiringLeaf = ioFiringLeaf;
-	
+
 	// trigger if its the end of epoch
 	EndOfEpochRule* theRuleP = dynamic_cast<EndOfEpochRule*> (iFiringRuleP);
 	if (theRuleP != NULL)
 		return true;
-		
+
 	return isSpeciationOrKillRule (iFiringRuleP);
 }
 
 
 
 // *** PHYLETIC / TRANSFORMING TRAIT EVOLUTION ***************************/
-#pragma mark -
 
 bool GradualCharEvolRule::isTriggered
 // (EvolRule* iFiringRuleP, nodeiter_t& ioFiringLeaf)
 (EvolRule* iFiringRuleP, nodearr_t& ioFiringLeaves)
 {
 	return true;
-	
+
 	// if this is called on a node that has just been killed, return false
 	MesaTree* theTreeP = getActiveTreeP();
 	assert (theTreeP != NULL);
@@ -412,7 +406,7 @@ bool GradualCharEvolRule::isTriggered
 		return false;
 	}
 
-	// otherwise say yes for everything else		
+	// otherwise say yes for everything else
 	iFiringRuleP = iFiringRuleP;
 	// DBG_MSG ("grad char evol is triggered");
 	return true;
@@ -430,7 +424,7 @@ void GradualCharEvolRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 	MesaTree* theTreeP = getActiveTreeP();
 	assert (theTreeP != NULL);
 	iNodes = iNodes; // just to shut compiler up
-	
+
 	// Main:
 	nodeiter_t theNode;
 	for (theNode = theTreeP->begin(); theNode != theTreeP->end(); theNode++)
@@ -445,9 +439,9 @@ void GradualCharEvolRule::commitAction (nodearr_t& iNodes, mesatime_t iTime)
 			}
 		}
 	}
-	
+
 	// nodeiter_t iNode = iNodes[0]; // what was this about?
-}	
+}
 
 // *** END ***************************************************************/
 

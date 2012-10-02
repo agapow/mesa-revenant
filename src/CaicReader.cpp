@@ -47,14 +47,14 @@ CaicReader::CaicReader
 	// Preconditions:
 	assert (iPhylStreamP->is_open());
 	assert (iBlenStreamP->is_open());
-	
+
 	// Main:
 	mCallBack = ikProgressCb;
 	mPhylStreamP = iPhylStreamP;
 	mBlenStreamP = iBlenStreamP;
 	// sic the reader onto the input stream
 	readData ();
-	
+
 	mPhylStreamP->close();
 	mBlenStreamP->close();
 }
@@ -76,27 +76,26 @@ void CaicReader::readData ()
 	sbl::StreamScanner	theBlenScanner (*mBlenStreamP);
 	theBlenScanner.SetComments ("", "");
 	theBlenScanner.SetLineComment ("#");
-	
+
 	// just check this is a tab delimited file
 	string 			theInLine;
-	theBlenScanner.ReadLine (theInLine);		
-	theBlenScanner.Rewind();	// roll back to beginning	
+	theBlenScanner.ReadLine (theInLine);
+	theBlenScanner.Rewind();	// roll back to beginning
 	if (count (theInLine.begin(), theInLine.end(), '\t') < 1)
 		throw FormatError ("the branchfile doesn't appear to be tab-delimited");
 
 	// now we can actually read the file
-	int theNumRows = 0;	
 	// while the eof has not been reached
 	while (theBlenScanner)
 	{
 		string	theCurrLine;
 		theBlenScanner.ReadLine (theCurrLine);
 		sbl::eraseTrailingSpace (theCurrLine);
-		
+
 		// stop at blank lines.
 		if (theCurrLine == "")
 			break;
-	
+
 		// otherwise break into tokens
 		stringvec_t									theDataRow;
 		std::back_insert_iterator<stringvec_t> 	theSplitIter (theDataRow);
@@ -106,18 +105,18 @@ void CaicReader::readData ()
 		{
 			sbl::eraseFlankingSpace (theDataRow[i]);
 		}
-		
+
 		// pop the row into the matrix
 		mBlenMatrix.push_back (theDataRow);
 	}
-	
+
 	// clean up & check correctness of data ...
 	if (mBlenMatrix.size() < 3)
-		throw FormatError ("insufficient branches in data");	
-	for (int i = 0; i < mBlenMatrix.size(); i++)
+		throw FormatError ("insufficient branches in data");
+	for (unsigned int i = 0; i < mBlenMatrix.size(); i++)
 	{
 		if (mBlenMatrix[i].size() != 3)
-			throw FormatError ("branch missing data");	
+			throw FormatError ("branch missing data");
 	}
 
 	// if people use lower-case in their phylogeny, convert it
@@ -127,7 +126,7 @@ void CaicReader::readData ()
 	if (theCodesInLowerCase)
 	{
 		// the bastards done wrote it in lower case
-		for (int i = 0; i < mBlenMatrix.size(); i++)
+		for (unsigned int i = 0; i < mBlenMatrix.size(); i++)
 		{
 			sbl::toUpper (mBlenMatrix[i][0]);
 		}
@@ -137,7 +136,7 @@ void CaicReader::readData ()
 	sbl::StreamScanner	thePhylScanner (*mPhylStreamP);
 	thePhylScanner.SetComments ("", "");
 	thePhylScanner.SetLineComment ("#");
-	
+
 	// while the eof has not been reached
 	while (thePhylScanner)
 	{
@@ -149,19 +148,19 @@ void CaicReader::readData ()
 			break;
 		if (theCodesInLowerCase)
 			sbl::toUpper (theCodeLine);
-			
+
 		// get spp name
 		string	theSppLine;
 		thePhylScanner.ReadLine (theSppLine);
 		sbl::eraseTrailingSpace (theSppLine);
-		
+
 		// store
 		mPhylCodeMap[theCodeLine] = nexifyString (theSppLine.c_str());
 		// DBG_MSG ("Inserting " << theCodeLine << ":" << theSppLine);
 	}
-	
-	
-	
+
+
+
 }
 
 
@@ -174,7 +173,7 @@ void CaicReader::getData (ContTraitMatrix& ioWrangler)
 	int theNumTaxa = mPhylCodeMap.size();
 	ioWrangler.resize (theNumTaxa, 1);
 	ioWrangler.resizeCols (0);
-	
+
 	// label all the rows with taxa names
 	std::map <string, string>::iterator p = mPhylCodeMap.begin();
 	int theRowNum = 0;
@@ -204,15 +203,15 @@ public:
 void CaicReader::getData (TreeWrangler& ioWrangler)
 {
 	std::vector <caictreenode_t>  theCaicEntries;
-	
-	for (int i = 0; i < mBlenMatrix.size(); i++)
+
+	for (stringmatrix_t::size_type i = 0; i < mBlenMatrix.size(); i++)
 	{
 		caictreenode_t   theCurrNode;
-		
+
 		theCurrNode.mCode = mBlenMatrix[i][0];
 		theCurrNode.mTimeToParent = sbl::toDouble (mBlenMatrix[i][1]);
 		theCurrNode.mTimeToTerminus = sbl::toDouble (mBlenMatrix[i][2]);
-		
+
 		theCaicEntries.push_back (theCurrNode);
 	}
 	/*
@@ -242,8 +241,8 @@ void CaicReader::getData (TreeWrangler& ioWrangler)
 	}
 	*/
 	MesaTree   theNewTree;
-	
-	for (int i = 0; i < theCaicEntries.size(); i++)
+
+	for (unsigned int i = 0; i < theCaicEntries.size(); i++)
 	{
 		sbl::CaicCode  theCode (theCaicEntries[i].mCode.c_str());
 		nodeiter_t theNewNode = theNewTree.addNode (theCode);
@@ -254,22 +253,21 @@ void CaicReader::getData (TreeWrangler& ioWrangler)
 		}
 		theNewTree.setEdgeWeight (theNewNode, theCaicEntries[i].mTimeToParent);
 	}
-	
-	
+
+
 	ioWrangler.addTree (theNewTree);
-}	
+}
 
 
 // *** INTERNALS *********************************************************/
 
 
 // *** DEPRECATED & TEST FUNCTIONS **************************************/
-#pragma mark -
 
 void CaicReader::validate ()
 {
 //	cout << "*** Testing CaicReader class" << endl;
-	
+
 //	cout << "*** Finished testing CaicReader class" << endl;
 }
 

@@ -38,12 +38,12 @@ public:
 	// LIFECYCLE
 	ManipAction ()
 		{}
-	
+
 	// SERVICES
 	void				execute ()
 	{ executeManip(); }
-	
-	virtual void	executeManip () = 0;		
+
+	virtual void	executeManip () = 0;
 	size_type deepSize ()
 		{ return 1; }
 	void deleteElement (size_type iIndex)
@@ -73,19 +73,19 @@ public:
 		{
 			mSites = iSiteArr;
 		}
-		
+
 		void executeManip ()
 		{
 			colIndex_t theNumTaxa = MesaGlobals::mContDataP->countTaxa();
 			colIndex_t theNumCols = MesaGlobals::mContDataP->countCols();
-			
+
 			// for every site indicated ...
 			for (colIndexArr_t::iterator p = mSites.begin();
 					p != mSites.end(); p++)
 			{
 				assert (0 <= *p);
 				assert (*p < theNumCols);
-				
+
 				// ... for every taxa, raze it to one
 				for (colIndex_t i = 0; i < theNumTaxa; i++)
 					MesaGlobals::mContDataP->at (i, *p) = 0.0;
@@ -94,9 +94,9 @@ public:
 
 private:
 	colIndexArr_t   mSites;
-	
-	 /** @todo   Finish description of action. */ 
-	const char* describeManipAction () 
+
+	 /** @todo   Finish description of action. */
+	const char* describeManipAction ()
 	{return ""; }
 
 };
@@ -114,7 +114,7 @@ case of PD this also means that a single surving taxa still has some worth /
 information value (sensu Wilson). On the other hand, sensu Crozier, it could be
 argued that a single taxa has no diversity (variance), and therefore the path
 to root should be trimmed (as the presence of, say, frogs does not raise the
-importance of a surving bird population). Hence we provide a flag for the 
+importance of a surving bird population). Hence we provide a flag for the
 pruning operations to choose either option.
 */
 typedef bool pruneLeaveRootPath_t;
@@ -131,13 +131,13 @@ public:
 	// SERVICES
 	/**
 	Actually do the manipulation (i.e. prune the tree).
-	
+
 	This is where most of the action actually occurs. It calls the
 	abstract function selectTargets() (provided by derived classe)
 	to select the nodes, actually kills them, then prunes the tree
 	down. All the various prune functions only differ in how the
 	nodes are selected.
-	
+
 	@todo   move implementation out of header file
 	*/
 	void executeManip ()
@@ -149,14 +149,14 @@ public:
 
 		// Main:
 		// gather nodes to be pruned ...
-		nodearr_t   theTargetNodes; 
+		nodearr_t   theTargetNodes;
 		selectTargets (theTargetNodes);
 
 		for (nodearr_t::iterator q = theTargetNodes.begin();
 		   q != theTargetNodes.end (); q++)
 			theTreeP->pruneBranch (*q);
-			
-			
+
+
 		if (mLeaveRootPath == false)
 		{
 			nodeiter_t theRootIter = theTreeP->getRoot();
@@ -168,13 +168,13 @@ public:
 				theRootIter = theChildIter;
 			}
 		}
-		
+
 		/*
 		// ... kill them ...
 		for (nodearr_t::iterator q = theTargetNodes.begin();
 		   q != theTargetNodes.end (); q++)
 			theTreeP->killLeaf (*q);
-		
+
 		// ... delete their subtrees ...
 		while (theTreeP->countLeaves () != theTreeP->countAliveLeaves ())
 		{
@@ -182,7 +182,7 @@ public:
 			{
 				nodeiter_t theCurrNode = q;
 				q++;
-				if (theTreeP->isLeaf (theCurrNode) and 
+				if (theTreeP->isLeaf (theCurrNode) and
 				    (not theTreeP->isNodeAlive (theCurrNode)))
 				{
 					theTreeP->pruneLeaf (theCurrNode);
@@ -196,12 +196,12 @@ public:
 		theTreeP->validate();
 	}
 
-	virtual void selectTargets (nodearr_t& oTargetNodes) = 0;		
-		
+	virtual void selectTargets (nodearr_t& oTargetNodes) = 0;
+
 	// INTERNALS
 private:
 	pruneLeaveRootPath_t mLeaveRootPath;
-	const char* describeManipAction () 
+	const char* describeManipAction ()
 	{ /** @todo */ return ""; }
 };
 
@@ -213,7 +213,7 @@ Once again, this was added not because of any user demand but mostly because
 the functionality was needed by several modules. This examines the site
 abundance data and - if it's 0 - prunes the active phylogeny.
 
-@todo Maybe this should accept specific sites. 
+@todo Maybe this should accept specific sites.
 
 */
 class PruneByAbundanceAction: public PruneAction
@@ -233,8 +233,8 @@ public:
 		MesaTree* theTreeP = getActiveTreeP();
 		theTreeP->getLeaves (theTips);
 		// DBG_VAL (theTreeP->countLeaves());
-		
-		
+
+
 		// for every taxa ...
 		for (nodearr_t::size_type i = 0; i < theTips.size(); i++)
 		{
@@ -255,11 +255,11 @@ public:
 					break;
 				}
 			}
-			
+
 			if (theTaxaIsDead == true)
 				oTargetNodes.push_back (theNodeIt);
 		}
-		
+
 		// DBG_VAL (oTargetNodes.size());
 	}
 
@@ -270,7 +270,7 @@ private:
 		static char theBuffer[64];
 		std::sprintf (theBuffer, "prune (taxa with 0 abundance)");
 		return theBuffer;
-	}	
+	}
 };
 
 
@@ -293,10 +293,10 @@ public:
 		MesaTree* theTreeP = getActiveTreeP ();
 		theTreeP->getLiveLeaves (oTargetNodes);
 		random_shuffle (oTargetNodes.begin(), oTargetNodes.end());
-		if (mKillNum < oTargetNodes.size())
-			oTargetNodes.resize (mKillNum);	
+		if ((unsigned int) mKillNum < oTargetNodes.size())
+			oTargetNodes.resize (mKillNum);
 	}
-		
+
 	// INTERNALS
 private:
 	const char* describeManipAction ()
@@ -304,8 +304,8 @@ private:
 		static char theBuffer[64];
 		std::sprintf (theBuffer, "prune (kill %i taxa)", mKillNum);
 		return theBuffer;
-	}	
-	
+	}
+
 	int   mKillNum;
 };
 
@@ -327,13 +327,13 @@ public:
 		random_shuffle (oTargetNodes.begin(), oTargetNodes.end());
 		oTargetNodes.resize (theKillNum);
 	}
-		
+
 	// INTERNALS
 private:
 	const char* describeManipAction ()
 	{
 		static char theBuffer[64];
-		std::sprintf (theBuffer, "prune (%.4g\% of taxa)", mKillFrac * 100);
+		std::sprintf (theBuffer, "prune (%.4g%% of taxa)", mKillFrac * 100);
 		return theBuffer;
 	}
 
@@ -347,7 +347,7 @@ public:
 	PruneByProbAction (double iProb, pruneLeaveRootPath_t iLeaveRootPath = true)
 		: PruneAction (iLeaveRootPath), mProb (iProb)
 		{}
-		
+
 	// SERVICES
 	void selectTargets (nodearr_t& oTargetNodes)
 	{
@@ -363,13 +363,13 @@ public:
 				oTargetNodes.erase (q);
 		}
 	}
-		
+
 	// INTERNALS
 private:
 	const char* describeManipAction ()
 	{
 		static char theBuffer[64];
-		std::sprintf (theBuffer, "prune (%.4g\% of pruning any taxa)", mProb);
+		std::sprintf (theBuffer, "prune (%.4g%% of pruning any taxa)", mProb);
 		return theBuffer;
 	}
 
@@ -401,14 +401,14 @@ public:
 			conttrait_t theTraitVal = getContData (*q, mTraitIndex);
 			double theProb = calcProbFromTriParameter (mTriParamA, mTriParamB,
 				mTriParamC, theTraitVal);
-				
+
 			if (MesaGlobals::mRng.UniformFloat () <= theProb)
 				q++;
 			else
 				oTargetNodes.erase (q);
 		}
 	}
-		
+
 	// INTERNALS
 private:
 	const char* describeManipAction ()
@@ -450,7 +450,7 @@ public:
 				oTargetNodes.erase (q);
 		}
 	}
-		
+
 	// INTERNALS
 private:
 	const char* describeManipAction ()
@@ -459,7 +459,7 @@ private:
 		std::sprintf (theBuffer, "prune (taxa %s)", mSppTest.describe());
 		return theBuffer;
 	}
-	
+
 	CharComparator   mSppTest;
 };
 
@@ -477,14 +477,14 @@ public:
 	void selectTargets (nodearr_t& oTargetNodes)
 	{
 		MesaTree* theTreeP = getActiveTreeP ();
-		for (int i = 0; i < mNames.size(); i++)
+		for (std::vector<std::string>::size_type i = 0; i < mNames.size(); i++)
 		{
 			nodeiter_t theNode = theTreeP->getIter (mNames[i].c_str());
 			if ((theNode != theTreeP->end()) and theTreeP->isLeaf (theNode))
 				oTargetNodes.push_back (theNode);
 		}
 	}
-		
+
 	// INTERNALS
 private:
 	const char* describeManipAction ()
@@ -493,7 +493,7 @@ private:
 		std::sprintf (theBuffer, "prune (a list of taxa names)");
 		return theBuffer;
 	}
-	
+
 	std::vector<std::string> mNames;
 };
 

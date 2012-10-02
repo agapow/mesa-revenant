@@ -67,7 +67,6 @@ To Do:
 
 
 // *** INCLUDES
-#pragma mark Include
 
 #include "BasicScanner.h"
 #include "Error.h"
@@ -86,7 +85,6 @@ SBL_NAMESPACE_START
 
 // *** CONSTANTS & DEFINES
 
-#pragma mark -
 // *** BASIC SCANNER *****************************************************/
 
 // *** LIFECYCLE *********************************************************/
@@ -293,7 +291,7 @@ void BasicScanner::SkipWhileComment ()
 	DBG_BLOCK(std::string dbgStart);
 	char	theNextChar;
 
-	for (int i = 0; i < mStartComment.length(); i++)
+	for (uint i = 0; i < mStartComment.length(); i++)
 	{
 		char theNextChar;
 		GetChar(theNextChar);
@@ -325,7 +323,7 @@ void BasicScanner::SkipWhileComment ()
 
 	// consume the comment stop
 	DBG_BLOCK(std::string dbgStop);
-	for (int i = 0; i < mStopComment.length(); i++)
+	for (unsigned int i = 0; i < mStopComment.length(); i++)
 	{
 		char theNextChar;
 		GetChar(theNextChar);
@@ -419,7 +417,6 @@ posn_t BasicScanner::Wind ()
 }
 
 
-#pragma mark -
 // *** CONSUME ***********************************************************/
 // Read characters while a given condition is met (i.e. you encounter a
 // char that is not in their set), then rollback to just before it.
@@ -563,7 +560,6 @@ void BasicScanner::ConsumeLine ()
 }
 
 
-#pragma mark -
 // *** READ FXNS *********************************************************/
 // Read characters until a given condition is met, rollback to just before
 // it and return read chars in buffer.
@@ -672,7 +668,6 @@ bool BasicScanner::isMemberOf(const char* ikCharSet, char iTestChar)
 
 
 // *** READ (Vanilla)
-#pragma mark -
 
 // To Do: this could be combined with ReadExpected or ReadToken? Anyway,
 // merge it into main code stream.
@@ -1034,7 +1029,6 @@ void BasicScanner::PeekToken	(std::string& oToken)
 // Read basic types and return result in token string. Make as large a
 // token as possible. Throw if unable to process.
 // To Do: where are the throws?
-#pragma mark -
 
 
 // READ NUMBER TOKEN
@@ -1067,7 +1061,6 @@ void BasicScanner::ReadIntToken (std::string& ioToken)
 
 
 // *** DEPRECATED & TEST FUNCTIONS **************************************/
-#pragma mark -
 
 // READ INT
 // Return the integer representation of a string. Note that these numbers

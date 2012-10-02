@@ -259,7 +259,7 @@ void foo(const Functor<int> &f)
 // can try defining some of these flags as well:
 
 
-#if defined(_MSC_VER)	
+#if defined(_MSC_VER)
 #define RHCB_CANT_PASS_MEMFUNC_BY_REFERENCE	//like it says
 #define RHCB_CANT_OVERLOAD_ON_CONSTNESS		//of mem funcs
 #define RHCB_CANT_INIT_REFERENCE_CTOR_STYLE	//int i;int &ir(i); //MS falls down
@@ -331,11 +331,11 @@ protected:
 // Note: this code depends on all ptr-to-mem-funcs being same size
 // If that is not the case then make memFunc as large as largest
 ////////////////////////////////////////////////////////////////
+	void *callee;
 	union{
 	PFunc func;
 	char memFunc[MEM_FUNC_SIZE];
 	};
-	void *callee;
 
 	CBFunctorBase():callee(0),func(0){}
 	CBFunctorBase(const void *c,PFunc f, const void *mf,size_t sz):

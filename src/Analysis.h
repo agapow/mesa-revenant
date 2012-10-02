@@ -36,17 +36,17 @@ public:
 	// LIFECYCLE
 	BasicAnalysis ()
 		{}
-	
+
 	virtual ~BasicAnalysis ()
 		{}
-			
+
 	// I/O
-	const char*           describe (size_type iIndex);	
+	const char*           describe (size_type iIndex);
 	virtual const char*   describeAnalysis () = 0;
 	size_type             deepSize ();
 	void                  deleteElement (size_type iIndex);
 	size_type             getDepth (size_type iIndex);
-	
+
 	// DEPRECIATED & DEBUG
 	void	validate	() {}
 };
@@ -65,10 +65,10 @@ public:
 	CountExtantTaxaAnalysis (int iRichIndex)
 		: mRichCol (iRichIndex)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-			
+
 	// I/O
 	const char* describeAnalysis ();
 
@@ -89,10 +89,10 @@ public:
 	CountAllTaxaAnalysis (int iRichIndex)
 		: mRichCol (iRichIndex)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 
@@ -118,13 +118,13 @@ public:
 		, mCalcPaleo (iCalcPaleo)
 		, mCalcAge (iCalcAge)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
-	
+
 	bool mCountNodes, mCountTips, mCountAlive, mCalcPaleo, mCalcAge;
 };
 
@@ -148,16 +148,16 @@ public:
 		, mCalcHeight (iCalcHeight)
 		, mCalcTimeToRoot (iCalcTimeToRoot)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 
 	nodetype_t mTargetNodetype;
 	bool mCalcAges, mCalcTimeToParent, mCalcChildren, mCalcLeaves,
-		theSubtreeSz, mCalcHeight, mCalcSubtree, mCalcSiblings, mCalcTimeToRoot;
+		theSubtreeSz, mCalcSubtree, mCalcSiblings, mCalcHeight, mCalcTimeToRoot;
 };
 
 class NodeSelector
@@ -172,16 +172,19 @@ public:
 				oSelectedNodes.push_back (p);
 		}
 	}
-	
+
 	virtual ~NodeSelector ()
 	{
 	}
-	
+
 	virtual bool isNodeSelected (MesaTree* iTargetTree, nodeiter_t& iCurrNode)
 	{
 		MesaTree* theDummyP = iTargetTree;     // just to shut compiler up
+
 		nodeiter_t theDummyIter = iCurrNode;   // just to shut compiler up
 		assert (false);   // should never be called
+		theDummyP = NULL;
+		theDummyIter = theDummyIter;
 		return true;
 	}
 };
@@ -192,6 +195,7 @@ public:
 	virtual bool isNodeSelected (MesaTree* iTargetTree, nodeiter_t& iCurrNode)
 	{
 		MesaTree* theDummyP = iTargetTree;     // just to shut compiler up
+		theDummyP = theDummyP;
 		nodeiter_t theDummyIter = iCurrNode;   // just to shut compiler up
 		return true;
 	}
@@ -227,7 +231,7 @@ public:
 	NodeSelectorAbsNumTips (int iTipsSelectedCount)
 		: mTipsSelectedCount (iTipsSelectedCount)
 	{}
-	
+
 	virtual void selectNodes (MesaTree* iTargetTree, nodearr_t& oSelectedNodes)
 	{
 		iTargetTree->getLiveLeaves (oSelectedNodes);
@@ -235,7 +239,7 @@ public:
 		sbl::shuffle (oSelectedNodes.begin(), oSelectedNodes.end());
 		oSelectedNodes.resize (mTipsSelectedCount);
 	}
-	
+
 	int mTipsSelectedCount;
 };
 
@@ -253,7 +257,7 @@ public:
 		else
 			return false;
 	}
-	
+
 	CharComparator mTraitTest;
 };
 
@@ -277,21 +281,21 @@ public:
 		, mCalcHeight (iCalcHeight)
 		, mCalcTimeToRoot (iCalcTimeToRoot)
 		{}
-		
+
 	virtual ~XNodeInfoAnalysis ()
 	{
 		delete mNodeSelectorP;
 	}
-	
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 
 	NodeSelector* mNodeSelectorP;
 	bool mSelectionCount, mCalcAges, mCalcTimeToParent, mCalcChildren, mCalcLeaves,
-		theSubtreeSz, mCalcHeight, mCalcSubtree, mCalcSiblings, mCalcTimeToRoot;
+		theSubtreeSz, mCalcSubtree, mCalcSiblings, mCalcHeight, mCalcTimeToRoot;
 };
 
 
@@ -304,10 +308,10 @@ public:
 	ListNodesAnalysis ()
 		: BasicAnalysis ("list_nodes")
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -324,10 +328,10 @@ public:
 	// LIFECYCLE
 	GeneticDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -339,10 +343,10 @@ public:
 	// LIFECYCLE
 	PhyloDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -354,10 +358,10 @@ public:
 	// LIFECYCLE
 	JackknifeGeneticDivAnalysis ()
 	{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -370,10 +374,10 @@ public:
 	// LIFECYCLE
 	JackknifePhyloDivAnalysis ()
 	{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -387,13 +391,13 @@ public:
 	BootstrapGeneticDivAnalysis (int iNumReps, int iNumSamples)
 		: mNumReps (iNumReps), mNumSamples (iNumSamples)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
-	
+
 	long   mNumReps;
 	long   mNumSamples;
 };
@@ -407,13 +411,13 @@ public:
 	BootstrapPhyloDivAnalysis (int iNumReps, int iNumSamples)
 		: mNumReps (iNumReps), mNumSamples (iNumSamples)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
-	
+
 	long   mNumReps;
 	long   mNumSamples;
 };
@@ -426,10 +430,10 @@ public:
 	// LIFECYCLE
 	SimpsonDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -440,10 +444,10 @@ public:
 	// LIFECYCLE
 	ShannonWeinerDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -454,10 +458,10 @@ public:
 	// LIFECYCLE
 	BrillouinDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -468,10 +472,10 @@ public:
 	// LIFECYCLE
 	PieDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -483,10 +487,10 @@ public:
 	// LIFECYCLE
 	MacintoshDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -497,10 +501,10 @@ public:
 	// LIFECYCLE
 	MargelefDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -511,10 +515,10 @@ public:
 	// LIFECYCLE
 	MenhinickDiversityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -529,8 +533,8 @@ public:
 		: mRichCol (iRichIndex), mListSizes (iListSizes)
 		{}
 
-	bool         mListSizes;
 	colIndex_t   mRichCol;
+	bool         mListSizes;
 };
 
 
@@ -548,10 +552,10 @@ public:
 
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
-	
+
 	bool  mListSize, mCorrection, mExtended;
 };
 
@@ -564,10 +568,10 @@ public:
 	SlowinskiGuyerAnalysis (bool iListSizes, colIndex_t iRichIndex)
 		: RichnessAnalysis (iRichIndex, iListSizes)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -579,10 +583,10 @@ public:
 	// LIFECYCLE
 	ShaosNbarAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -594,10 +598,10 @@ public:
 	// LIFECYCLE
 	ShaosSigmaSqAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -610,10 +614,10 @@ public:
 	// LIFECYCLE
 	CollessCAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -626,10 +630,10 @@ public:
 	// LIFECYCLE
 	B1Analysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -642,10 +646,10 @@ public:
 	// LIFECYCLE
 	B2Analysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -660,10 +664,10 @@ public:
 	// LIFECYCLE
 	StemminessAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -676,10 +680,10 @@ public:
 	// LIFECYCLE
 	ResolutionAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -691,10 +695,10 @@ public:
 	// LIFECYCLE
 	UltrametricAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -709,10 +713,10 @@ public:
 	// LIFECYCLE
 	SiteComplementarityAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -727,10 +731,10 @@ public:
 	// LIFECYCLE
 	ComparativeAnalysis ()
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -746,13 +750,13 @@ public:
 		, mPredictorType (iPredictorType)
 		, mContCols (iContCols)
 		{}
-		
+
 	// SERVICE
 	void execute () {}
-		
+
 	// I/O
 	const char* describeAnalysis () { return ""; }
-	
+
 	colIndex_t						mPredictorCol;
 	traittype_t						mPredictorType;
 	std::vector<colIndex_t>		mContCols;
@@ -773,10 +777,10 @@ public:
 	FuscoAllAnalysis (bool iListSizes, int iRichIndex)
 		: RichnessAnalysis ("calc_fusco_all", iRichIndex, iListSizes)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -792,10 +796,10 @@ public:
 	FuscoWeightedAnalysis ()
 		: BasicAnalysis ("calc_fusco_weighted")
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 };
@@ -812,14 +816,14 @@ public:
 	FuscoExtendedAnalysis (int iRichIndex)
 		: BasicAnalysis ("calc_fusco_extended"), mRichCol (iRichIndex)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 
-	// INTERNALS	
+	// INTERNALS
 private:
 	int	mRichCol;
 };
@@ -838,14 +842,14 @@ public:
 		: BasicAnalysis ("calc_fusco_extended_all"), mRichCol (iRichIndex),
 		mListSizes (iListSizes)
 		{}
-		
+
 	// SERVICE
 	void execute ();
-		
+
 	// I/O
 	const char* describeAnalysis ();
 
-	// INTERNALS	
+	// INTERNALS
 private:
 	int	mRichCol;
 	bool	mListSizes;

@@ -1,5 +1,5 @@
 /**************************************************************************
-ActionQueue.h - a manager for groups of model manipulations 
+ActionQueue.h - a manager for groups of model manipulations
 
 Credits:
 - By Paul-Michael Agapow, 2002, Dept. Biology, Imperial College at
@@ -7,7 +7,7 @@ Credits:
 - <mail://mesa@agapow.net> <http://www.agapow.net/software/mesa/>
 
 About:
-- 
+-
 
 Changes:
 - 99.7.13: Created.
@@ -48,8 +48,8 @@ ActionQueue::~ActionQueue ()
 {
 	clear ();
 }
-		
-		
+
+
 // *** ACCESSORS *********************************************************/
 
 int ActionQueue::getDepth (size_type iIndex)
@@ -73,7 +73,7 @@ int ActionQueue::size ()
 	assert (0 <= theDeepSize);
 	return theDeepSize;
 }
-		
+
 
 bool ActionQueue::isEmpty ()
 //: are there no actions stored in the queue?
@@ -87,7 +87,7 @@ const char* ActionQueue::describe (size_type iIndex)
 	/// Preconditions:
 	assert (0 <= iIndex);
 	assert (iIndex < size());
-	
+
 	// Main:
 	return mContents.describe (iIndex + 1);
 }
@@ -101,7 +101,6 @@ bool ActionQueue::containsAnalyses ()
 
 
 // *** MUTATORS **********************************************************/
-#pragma mark -
 
 void ActionQueue::adoptAction (value_type iNewActionP)
 {
@@ -114,7 +113,7 @@ void ActionQueue::deleteElement (size_type iIndex)
 	/// Preconditions:
 	assert (0 <= iIndex);
 	assert (iIndex < size());
-	
+
 	// Main:
 	mContents.deleteElement (iIndex + 1);
 	/*
@@ -122,7 +121,7 @@ void ActionQueue::deleteElement (size_type iIndex)
 	for (q = mContents.begin(); q != mContents.end(); q++)
 	{
 		assert (0 <= iIndex);
-		
+
 		int theSizeCurrElement = (*q)->deepSize();
 		if (iIndex == 0)
 		{
@@ -160,7 +159,6 @@ void ActionQueue::clear ()
 
 
 // *** I/O ***************************************************************/
-#pragma mark -
 
 void ActionQueue::summarise (std::ostream& ioOutStream)
 //: output an executive summary of the queue to the stream
@@ -174,7 +172,7 @@ void ActionQueue::summarise (std::ostream& ioOutStream)
 		case (0):
 			ioOutStream << "are no actions";
 			break;
-			
+
 		case (1):
 			ioOutStream << "is one action";
 			break;
@@ -183,7 +181,7 @@ void ActionQueue::summarise (std::ostream& ioOutStream)
 			ioOutStream << "are " << theSize << " actions";
 			break;
 	}
-	
+
 	ioOutStream << " programmed in the queue." << std::endl;
 }
 
@@ -199,7 +197,7 @@ void ActionQueue::detailedReport (std::ostream* ioOutStreamP)
 	{
 		long theNumActions = size();
 		bool	theMultipleActions = (1 < size());
-		(*ioOutStreamP) << "There " << (theMultipleActions? "are" : "is") << 
+		(*ioOutStreamP) << "There " << (theMultipleActions? "are" : "is") <<
 			" " << size() << " action" << (theMultipleActions? "s" : "") <<
 			" programmed in the queue." << std::endl;
 		for (long i = 0; i < theNumActions; i++)
@@ -229,7 +227,6 @@ void ActionQueue::dump()
 
 
 // *** SERVICES **********************************************************/
-#pragma mark -
 
 void ActionQueue::runOnce ()
 //: execute the stored chain of actions once in order
@@ -269,7 +266,6 @@ void ActionQueue::runAndRestore (int iLoops)
 
 
 // *** DEPRECATED & TEST FUNCTIONS **************************************/
-#pragma mark -
 
 void ActionQueue::validate ()
 //: validates queue by calling all memebers to validate themselves

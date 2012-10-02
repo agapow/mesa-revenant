@@ -56,7 +56,6 @@ Bounds::Bounds (double iLower, unbounded_t iUpper)
 
 
 // *** ACCESSORS
-#pragma mark -
 
 bool Bounds::hasUpper () const
 //: does that Bounds have an upper bound?
@@ -143,7 +142,6 @@ void Bounds::unsetLower ()
 
 
 // *** DEPRECIATE & DEBUG
-#pragma mark -
 
 void Bounds::validate ()
 //: self-check

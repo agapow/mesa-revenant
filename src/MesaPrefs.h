@@ -56,11 +56,11 @@ enum pref_cladelabels_t
 	kPrefCladeLabels_Series
 };
 
-static char* kPrefCladeLabels_Cstrs [] =
+static const char* kPrefCladeLabels_Cstrs [] =
 {
-	"label phylogenetically", 
-	"label CAIC-style", 
-	"label as hierachy" 
+	"label phylogenetically",
+	"label CAIC-style",
+	"label as hierachy"
 };
 
 
@@ -73,11 +73,11 @@ enum pref_preservenodes_t
 	kPrefPreserveNodes_RootChildren   // kill, delete, collapse
 };
 
-static char* kPrefPreserveNodes_Cstrs [] =
+static const char* kPrefPreserveNodes_Cstrs [] =
 {
-	"allow killing of all nodes", 
-	"preserve the root", 
-	"preserve the root & its children" 
+	"allow killing of all nodes",
+	"preserve the root",
+	"preserve the root & its children"
 };
 
 
@@ -91,14 +91,14 @@ There are two ways:
 2. "bounce" from the lower limit - the last species can never go extinct
 */
 {
-	kPrefTotalExtinction_Allowed = 0, 
-	kPrefTotalExtinction_Bounce   
+	kPrefTotalExtinction_Allowed = 0,
+	kPrefTotalExtinction_Bounce
 };
 
-static char* kPrefTotalExtinction_Cstrs [] =
+static const char* kPrefTotalExtinction_Cstrs [] =
 {
-	"allow last species to die", 
-	"last species never dies" 
+	"allow last species to die",
+	"last species never dies"
 };
 
 
@@ -123,7 +123,7 @@ public:
 		, mTimeGrain (0.0001)
 		{}
 	// ~MesaPrefs		();
-				
+
 	// The values
 	pref_verbosity_t       mVerbosity;
 	pref_analysisout_t     mAnalysisOut;

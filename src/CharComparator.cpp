@@ -41,8 +41,8 @@ CharComparator::CharComparator
 {
 	init (iCharIndex, iComp);
 }
-	
-	
+
+
 void CharComparator::init (colIndex_t iColIndex, comparator_t iComp)
 {
 	mCharIndex = iColIndex;
@@ -62,7 +62,7 @@ bool CharComparator::testCharacter (nodeiter_t iNode)
 	else
 	{
 		assert (false);   // should never get here
-		return false;     // to shut compiler up 
+		return false;     // to shut compiler up
 	}
 }
 
@@ -76,27 +76,27 @@ bool CharComparator::testCharacterCont (nodeiter_t iNode)
 		case kComparator_LessThan:
 			return (theLhsVal < mContRhsVal);
 			break;
-			
+
 		case kComparator_LessThanOrEqual:
 			return (theLhsVal <= mContRhsVal);
 			break;
-			
+
 		case kComparator_Equal:
 			return (theLhsVal == mContRhsVal);
 			break;
-			
+
 		case kComparator_NotEqual:
 			return (theLhsVal != mContRhsVal);
 			break;
-			
+
 		case kComparator_GreaterThan:
 			return (theLhsVal > mContRhsVal);
 			break;
-			
+
 		case kComparator_GreaterThanOrEqual:
 			return (theLhsVal >= mContRhsVal);
 			break;
-			
+
 		default:
 			assert (false);   // should never get here
 			return false;     // just to shut compiler up
@@ -113,82 +113,81 @@ bool CharComparator::testCharacterDisc (nodeiter_t iNode)
 		case kComparator_LessThan:
 			return (theLhsVal < mDiscRhsVal);
 			break;
-			
+
 		case kComparator_LessThanOrEqual:
 			return (theLhsVal <= mDiscRhsVal);
 			break;
-			
+
 		case kComparator_Equal:
 			return (theLhsVal == mDiscRhsVal);
 			break;
-			
+
 		case kComparator_NotEqual:
 			return (theLhsVal != mDiscRhsVal);
 			break;
-			
+
 		case kComparator_GreaterThan:
 			return (theLhsVal > mDiscRhsVal);
 			break;
-			
+
 		case kComparator_GreaterThanOrEqual:
 			return (theLhsVal >= mDiscRhsVal);
 			break;
-			
+
 		default:
 			assert (false);   // should never get here
 			return false;     // just to shut compiler up
 	}
 }
 
-	
-	
+
+
 // *** I/O ***************************************************************/
-#pragma mark -
 
 const char* CharComparator::describe ()
 {
 	static string theBuffer;
-	
+
 	theBuffer = "where ";
-	
+
 	if (mCharType == kTraittype_Continuous)
 		theBuffer += "continuous ";
 	else if (mCharType == kTraittype_Discrete)
 		theBuffer += "discrete ";
 	else
 		// should never get here
-		assert (false); 
-		
+		assert (false);
+
 	theBuffer += "trait #";
 	theBuffer += sbl::toString (mCharIndex + 1);
 	theBuffer += " ";
-	
+
 	switch (mComp)
 	{
 		case kComparator_LessThan:
 			theBuffer += "<";
 			break;
-			
+
 		case kComparator_LessThanOrEqual:
 			theBuffer += "<=";
 			break;
-			
+
 		case kComparator_Equal:
 			theBuffer += "=";
 			break;
-			
+
 		case kComparator_NotEqual:
 			theBuffer += "not =";
 			break;
-			
+
 		case kComparator_GreaterThan:
 			theBuffer += ">";
 			break;
-			
+
 		case kComparator_GreaterThanOrEqual:
 			theBuffer += ">=";
 			break;
-			
+
 		default:
 			assert (false); // should never get here
 	}
@@ -200,14 +199,13 @@ const char* CharComparator::describe ()
 		theBuffer+= mDiscRhsVal;
 	else
 		assert (false); // should never get here
-	
+
 	return theBuffer.c_str();
 }
 
 
 
 // *** DEBUG & DEPRECATED ***********************************************/
-#pragma mark -
 
 void CharComparator::validate ()
 // not much we can actually test here
