@@ -22,7 +22,7 @@ SOURCES=Action.cpp CaicWriter.cpp discretematrix.cpp \
    Numerics.cpp setreader.cpp XRate.cpp \
    CharStateSet.cpp Macro.cpp NclBlocks.cpp \
    nxsdate.cpp SimGlobals.cpp \
-   Bounds.cpp datablock.cpp main.cpp NclReader.cpp \
+   datablock.cpp main.cpp NclReader.cpp \
    nxsstring.cpp SystemAction.cpp \
    CaicReader.cpp discretedatum.cpp \
    Prune.cpp TabDataReader.cpp RandomService.cpp StringUtils.cpp \
