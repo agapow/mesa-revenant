@@ -83,7 +83,7 @@ public:
 /// @name LIFECYCLE
 //@{
 	ConsoleApp	();
-	~ConsoleApp	();
+	virtual ~ConsoleApp	();
 //@}
 		
 /// @name SERVICES

@@ -1,6 +1,6 @@
 
 CC=g++
-CFLAGS=-c
+CFLAGS=-c -Wall
 LDFLAGS=
 
 INSTALL=/usr/local/bin/install -c

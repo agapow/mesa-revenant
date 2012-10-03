@@ -46,7 +46,7 @@ public:
 	{
 		// return (mSrcStringP != NULL);
 
-		if ((mSrcStringP == NULL) or (mPosn == kScan_SrcEnd))
+		if ((mSrcStringP == NULL) or ((int) mPosn == kScan_SrcEnd))
 			return false;
 		else
 			return true;

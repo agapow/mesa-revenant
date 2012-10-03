@@ -44,6 +44,8 @@ public:
 	TraitEvolScheme (int iColIndex)
 		: mColIndex (iColIndex)
 		{}
+
+	virtual ~TraitEvolScheme() {}
 		
 	virtual void evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 		{

@@ -371,6 +371,7 @@ bool TerminalCharEvolRule::isTriggered
 	// return false
 	MesaTree* theTreeP = getActiveTreeP();
 	assert (theTreeP != NULL);
+	theTreeP = theTreeP; // just to shut compiler up
 	// if (ioFiringLeaf == theTreeP->end())
 	//	return false;
 

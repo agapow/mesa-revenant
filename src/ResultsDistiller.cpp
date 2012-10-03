@@ -76,7 +76,7 @@ void ResultsDistiller::distill
 		*/
 		
 		OutputCol	theCurrLine;
-		if (mTrimCols < theBuffer.size())
+		if ((unsigned int) mTrimCols < theBuffer.size())
 			theCurrLine.first.assign (theBuffer.begin() + mTrimCols, theBuffer.end());
 		theUniqueLines.push_back (theCurrLine);
 			
@@ -109,7 +109,7 @@ void ResultsDistiller::distill
 	// we now have a list of tokenized rows (vectors of strings)
 	
 	// find how long the longest row (now) / column (to be) is ...
-	long theMaxColSize = 0;
+	unsigned long theMaxColSize = 0;
 	std::list<OutputCol>::iterator q;
 	for (q = theUniqueLines.begin(); q != theUniqueLines.end(); q++)
 	{	
@@ -123,7 +123,7 @@ void ResultsDistiller::distill
 	}
 		
 	// for each row (to be)			
-	for (long i = 0; i < theMaxColSize; i++)
+	for (unsigned long i = 0; i < theMaxColSize; i++)
 	{
 		for (q = theUniqueLines.begin(); q != theUniqueLines.end(); q++)
 		{
@@ -170,7 +170,7 @@ bool ResultsDistiller::compareStringVec (stringvec_t& iInfo1, stringvec_t& iInfo
 		return false;
 	else
 	{
-		for (long i = 0; i < iInfo1.size(); i++)
+		for (unsigned long i = 0; i < iInfo1.size(); i++)
 		{
 			if (iInfo1[i] != iInfo2[i])
 				return false;

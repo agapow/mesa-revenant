@@ -432,7 +432,7 @@ MyTreesBlock* NexusReader::adoptTrees ()
 
 
 // *** DEPRECATED & TEST FUNCTIONS **************************************/
-#pragma mark -
+
 
 void NexusReader::validate ()
 {

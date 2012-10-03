@@ -176,7 +176,7 @@ void BasicMacro::deleteAction (int iIndex)
 // actions.
 {
 	assert (0 <= iIndex);
-	assert (iIndex < mContents.size());
+	assert ((unsigned int) iIndex < mContents.size());
 	deleteAction (mContents.begin() + iIndex);
 }
 
@@ -343,7 +343,7 @@ void BasicMacro::executeMacro ()
 
 
 // *** RUN N MACRO *******************************************************/
-#pragma mark -
+
 
 void RunNMacro::execute ()
 {
@@ -375,7 +375,7 @@ void	RunNMacro::validate	()
 
 
 // *** RUN TREE MACRO *****************************************************/
-#pragma mark -
+
 
 void TreeMacro::execute ()
 // NOTE: restores the same active tree as was at the start.
@@ -411,7 +411,7 @@ const char* TreeMacro::describeMacro ()
 
 
 // *** RUN ONCE MACRO ****************************************************/
-#pragma mark -
+
 
 void RunOnceMacro::execute ()
 {
@@ -427,7 +427,7 @@ const char* RunOnceMacro::describeMacro ()
 
 
 // *** RUN & RESTORE MACRO ***************************************************/
-#pragma mark -
+
 
 void RunAndRestoreMacro::execute ()
 {	
@@ -469,7 +469,7 @@ void	RunAndRestoreMacro::validate	()
 
 
 // *** UTILITY FUNCTIONS *************************************************/
-#pragma mark -
+
 
 BasicMacro* castAsMacro (BasicAction* iActionP)
 //: return the parameter cast as a macro is possible, otherwise nil

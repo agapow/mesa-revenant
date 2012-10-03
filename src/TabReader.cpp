@@ -68,7 +68,6 @@ void TabReader::read ()
 		throw FormatError ("this isn't a tab-delimited file");
 	
 	// now we can actually read the file
-	int theNumRows = 0;	
 	// while the eof has not been reached
 	while (theScanner)
 	{

@@ -74,7 +74,7 @@ void CaicWriter::writeData
 		(*mDataStreamP) << *p;
 
 		// print out cont data
-		for (long i = 0; i < theNumContCols; i++)
+		for (ContTraitMatrix::size_type i = 0; i < theNumContCols; i++)
 		{
 			/*
 			std::string theContStr = iContWrangler.getData (p->c_str(), i);
@@ -85,7 +85,7 @@ void CaicWriter::writeData
 			(*mDataStreamP) << "\t" << iContWrangler.getData (p->c_str(), i);;
 		}
 		// print out disc data
-		for (long i = 0; i < theNumDiscCols; i++)
+		for (DiscTraitMatrix::size_type i = 0; i < theNumDiscCols; i++)
 		{
 			// TO DO: need to translate disc data. Big prob
 			// see if all numerical?

@@ -38,7 +38,7 @@ class ConsoleMenuApp: public ConsoleApp
 public:
 	// Lifecycle
 	ConsoleMenuApp		() {};	// use defaults
-	~ConsoleMenuApp	() {};
+	virtual ~ConsoleMenuApp	() {};
 		
 	// Services		
 	virtual void	Run			();							// main event loop

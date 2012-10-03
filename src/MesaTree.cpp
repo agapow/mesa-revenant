@@ -16,7 +16,7 @@ Changes:
 
 
 // *** INCLUDES
-#pragma mark Includes
+
 
 #include "MesaTree.h"
 #include "Sbl.h"
@@ -40,7 +40,7 @@ using std::vector;
 
 
 // *** CONSTANTS & DEFINES
-#pragma mark Constants & Defines
+
 
 typedef MesaTree::size_type		size_type;
 typedef MesaTree::weight_type		weight_type;
@@ -298,7 +298,7 @@ iterator MesaTree::getLivingDescendant (iterator & iNode)
 
 
 // *** TREE ACCESSORS ******************************************************/
-#pragma mark -
+
 
 /**
 What is the age of the tree?
@@ -557,7 +557,7 @@ double MesaTree::calcGeneticDiversity ()
 
 
 // *** NODE COLLECTION ******************************************************/
-#pragma mark -
+
 
 
 /*
@@ -650,7 +650,7 @@ void MesaTree::getTaxaNames (stringvec_t& ioLabelVec)
 
 
 // *** NODE NAMING & LABELLING **********************************************/
-#pragma mark -
+
 
 void MesaTree::setNodeName (iterator iTargetIter, std::string iName)
 {
@@ -762,7 +762,7 @@ iterator MesaTree::getNodeByCaicCode
 
 
 // *** TREE NAMING *******************************************************/
-#pragma mark -
+
 
 std::string MesaTree::getTreeName () const
 {
@@ -776,7 +776,7 @@ void MesaTree::setTreeName (const char* iNameStr)
 
 	
 // *** LEAF AGING *******************************************************/
-#pragma mark -
+
 
 /*
 void MesaTree::ageLeaf (iterator iLeafIter, double iAgeIncr)
@@ -870,7 +870,7 @@ nodeiter_t MesaTree::addNodeHelper (CaicCode iNewCode, nodeiter_t iParentIt)
 
 
 // *** MISC *************************************************************/
-#pragma mark -
+
 
 size_type  MesaTree::getDistance (iterator iChildIter, iterator iParIter)
 //: how many time do you have to step up to find the parent?
@@ -1044,7 +1044,7 @@ void MesaTree::moveSubtree (iterator& ioSubtree, iterator& ioNewParent)
 
 
 // *** I/O ***************************************************************/
-#pragma mark -
+
 
 std::string	MesaTree::writeNewick (TranslationTable* iTranslatorP)
 //: return a newick format representation of the tree
@@ -1111,7 +1111,7 @@ void MesaTree::writeNewickNode
 
 
 // *** DEPRECATED & DEBUG ***********************************************/
-#pragma mark -
+
 
 void MesaTree::dump ()
 {

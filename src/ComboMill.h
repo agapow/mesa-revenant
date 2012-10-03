@@ -30,7 +30,6 @@ using std::endl;
 
 
 // *** MAIN BODY *********************************************************/
-#pragma mark --
 
 /**
 Given a container, one by one generate all combinations of the contents.
@@ -99,7 +98,7 @@ public:
 	// is it all ones?
 	bool isLast ()
 	{
-		for (int i = 0; i < mMembership.size(); i++)
+		for (uint i = 0; i < mMembership.size(); i++)
 		{
 			if (mMembership[i] == true)
 				return false;
@@ -162,7 +161,7 @@ public:
 	{
 		assert (not isLast());
 		
-		for (int i = 0; i < mMembership.size(); i++)
+		for (uint i = 0; i < mMembership.size(); i++)
 		{
 			if (mMembership[i] == false)
 			{
@@ -254,7 +253,7 @@ public:
 		// if ((size() < iLowerBound) or (iUpperBound < size())) 
 		//	nextKJ (iLowerBound, iUpperBound);
 		setMembership (false);
-		for (int i = 0; i < iLowerBound; i++)
+		for (uint i = 0; i < iLowerBound; i++)
 			mMembership[i] = true;
 	}
 	
@@ -335,7 +334,7 @@ private:
 		
 	void setMembership (bool iIsMember)
 	{
-		for (int i = 0; i < mMembership.size(); i++)
+		for (uint i = 0; i < mMembership.size(); i++)
 		{
 			mMembership[i] = iIsMember;
 		}
@@ -403,7 +402,7 @@ void TestComboMill ()
 	{
 		//theTestMill.Dump();
 		theTestMill.getCurrent (theResArr.begin(), theSetIter);
-		PrintContainer(theResArr.begin(), theSetIter);
+		PrintContainer (theResArr.begin(), theSetIter);
 		theTestMill.next();
 	}
 

@@ -40,7 +40,7 @@ string	makeUnknownCmdStr (nxsstring  iNexStr)
 
 
 // *** MY TAXA BLOCK *****************************************************/
-#pragma mark -
+
 
 void MyTaxaBlock::SkippingCommand (nxsstring s)
 {
@@ -63,7 +63,7 @@ void MyTaxaBlock::summarise (ostream& ioOutStream)
 	
 
 // *** MY CHARACTERS BLOCK ***********************************************/
-#pragma mark -
+
 
 void MyCharactersBlock::SkippingCommand (nxsstring s)
 {
@@ -197,7 +197,7 @@ void MyCharactersBlock::handleContMatrix (NexusToken& token)
 		assert (mContData[1].size() == mContData[i].size());
 		
 	// store names in continuous data matrix
-	for (int i = 0; i < mTaxaNames.size(); i++)
+	for (unsigned int i = 0; i < mTaxaNames.size(); i++)
 		mContData.setRowName (i, mTaxaNames[i].c_str());
 }
 
@@ -213,7 +213,7 @@ void MyCharactersBlock::assertValidIndex (int iRow, int iCol)
 
 
 // *** MY TREES BLOCK ****************************************************/
-#pragma mark -
+
 
 void MyTreesBlock::parseTrees ()
 {
@@ -378,7 +378,7 @@ void MyTreesBlock::readNewickNode
       {
           sbl::StringScanner* scnnr = (sbl::StringScanner*) iSrcScanner;
           string* buff = scnnr->mSrcStringP;
-          std:string buffer = *buff;
+          std::string buffer = *buff;
           cout << "||" << theNextChar << "//" << scnnr->GetPosn() << endl;
           cout << buffer << endl;
 
@@ -443,7 +443,7 @@ double MyTreesBlock::readNewickNodeDist (sbl::BasicScanner* iSrcScanner)
 
 
 // *** CONTINUOUS BLOCK **************************************************/
-#pragma mark -
+
 
 void MyContBlock::summarise (ostream& ioOutStream)
 {
@@ -456,7 +456,7 @@ void MyContBlock::summarise (ostream& ioOutStream)
 
 
 // *** DATA BLOCK ********************************************************/
-#pragma mark -
+
 
 void MyDataBlock::summarise (ostream& ioOutStream)
 {
@@ -476,7 +476,7 @@ void MyDataBlock::Reset()
 
 
 // *** TREES BLOCK *******************************************************/
-#pragma mark -
+
 
 void MyTreesBlock::Read (NexusToken& token)
 //: overriding the read so as to parse the trees into a useful format
@@ -494,7 +494,7 @@ void MyTreesBlock::SkippingCommand (nxsstring s)
 
 
 // *** DEPRECATED & DEBUG ***********************************************/
-#pragma mark -
+
 
 /*
 void MyCharactersBlock::mergeData (stringmatrix_t& iNewMatrix)

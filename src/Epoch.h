@@ -117,7 +117,6 @@ private:
 
 
 // *** UTILITY FUNCTIONS *************************************************/
-#pragma mark -
 
 EpochMacro* castAsEpoch (BasicAction* iActionP);
 

@@ -11,7 +11,7 @@ Credits:
 
 
 // *** INCLUDES
-#pragma mark "Includes"
+
 
 #include "Numerics.h"
 #include <cmath>
@@ -21,7 +21,7 @@ using std::log;
 
 
 // *** CONSTANTS & DEFINES
-#pragma mark "Constants & Defines"
+
 
 const double pi = 3.141592654;
 

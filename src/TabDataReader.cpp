@@ -61,7 +61,6 @@ void TabDataReader::read ()
 		throw FormatError ("this isn't a tab-delimited file");
 	
 	// now we can actually read the file
-	int theNumRows = 0;	
 	// while the eof has not been reached
 	while (theScanner)
 	{
@@ -138,7 +137,7 @@ void TabDataReader::getData (DiscTraitMatrix& ioWrangler)
 
 	// see what rows have to be added, assume all columns have to be added
 	stringvec_t   theNewRows;
-	for (int i = 0; i < mRowNames.size(); i++)
+	for (uint i = 0; i < mRowNames.size(); i++)
 	{
 		if (not ioWrangler.hasRowName (mRowNames[i].c_str()))
 			theNewRows.push_back (mRowNames[i]);
@@ -163,7 +162,7 @@ void TabDataReader::getData (DiscTraitMatrix& ioWrangler)
 	// stuff things into the the wrangler		
 	for (int i = 0 ; i < theNumNewTraits; i++)
 	{
-		for (int j = 0; j < mDiscDataMatrix.size(); j++)
+		for (uint j = 0; j < mDiscDataMatrix.size(); j++)
 		{
 			ioWrangler.getData (mRowNames[j].c_str(), theNumOldTraits + i)	=
 				mDiscDataMatrix[j][i];
@@ -188,7 +187,7 @@ void TabDataReader::getData (ContTraitMatrix& ioWrangler)
 
 	// see what rows have to be added, assume all columns have to be added
 	stringvec_t   theNewRows;
-	for (int i = 0; i < mRowNames.size(); i++)
+	for (uint i = 0; i < mRowNames.size(); i++)
 	{
 		if (not ioWrangler.hasRowName (mRowNames[i].c_str()))
 			theNewRows.push_back (mRowNames[i]);
@@ -216,7 +215,7 @@ void TabDataReader::getData (ContTraitMatrix& ioWrangler)
 	// stuff things into the the wrangler		
 	for (int i = 0 ; i < theNumNewTraits; i++)
 	{
-		for (int j = 0; j < mContDataMatrix.size(); j++)
+		for (uint j = 0; j < mContDataMatrix.size(); j++)
 		{
 			ioWrangler.getData (mRowNames[j].c_str(), theNumOldTraits + i)	=
 				sbl::toDouble (mContDataMatrix[j][i]);
@@ -284,11 +283,11 @@ are assumed to be discrete. Everything else is an error.
 void TabDataReader::extractFormat ()
 //: detects the format of the data read in
 {
-	int theNumCols = mDataMatrix[0].size();
-	int theNumRows = mDataMatrix.size();
+	uint theNumCols = mDataMatrix[0].size();
+	uint theNumRows = mDataMatrix.size();
 
 	// check that all rows have the same number of columns
-	for (int i = 0; i < mDataMatrix.size(); i++)
+	for (uint i = 0; i < mDataMatrix.size(); i++)
 	{
 		if (mDataMatrix[i].size() != theNumCols)
 			throw FormatError ("imported data matrix has rows of unequal length");
@@ -296,7 +295,7 @@ void TabDataReader::extractFormat ()
 	
 	// for each column, establish what sort of data can be found there
 	mColumnTypes.clear();
-	for (int i = 0; i < theNumCols; i++)
+	for (uint i = 0; i < theNumCols; i++)
 	{
 		traittype_t theOverallType;
 
@@ -324,7 +323,7 @@ void TabDataReader::extractFormat ()
 			int theCountFloats, theCountInts, theCountAlpha, theCountOther;
 			theCountFloats = theCountInts = theCountAlpha = theCountOther = 0;
 		
-			for (int j = 0; j < theNumRows; j++)
+			for (uint j = 0; j < theNumRows; j++)
 			{
 				if (mDataMatrix[j][i] == "")
 					throw FormatError ("imported data matrix contains null entries");
@@ -373,7 +372,7 @@ void TabDataReader::extractFormat ()
 		}
 
 		mColumnTypes.push_back (theOverallType);
-		assert (mColumnTypes.size() == (i+1));	
+		assert (mColumnTypes.size() == (uint) (i+1));	
 	}
 	
 	/*
@@ -392,14 +391,14 @@ void TabDataReader::extractFormat ()
 			case kTraittype_Discrete:
 				// so delete continuous copies
 				mContColNames.erase (mContColNames.begin() + i);
-				for (int j = 0; j < mContDataMatrix.size(); j++)
+				for (uint j = 0; j < mContDataMatrix.size(); j++)
 					mContDataMatrix[j].erase(mContDataMatrix[j].begin() + i);
 				break;
 				
 			case kTraittype_Continuous:
 				// so delete discrete copies
 				mDiscColNames.erase (mDiscColNames.begin() + i);
-				for (int j = 0; j < mDiscDataMatrix.size(); j++)
+				for (uint j = 0; j < mDiscDataMatrix.size(); j++)
 					mDiscDataMatrix[j].erase (mDiscDataMatrix[j].begin() + i);			
 				break;
 				

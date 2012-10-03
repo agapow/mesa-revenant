@@ -47,13 +47,13 @@ const char* NullCeScheme::describe ()
 
 
 // *** DISCRETE CLASSES **************************************************/
-		
+
 disctrait_t& DiscCeScheme::referState (nodeiter_t& ioLeaf)
 {
 	return referDiscState (ioLeaf, mColIndex);
 }
 
-/*			
+/*
 bool hasState (disctrait_t& iSearchState)
 {
 	return (find (mCharStates.begin(), mCharStates.end(),
@@ -69,15 +69,15 @@ long findState (disctrait_t& iSearchState)
 }
 
 disctrait_t nextState (disctrait_t& iSearchState)
-{ 
+{
 	long theOldIndex = findState (iSearchState);
 	if (theOldIndex != (countStates() - 1))
 		theOldIndex++;
 	return getState (theOldIndex);
 }
-	
+
 disctrait_t prevState (disctrait_t& iSearchState)
-{ 
+{
 	long theOldIndex = findState (iSearchState);
 	if (theOldIndex != 0)
 		theOldIndex--;
@@ -86,7 +86,7 @@ disctrait_t prevState (disctrait_t& iSearchState)
 
 long countStates ()
 	{ return long (mCharStates.size()); }
-	
+
 disctrait_t getState (long iIndex)
 	{ return mCharStates [iIndex]; }
 */
@@ -96,14 +96,14 @@ disctrait_t getState (long iIndex)
 
 void MarkovianCeScheme::evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 {
-	/* 
+	/*
 	Arse. We didn't make use of time here, and that introduced problems when
 	doing gradual eveolution of discrete traits. What I'll do now is compare the wait to the
 	time.
 	*/
 	/*
 	original
-	
+
 	iTime = iTime;
 	// disctrait_t theOldState = referState (ioLeafIter);
 	disctrait_t theOldState = getDiscData (ioLeafIter, mColIndex);
@@ -116,13 +116,13 @@ void MarkovianCeScheme::evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 			long theChoice = MesaGlobals::mRng.UniformWhole (theNumStates);
 			theNewState = mCharStates[theChoice];
 		}
-	
+
 		// referState (ioLeafIter) = theNewState;
 		setDiscData (ioLeafIter, mColIndex, theNewState);
 	}
 	*/
 
-	
+
 	iTime = iTime;
 	// disctrait_t theOldState = referState (ioLeafIter);
 	disctrait_t theOldState = getDiscData (ioLeafIter, mColIndex);
@@ -136,10 +136,10 @@ void MarkovianCeScheme::evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 			long theChoice = MesaGlobals::mRng.UniformWhole (theNumStates);
 			theNewState = mCharStates[theChoice];
 		}
-	
+
 		// referState (ioLeafIter) = theNewState;
 		setDiscData (ioLeafIter, mColIndex, theNewState);
-	}	
+	}
 }
 
 const char* MarkovianCeScheme::describe ()
@@ -186,7 +186,7 @@ const char* RankedMarkovianCeScheme::describe ()
 	theMsg.append (")");
 	return theMsg.c_str();
 }
-			
+
 
 // *** BINARY
 /*
@@ -220,11 +220,11 @@ const char* BinaryCeScheme::describe ()
 	theMsg.append (")");
 	return theMsg.c_str();
 }
-			
+
 */
 
 // *** CONTINUOUS CLASSES ************************************************/
-		
+
 conttrait_t& ContCeScheme::referState (nodeiter_t& ioLeaf)
 {
 	return referContState (ioLeaf, mColIndex);
@@ -237,16 +237,16 @@ void ContBrownianScheme::evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 {
 	// Preconditions:
 	assert (0.0 <= iTime);
-	
+
 	// Main:
 	conttrait_t theNewState;
-	
+
 	switch (mBoundsBehaviour)
 	{
 		case kEvolBound_Ignore:
 			theNewState = proposeNewState (ioLeafIter, iTime);
 			break;
-			
+
 		case kEvolBound_Truncate:
 			theNewState = proposeNewState (ioLeafIter, iTime);
 			if (mRange.hasUpper() and (mRange.getUpper() < theNewState))
@@ -254,7 +254,7 @@ void ContBrownianScheme::evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 			if (mRange.hasLower() and (theNewState < mRange.getLower()))
 				theNewState = mRange.getLower();
 			break;
-			
+
 		case kEvolBound_Replace:
 			do
 			{
@@ -262,21 +262,21 @@ void ContBrownianScheme::evolveChars (nodeiter_t& ioLeafIter, mesatime_t iTime)
 			}
 			while (not mRange.isWithin (theNewState));
 			break;
-			
+
 		default:
 			assert (false);
 	}
-		
+
 		setContData (ioLeafIter, mColIndex, theNewState);
 		referState (ioLeafIter) = theNewState;
 }
-	
+
 conttrait_t ContBrownianScheme::proposeNewState (nodeiter_t& ioLeafIter, mesatime_t iTime)
 {
 	// get old state
 	conttrait_t theOldState = getContData (ioLeafIter, mColIndex);
 	if (mIsPunct)
-		iTime = 1.0;	
+		iTime = 1.0;
 	// generate change
 	double theChange = MesaGlobals::mRng.gaussian (mMean * iTime, mStdDev * std::sqrt (iTime));
 	// generate & return putative new state
@@ -293,23 +293,22 @@ const char* ContBrownianScheme::describe ()
 	theMsg.append (" per time)");
 	return theMsg.c_str();
 }
-		
+
 void ContBrownianScheme::validate ()
 {
 	mRange.validate();
 }
 
-					
-					
+
+
 // *** LOG NORMAL
-#pragma mark -
-	
+
 conttrait_t ContLogNormalScheme::proposeNewState (nodeiter_t& ioLeafIter, mesatime_t iTime)
 {
 	// get old state
 	conttrait_t theOldState = getContData (ioLeafIter, mColIndex);
 	if (mIsPunct)
-		iTime = 1.0;	
+		iTime = 1.0;
 	// generate change
 	double theChange = MesaGlobals::mRng.gaussian (mMean * iTime, mStdDev * std::sqrt (iTime));
 	conttrait_t theNewState = std::exp (std::log (theOldState) + theChange);
@@ -328,11 +327,10 @@ const char* ContLogNormalScheme::describe ()
 	return theMsg.c_str();
 }
 
-					
-					
+
+
 // *** SCHEME STORAGE
 // so the schemes within are disposed of automgaically
-#pragma mark -
 
 SchemeArr::~SchemeArr ()
 {

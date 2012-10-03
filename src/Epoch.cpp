@@ -564,7 +564,7 @@ void EpochPopLimit::execute ()
 */
 
 // *** TIME LIMIT EPOCH ************************************************/
-#pragma mark -
+
 
 bool EpochTimeLimit::isAtEnd ()
 {
@@ -593,7 +593,7 @@ const char* EpochTimeLimit::describeEpoch ()
 
 
 // *** UTILITY FUNCTIONS *************************************************/
-#pragma mark -
+
 
 EpochMacro* castAsEpoch (BasicAction* iActionP)
 //: return the parameter cast as a epoch if possible, otherwise nil

@@ -257,7 +257,7 @@ public:
 		
 	int getMaxLenRowName ()
 	{
-		int theMaxLen = 0;
+		unsigned int theMaxLen = 0;
 		for (size_type i = 0; i < base_type::countRows (); i++)
 		{
 			if (theMaxLen < mRowNames[i].size())

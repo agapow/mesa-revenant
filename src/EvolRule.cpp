@@ -67,7 +67,7 @@ void EvolRule::commitAction (nodearr_t& ioSubjectLeaves, mesatime_t iTime)
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 bool ConditionalRule::isTriggered (EvolRule* iFiringRuleP, nodearr_t& ioFiringLeaves)
 {
@@ -85,7 +85,7 @@ const char* ConditionalRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t GlobalRule::calcNextWait ()
 {
@@ -102,7 +102,7 @@ const char* GlobalRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t LocalRule::calcNextWait (nodeiter_t iLeafIter)
 { 
@@ -126,7 +126,7 @@ const char* LocalRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 void NullRule::commitAction (nodearr_t& ioSubjectLeaves, mesatime_t iTime)
 { 
@@ -152,7 +152,7 @@ const char* NullRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 void EndOfEpochRule::commitAction (nodearr_t& ioSubjectLeaves, mesatime_t iTime)
 {
@@ -167,7 +167,7 @@ const char* EndOfEpochRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 mesatime_t MarkovSpRule::calcNextWait (nodeiter_t iLeafIter)
 {
 	iLeafIter = iLeafIter; // to shut compiler up
@@ -194,7 +194,7 @@ const char* MarkovSpRule::describeRule ()
 }
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 mesatime_t LogisticSpRule::calcNextWait (nodeiter_t iLeafIter)
 {
 	iLeafIter = iLeafIter; // to shut compiler up
@@ -224,7 +224,7 @@ const char* LogisticSpRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t AgeBiasedSpRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -264,7 +264,7 @@ const char* AgeBiasedSpRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t CharBiasedSpRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -308,7 +308,7 @@ const char* CharBiasedSpRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t CharBiasedSpRule_New::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -335,7 +335,7 @@ const char* CharBiasedSpRule_New::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t CharBiasedKillRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -378,7 +378,7 @@ const char* CharBiasedKillRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t BiasedKillRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -419,7 +419,7 @@ const char* BiasedKillRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t LatentSpRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -458,7 +458,7 @@ const char* LatentSpRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t MarkovKillRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -492,7 +492,7 @@ const char* MarkovKillRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t LogisticKillRule::calcNextWait (nodeiter_t iLeafIter)
 {
@@ -527,7 +527,7 @@ const char* LogisticKillRule::describeRule ()
 
 
 // *** CLASS DEFINITION **************************************************/
-#pragma mark -
+
 
 mesatime_t MassKillRule::calcNextWait ()
 {
@@ -692,7 +692,7 @@ const char* MassKillTraitBiasedRule::describeRule ()
 
 	
 // *** UTILITY FUNCTIONS *************************************************/
-#pragma mark -
+
 
 
 /*

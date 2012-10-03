@@ -24,7 +24,8 @@ SBL_NAMESPACE_START
 // *** CONSTANTS & DEFINES
 
 struct boundary_t {};
-static boundary_t kUnbounded;
+// TODO: needed?
+//static boundary_t kUnbounded;
 
 
 // *** CLASS DECLARATION *************************************************/

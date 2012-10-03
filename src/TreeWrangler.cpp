@@ -108,7 +108,7 @@ void TreeWrangler::deleteTree (int iIndex)
 	{
 		if (iIndex == 0)
 			setActiveTreeIndex (0);
-		else if (iIndex == (size() - 1)) // if last entry
+		else if ((unsigned int) iIndex == (size() - 1)) // if last entry
 		{
 			setActiveTreeIndex ((iIndex) ? 0 : (theDefIndex - 1));
 		}
@@ -248,7 +248,7 @@ void TreeWrangler::assertValidIndex (size_type iIndex) const
 void TreeWrangler::validate ()
 //: just a debug function to catch bad accesses
 {
-	for (long i = 0; i < size(); i++)
+	for (unsigned long i = 0; i < size(); i++)
 		(at (i)).validate ();
 		
 	if (size () != 0)

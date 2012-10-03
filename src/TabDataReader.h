@@ -71,8 +71,8 @@ public:
 
 /// @name INTERNALS
 private:
-	progcallback_t			mProgressCb; // for sending progress reports
 	std::ifstream&			mInStream;   // the stream that is being read
+	progcallback_t			mProgressCb; // for sending progress reports
 	stringmatrix_t 		mDataMatrix, mContDataMatrix, mDiscDataMatrix;
 	stringvec_t				mRowNames;
 	stringvec_t			   mColNames;

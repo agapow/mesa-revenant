@@ -29,7 +29,7 @@ To Do:
 
 
 // *** INCLUDES
-#pragma mark Includes
+
 
 #include "MesaModel.h"
 #include "StringUtils.h"
@@ -60,7 +60,7 @@ using sbl::kStr_NoLimit;
 // *** CONSTANTS & DEFINES
 
 // *** MAIN BODY *********************************************************/
-#pragma mark -
+
 
 // *** LIFECYCLE *********************************************************/
 
@@ -148,7 +148,7 @@ std::string MesaModel::getTraitName (traittype_t iDataType, int iIndex)
 	
 
 // *** MUTATORS **********************************************************/
-#pragma mark -
+
 
 void MesaModel::seedTree ()
 //: create a new tree, with just a root
@@ -259,7 +259,7 @@ void MesaModel::restoreData ()
 
 
 // *** I/O ***************************************************************/
-#pragma mark -
+
 
 fileformat_t MesaModel::sniffFormat (std::ifstream& iInStream)
 {
@@ -565,7 +565,7 @@ void MesaModel::exportData
 
 
 // *** REPORTING *********************************************************/
-#pragma mark -
+
 
 void MesaModel::summarise (ostream& ioOutStream)
 {
@@ -587,7 +587,7 @@ void MesaModel::detailedReport (ostream& ioOutStream)
 
 
 // *** DEPRECATED & TEST FUNCTIONS **************************************/
-#pragma mark -
+
 
 void MesaModel::validate ()
 {

@@ -125,7 +125,7 @@ void NexusWriter::writeEndBlock ()
 
 
 // *** COMMAND WRITING **************************************************/
-#pragma mark -
+
 
 void NexusWriter::writeDimensionsCmd (int iNumTaxa, int iNumChar)
 {
@@ -356,7 +356,7 @@ void NexusWriter::writeTreesCmd (TreeWrangler& iWrangler, TranslationTable* iTab
 
 
 // *** HELPER FXNS *******************************************************/
-#pragma mark -
+
 
 NexusWriter& operator << (NexusWriter& iWriter, literal& iFormatCmd)
 {
@@ -366,7 +366,7 @@ NexusWriter& operator << (NexusWriter& iWriter, literal& iFormatCmd)
 
 
 // *** DEPRECATED & DEBUG ***********************************************/
-#pragma mark -
+
 // these all check that the block is not null
 
 

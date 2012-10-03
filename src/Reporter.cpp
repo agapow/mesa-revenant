@@ -26,7 +26,7 @@ About:
 #include <cstdio>
 #include "MesaTypes.h"
 #include "StringUtils.h"	
-	  
+
 using std::vector;
 using std::string;
 using sbl::eraseTrailingSpace;
@@ -70,7 +70,7 @@ void Reporter::popPrefix ()
 
 
 // *** I/O ***************************************************************/
-#pragma mark -
+
 
 void  Reporter::printNotApplicable (const char* iDetails, const char* iTitle)
 {
@@ -99,7 +99,7 @@ void Reporter::print	(std::string iStlStr, const char* iTitle)
 		std::back_insert_iterator<stringvec_t> theOutputIter (theOutputLines);
 		sbl::split (iStlStr, theOutputIter, '\n');
 		
-		for (long i = 0; i < theOutputLines.size(); i++)
+		for (unsigned long i = 0; i < theOutputLines.size(); i++)
 		{
 			sbl::eraseFlankingSpace (theOutputLines[i]);
 			rawOutput (theOutputLines[i], iTitle);
@@ -217,7 +217,7 @@ void Reporter::alertApplication (const char* iMsg)
 
 
 // *** INTERNALS *********************************************************/
-#pragma mark -
+
 
 void Reporter::rawOutput (std::string& iReportStr, const char* iTitle)
 //: format & send a single line of output to appropriate places
@@ -253,7 +253,7 @@ void Reporter::rawOutput (std::string& iReportStr, const char* iTitle)
 std::string Reporter::printPrefix ()
 {
 	std::stringstream theBuffer;
-	for (long i = 0; i < mPrefixStack.size(); i++)
+	for (unsigned long i = 0; i < mPrefixStack.size(); i++)
 		theBuffer << mPrefixStack[i] << "\t";
 	return theBuffer.str();
 }

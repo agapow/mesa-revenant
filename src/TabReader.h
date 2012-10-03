@@ -37,13 +37,13 @@ class TabReader
 public:
 	// LIFECYCLE
 	TabReader (std::ifstream& iInStream, progcallback_t& ikProgressCb)
-		: mInStream (iInStream),
-		mProgressCb (ikProgressCb),
-		mDatatype (kTraittype_Unknown)
+		: mDatatype (kTraittype_Unknown)
+		, mInStream (iInStream)
+		, mProgressCb (ikProgressCb)
 		//: ctor that reads data from stream reporting problems
 		{}
 		
-	~TabReader ()
+	virtual ~TabReader ()
 		{ mInStream.close(); }
 	
 	// SERVICES	
@@ -62,8 +62,8 @@ protected:
 	stringvec_t			mColNames;
 
 private:
-	progcallback_t			mProgressCb;
 	std::ifstream&			mInStream;
+	progcallback_t			mProgressCb;
 	stringmatrix_t 		mDataMatrix;
 	stringvec_t				mRowNames;
 	
