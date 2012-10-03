@@ -604,6 +604,11 @@ NodeSelector* MesaConsoleApp::askNodeSelector (const char* iPrompt)
 			assert (false);
 			return NULL;
 	}
+
+	// XXX: to shut compiler up
+	// this should never happen
+	assert (false);
+	return NULL;
 }
 
 

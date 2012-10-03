@@ -121,7 +121,7 @@ public:
 		iterator theCurrIter = mSeqStart;
 		oStopOut = iStartOut;
 
-		for (int i = 0; i < mMembership.size(); i++)
+		for (uint i = 0; i < mMembership.size(); i++)
 		{
 			assert (theCurrIter != mSeqStop);
 			

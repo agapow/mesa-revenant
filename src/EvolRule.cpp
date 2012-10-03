@@ -573,7 +573,7 @@ nodearr_t MassKillFixedNumRule::selectTargets ()
 	nodearr_t theTargets;
 	theTreeP->getLiveLeaves (theTargets);
 	random_shuffle (theTargets.begin(), theTargets.end());
-	if (mAbsNum < theTargets.size())
+	if ((unsigned) mAbsNum < theTargets.size())
 		theTargets.resize (mAbsNum);
 		
 	return theTargets; 
@@ -592,7 +592,7 @@ nodearr_t MassKillPercentRule::selectTargets ()
 	MesaTree* theTreeP = getActiveTreeP ();
 	nodearr_t theTargets;
 	theTreeP->getLiveLeaves (theTargets);
-	nodearr_t::size_type theKillNum = theTargets.size() * mPercent;
+	nodearr_t::size_type theKillNum = (nodearr_t::size_type) (theTargets.size() * mPercent);
 	random_shuffle (theTargets.begin(), theTargets.end());
 	theTargets.resize (theKillNum);
 		
@@ -603,7 +603,7 @@ nodearr_t MassKillPercentRule::selectTargets ()
 const char* MassKillPercentRule::describeRule ()
 {
 	static char theBuffer[64];
-	std::sprintf (theBuffer, "mass extinction (kill %.4g\% of species)", mPercent);
+	std::sprintf (theBuffer, "mass extinction (kill %.4g%% of species)", mPercent);
 	return theBuffer;
 }	
 
@@ -628,7 +628,7 @@ nodearr_t MassKillProbRule::selectTargets ()
 const char* MassKillProbRule::describeRule ()
 {
 	static char theBuffer[64];
-	std::sprintf (theBuffer, "mass extinction (%.4g\% of killing species)", mProb);
+	std::sprintf (theBuffer, "mass extinction (%.4g%% of killing species)", mProb);
 	return theBuffer;
 }
 

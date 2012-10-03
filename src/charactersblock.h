@@ -28,8 +28,8 @@ class CharactersBlock : public NexusBlock
 friend class AssumptionsBlock;
 
 protected:
-	TaxaBlock& taxa;
 	AssumptionsBlock& assumptionsBlock;
+	TaxaBlock& taxa;
 
 	int ntax;
 	int ntaxTotal;

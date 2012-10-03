@@ -3,10 +3,10 @@
 
 class SetReader
 {
-   NexusBlock& block;
    NexusToken& token;
    IntSet& nxsset;
    int max;
+   NexusBlock& block;
    int settype;
 
 public:

@@ -601,19 +601,19 @@ void JackknifeGeneticDivAnalysis::execute ()
 		// ... get list of sites
 		vector<colIndex_t> theSiteIndexes;
 		MesaGlobals::mContDataP->listSiteTraits (theSiteIndexes);
-		int theNumSites = theSiteIndexes.size();
+		uint theNumSites = theSiteIndexes.size();
 
 		// ... get list of tips, ditto
 		stringvec_t theTipNames;
 		theTreeP->getTaxaNames (theTipNames);
-		int theNumTaxa = theTipNames.size();
+		uint theNumTaxa = theTipNames.size();
 
 		// ... get number of observations
 		long theNumObservations = 0;
-		for (int i = 0; i < theNumSites; i++)
+		for (uint i = 0; i < theNumSites; i++)
 		{
-			for (int j = 0; j < theNumTaxa; j++)
-				theNumObservations += getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
+			for (uint j = 0; j < theNumTaxa; j++)
+				theNumObservations += (long) getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
 		}
 
 		/*
@@ -624,16 +624,16 @@ void JackknifeGeneticDivAnalysis::execute ()
 		long   theNumJackknifes = 0;
 		double theSumDiversity = 0.0;
 		double theTotalSqDiffs = 0.0;
-		for (int i = 0; i < theNumTaxa; i++)
+		for (uint i = 0; i < theNumTaxa; i++)
 		{
 			bool theTaxaIsJackknifable = true;
 			long theNumSitesWithZero = 0;
 			int  theIndexOfJackknifeSite = -1;
 
 			// walk along sites for every taxa, count all the 0s, record the 1
-			for (int j = 0; j < theNumSites; j++)
+			for (uint j = 0; j < theNumSites; j++)
 			{
-				long theAbundance = getContData (theTipNames[i].c_str(), theSiteIndexes[j]);
+				long theAbundance = (long) getContData (theTipNames[i].c_str(), theSiteIndexes[j]);
 				if (2 <= theAbundance)
 				{
 					theTaxaIsJackknifable = false;
@@ -754,7 +754,7 @@ void JackknifePhyloDivAnalysis::execute ()
 		for (int i = 0; i < theNumSites; i++)
 		{
 			for (int j = 0; j < theNumTaxa; j++)
-				theNumObservations += getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
+				theNumObservations += (long) getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
 		}
 
 		/*
@@ -774,7 +774,7 @@ void JackknifePhyloDivAnalysis::execute ()
 			// walk along sites for every taxa, count all the 0s, record the 1
 			for (int j = 0; j < theNumSites; j++)
 			{
-				long theAbundance = getContData (theTipNames[i].c_str(), theSiteIndexes[j]);
+				long theAbundance = (long) getContData (theTipNames[i].c_str(), theSiteIndexes[j]);
 				if (2 <= theAbundance)
 				{
 					theTaxaIsJackknifable = false;
@@ -907,7 +907,7 @@ void BootstrapPhyloDivAnalysis::execute ()
 		{
 			for (int j = 0; j < theNumTaxa; j++)
 			{
-				long theNumAtSite = getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
+				long theNumAtSite = (long) getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
 				if (0 < theNumAtSite)
 				{
 					theNumObservations += theNumAtSite;
@@ -1043,7 +1043,7 @@ void BootstrapGeneticDivAnalysis::execute ()
 		{
 			for (int j = 0; j < theNumTaxa; j++)
 			{
-				long theNumAtSite = getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
+				long theNumAtSite = (long) getContData (theTipNames[j].c_str(), theSiteIndexes[i]);
 				if (0 < theNumAtSite)
 				{
 					theNumObservations += theNumAtSite;
@@ -1168,7 +1168,7 @@ void BrillouinDiversityAnalysis::execute ()
 
 	// calculate total abundance & sum of ln (factorial)
 	long theTotal = 0;
-	long theTotalLnFactorial = 0;
+	double theTotalLnFactorial = 0;
 	for (unsigned int k = 0; k < theAbundances.size(); k++)
 	{
 		long theNextAbundance = theAbundances[k];
@@ -1668,7 +1668,7 @@ void FuscoAnalysis::execute ()
 			if (theBigTips < theSmallTips)
 				swap (theBigTips, theSmallTips);
 
-			long theMin = ceil (double (theTotalTips) / 2.0);
+			long theMin = (long) ceil (double (theTotalTips) / 2.0);
 			long theMax = theTotalTips - 1;
 			theImbalance = double (theBigTips - theMin) / double (theMax - theMin);
 			// this where we correct

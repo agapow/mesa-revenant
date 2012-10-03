@@ -16,10 +16,10 @@ class NexusBlock
 	friend class Nexus;
 
 protected:
-	bool isEnabled;
 	NexusBlock* next;
 	Nexus* nexus;
 	bool isEmpty;
+	bool isEnabled;
 	nxsstring id;
 
 	virtual void Read( NexusToken& token ) = 0;

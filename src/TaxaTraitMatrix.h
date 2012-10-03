@@ -27,6 +27,7 @@ To Do:
 // *** INCLUDES
 
 #include "Sbl.h"
+#include "SblTypes.h"
 #include "MesaTypes.h"
 #include "SimpleMatrix.h"
 #include "CharStateSet.h"
@@ -73,7 +74,7 @@ public:
 	void setRowNames (stringvec_t& ioNameVec)
 	{
 		assert (ioNameVec.size() == base_type::countRows ());
-		for (long i = 0; i < base_type::countRows (); i++)
+		for (ulong i = 0; i < base_type::countRows (); i++)
 			this->setRowName (i, ioNameVec[i].c_str());
 	}
 

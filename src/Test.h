@@ -24,8 +24,10 @@ Credits:
 
 class BasicTest
 //: an encapsulated yes/no query of the data
-{
+{	
 public:
+	virtual ~BasicTest() {}
+
 	// SERVICES
 	virtual bool operator () () = 0;
 		

@@ -46,7 +46,7 @@ public:
 	{
 		// return (mSrcStringP != NULL);
 
-		if ((mSrcStringP == NULL) or ((int) mPosn == kScan_SrcEnd))
+		if ((mSrcStringP == NULL) or (mPosn == kScan_SrcEnd))
 			return false;
 		else
 			return true;
@@ -55,7 +55,7 @@ public:
 // SERVICES
 	// low level, obligate overrides
 	posn_t	GetPosn 	();						// where	
-	posn_t	Goto 		(int iPosn);			// go to given posn
+	posn_t	Goto 		(posn_t iPosn);		// go to given posn
 	bool 		GetChar	(char& oCurrChar);	// get next char, return sucess
 
 
@@ -67,7 +67,7 @@ public:
 	
 public:
 	std::string*				mSrcStringP;
-	std::string::size_type	mPosn;
+	posn_t               	mPosn;
 };
 
 

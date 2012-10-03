@@ -34,6 +34,7 @@ To Do:
 #include <sstream>
 #include "distancesblock.h"
 #include "nexusdefs.h"
+#include "SblTypes.h"
 
 using std::ifstream;
 using std::stringstream;
@@ -177,26 +178,26 @@ void NexusReader::mergeData
 	mGapSymbol = iNewBlockP->GetGapSymbol ();
 	
 	// grow matrix to right size
-	int theNumChar = iNewBlockP->GetNChar();
-	int theNumTaxa = iNewBlockP->GetNTax();
+	uint theNumChar = iNewBlockP->GetNChar();
+	uint theNumTaxa = iNewBlockP->GetNTax();
 	ioWrangler.resize (theNumTaxa, theNumChar);
 	
 	// label all the rows with taxa names
-	for (int i = 0; i < theNumTaxa; i++)
+	for (uint i = 0; i < theNumTaxa; i++)
 	{
 		nxsstring theTmpName = (iNewBlockP->mTaxaNames[i]).c_str();
 		ioWrangler.setRowName (i, nexifyString(theTmpName.c_str()).c_str());
 	}
 		
 	// fill the matrix with the old data
-	for (int i = 0; i < theNumTaxa; i++)
+	for (uint i = 0; i < theNumTaxa; i++)
 	{
-		for (int j = 0; j < theNumChar; j++)
+		for (uint j = 0; j < theNumChar; j++)
 			ioWrangler[i][j] = iNewBlockP->mContData[i][j];
 	}
 	
 	// fill the label names
-	for (int i = 0; i < theNumChar; i++)
+	for (uint i = 0; i < theNumChar; i++)
 	{
 		// can we find a name for the character label?
 		string theLabel ("");
@@ -217,9 +218,9 @@ void NexusReader::mergeData
 	}	
 	
 	// Postconditions:
-	for (int i = 0; i < ioWrangler.countRows(); i++)
+	for (uint i = 0; i < ioWrangler.countRows(); i++)
 		assert (ioWrangler.getRowName (i) != "");
-	for (int i = 0; i < ioWrangler.countCols(); i++)
+	for (uint i = 0; i < ioWrangler.countCols(); i++)
 		assert (ioWrangler.getColName (i) != "");		
 }
 
@@ -235,12 +236,12 @@ void NexusReader::mergeData
 		
 	// Main:
 	// grow matrix to right size
-	int theNumChar = iNewBlockP->GetNChar();
-	int theNumTaxa = iNewBlockP->GetNTax();
+	uint theNumChar = iNewBlockP->GetNChar();
+	uint theNumTaxa = iNewBlockP->GetNTax();
 	ioWrangler.resize (theNumTaxa, theNumChar);
 	
 	// label all the rows with taxa names
-	for (int i = 0; i < theNumTaxa; i++)
+	for (uint i = 0; i < theNumTaxa; i++)
 	{
 		nxsstring theTmpStr = iNewBlockP->taxa.GetTaxonLabel(i);
 		ioWrangler.setRowName (i, nexifyString (theTmpStr.c_str()).c_str());
@@ -248,8 +249,8 @@ void NexusReader::mergeData
 
 	// get symbol table
 	char* theSymbolCstr = iNewBlockP->GetSymbols();
-	long theNumSymbols = strlen (theSymbolCstr);
-	for (int i = 0; i < theNumSymbols; i++)
+	ulong theNumSymbols = strlen (theSymbolCstr);
+	for (ulong i = 0; i < theNumSymbols; i++)
 	{
 		string theNewState (1, theSymbolCstr[i]);
 		ioWrangler.mStates.addState (theNewState);
@@ -259,9 +260,9 @@ void NexusReader::mergeData
 	mGapSymbol = iNewBlockP->GetGapSymbol ();
 	
 	// fill the matrix with the old data
-	for (int i = 0; i < theNumTaxa; i++)
+	for (uint i = 0; i < theNumTaxa; i++)
 	{
-		for (int j = 0; j < theNumChar; j++)
+		for (uint j = 0; j < theNumChar; j++)
 		{
 			// ioWrangler[i][j] = iNewBlockP->GetState (i, j);
 			
@@ -280,7 +281,7 @@ void NexusReader::mergeData
 
 	
 	// fill the label names
-	for (int i = 0; i < theNumChar; i++)
+	for (uint i = 0; i < theNumChar; i++)
 	{
 		// can we find a name for the character label?
 		string theLabel ("");
@@ -301,9 +302,9 @@ void NexusReader::mergeData
 	}	
 	
 	// Postconditions:
-	for (int i = 0; i < ioWrangler.countRows(); i++)
+	for (uint i = 0; i < ioWrangler.countRows(); i++)
 		assert (ioWrangler.getRowName (i) != "");
-	for (int i = 0; i < ioWrangler.countCols(); i++)
+	for (uint i = 0; i < ioWrangler.countCols(); i++)
 		assert (ioWrangler.getColName (i) != "");		
 }
 

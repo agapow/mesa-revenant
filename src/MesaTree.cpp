@@ -854,8 +854,8 @@ nodeiter_t MesaTree::addNodeHelper (CaicCode iNewCode, nodeiter_t iParentIt)
 	{
 		// work out how many children there are supposed to be here
 		char theNewTaxaChar = iNewCode.popFront();
-		int  theNewTaxaIndex = CaicCode::charToIndex (theNewTaxaChar);
-		int  theNumImpliedNodes = theNewTaxaIndex + 1;
+		uint  theNewTaxaIndex = CaicCode::charToIndex (theNewTaxaChar);
+		uint  theNumImpliedNodes = theNewTaxaIndex + 1;
 		// create the extra ones if need be
 		while (countChildren (iParentIt) < theNumImpliedNodes)
 		{

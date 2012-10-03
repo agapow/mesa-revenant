@@ -55,11 +55,11 @@ posn_t StringScanner::GetPosn ()
 }
 
 
-posn_t StringScanner::Goto (int iPosn)
+posn_t StringScanner::Goto (posn_t iPosn)
 //: go to a designated position
 {
 	posn_t theOldPosn = GetPosn ();
-	mPosn = (ulong) iPosn;
+	mPosn = iPosn;
 	return theOldPosn;
 }
 
@@ -77,7 +77,7 @@ bool StringScanner::GetChar (char& oCurrChar)
 	std::string::size_type theLen = mSrcStringP->size();
 	//assert ((mPosn == kScan_SrcEnd) or ((0 <= mPosn) and (mPosn < theLen)));
 
-	ASSERT_DO ((mPosn == kScan_SrcEnd) or ((0 <= (int) mPosn) and (mPosn < theLen)),
+	ASSERT_DO ((mPosn == kScan_SrcEnd) or ((0 <= (int) mPosn) and (mPosn < (signed) theLen)),
 		DBG_MSG (mPosn));
 	
 	// Main:
@@ -86,11 +86,11 @@ bool StringScanner::GetChar (char& oCurrChar)
 
 	oCurrChar = (*mSrcStringP)[mPosn];
 	mPosn++;
-	if (mPosn == theLen)
+	if (mPosn == (signed) theLen)
 		mPosn = (ulong) kScan_SrcEnd;
 	
 	// Postconditions & Return:
-	assert (((int) mPosn == kScan_SrcEnd) or ((0 <= mPosn) and (mPosn < theLen)));
+	assert ((mPosn == kScan_SrcEnd) or ((0 <= mPosn) and (mPosn < (signed) theLen)));
 	
 	return true;
 }
@@ -103,8 +103,8 @@ void StringScanner::UnreadChar (char iLastChar)
 	// Preconditions & Preparation:
 	// valid string & position
 	assert (mSrcStringP);
-	assert (((int) mPosn == kScan_SrcEnd) or ((0 <= mPosn) and
-		(mPosn < mSrcStringP->size())));
+	assert ((mPosn == kScan_SrcEnd) or ((0 <= mPosn) and
+		(mPosn < (signed) mSrcStringP->size())));
 
 	// just to shut compiler up
 	iLastChar = iLastChar;
@@ -124,8 +124,8 @@ void StringScanner::UnreadChar (char iLastChar)
 	}		
 	
 	// Preconditions & Preparation:
-	assert (((int) mPosn == kScan_SrcEnd) or ((0 <= mPosn) and
-		(mPosn < mSrcStringP->size())));
+	assert ((mPosn == kScan_SrcEnd) or ((0 <= mPosn) and
+		(mPosn < (signed) mSrcStringP->size())));
 }
 
 

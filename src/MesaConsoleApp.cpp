@@ -304,7 +304,7 @@ bool MesaConsoleApp::UpdateCmd (cmdId_t iCmdId)
 	bool theModelHasContTraits = theModelHasTraits and (mModel->countContTraits() != 0);
 	bool theModelHasDiscTraits = theModelHasTraits and (mModel->countDiscTraits() != 0);
 	bool theModelHasSiteData = theModelHasTraits and (mModel->countSiteTraits() != 0);
-	
+
 	switch (iCmdId)
 	{
 		// it is always possible to quit & set prefs
@@ -423,7 +423,7 @@ bool MesaConsoleApp::UpdateCmd (cmdId_t iCmdId)
 			if ((theModelHasMultipleTrees) and (not theModelHasTraits))
 			{
 				TreeWrangler::iterator q = mModel->mTreeData.begin();
-				int theTreeSize = q->countLeaves();
+				uint theTreeSize = q->countLeaves();
 				q++;
 				for (; q != mModel->mTreeData.end(); q++)
 				{
@@ -2600,7 +2600,7 @@ EvolRule* MesaConsoleApp::newRule (cmdId_t iUserCmd)
 		{
 			askRate (theFreqA);
 			double thePercent = askDouble ("Kill what percent of species", 0.0, 100.0);
-			theRuleP = (EvolRule*) new MassKillFixedNumRule (theFreqA, thePercent);		
+			theRuleP = (EvolRule*) new MassKillPercentRule (theFreqA, thePercent);		
 			break;
 		}
 			
@@ -2608,7 +2608,7 @@ EvolRule* MesaConsoleApp::newRule (cmdId_t iUserCmd)
 		{
 			askRate (theFreqA);
 			double theProb = askDouble ("Kill species with what probability", 0.0, 100.0);
-			theRuleP = (EvolRule*) new MassKillFixedNumRule (theFreqA, theProb);	
+			theRuleP = (EvolRule*) new MassKillProbRule (theFreqA, theProb);	
 			break;
 		}
 
@@ -2984,14 +2984,14 @@ void MesaConsoleApp::doXPruneSites ()
 	// do analyses before pruning
 	cout << endl;	
 	Report ("Executing analyses before omitting sites:");
-	for (int i = 0; i < theAnalysisPtrs.size(); i++)
+	for (uint i = 0; i < theAnalysisPtrs.size(); i++)
 		(theAnalysisPtrs[i])->execute();
 	
 	// save data before pruning so it can be restored
 	mModel->backupData();
 	
 	
-	for (int a = 0; a < theSiteArrays.size(); a++)
+	for (uint a = 0; a < theSiteArrays.size(); a++)
 	{
 		// prune sites (i.e. reduce them to population zero)
 		/// @todo have it print out names and not just numbers
@@ -3051,7 +3051,7 @@ void MesaConsoleApp::doXPruneSites ()
 			else
 			{
 				string theExtinctTaxa;
-				for (int k = 0; k < thePrunedNames.size(); k++)
+				for (uint k = 0; k < thePrunedNames.size(); k++)
 				{
 					theExtinctTaxa += " ";
 					theExtinctTaxa += thePrunedNames[k];
@@ -3074,7 +3074,7 @@ void MesaConsoleApp::doXPruneSites ()
 		// mModel->detailedReport(cout);
 		// do previous analyses
 		Report ("Executing analyses after pruning:");
-		for (int i = 0; i < theAnalysisPtrs.size(); i++)
+		for (uint i = 0; i < theAnalysisPtrs.size(); i++)
 			(theAnalysisPtrs[i])->execute();
 		
 		// Cleanup:
@@ -3083,7 +3083,7 @@ void MesaConsoleApp::doXPruneSites ()
 	}
 	
 	// delete analyses
-	for (int i = 0; i < theAnalysisPtrs.size(); i++)
+	for (uint i = 0; i < theAnalysisPtrs.size(); i++)
 		delete theAnalysisPtrs[i];
 }
 

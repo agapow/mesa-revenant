@@ -133,6 +133,10 @@ bool CharComparator::testCharacterDisc (nodeiter_t iNode)
 		case kComparator_GreaterThanOrEqual:
 			return (theLhsVal >= mDiscRhsVal);
 			break;
+
+		default:
+			assert (false);   // should never get here
+			return false;     // just to shut compiler up
 	}
 
     assert (false);   // should never get here

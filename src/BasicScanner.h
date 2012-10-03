@@ -41,7 +41,7 @@ enum eoln_t
 	kEoln_Unix
 };
 
-typedef int posn_t;
+typedef long posn_t;
 
 // Format codes
 

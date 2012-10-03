@@ -334,7 +334,7 @@ void BasicMacro::executeMacro ()
 //: execute the enclosed block 
 // NOTE: necessary for evolution events
 {
-	for (int i = 0; i < mContents.size(); i++)
+	for (uint i = 0; i < mContents.size(); i++)
 		(mContents.at(i))->execute();
 		
 	// MesaGlobals::mTreeDataP->validate();

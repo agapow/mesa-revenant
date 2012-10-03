@@ -65,7 +65,7 @@ using std::endl;
  *
  * Initializes id to "TREES" and ntrees and defaultTrees to 0.
  */
-TreesBlock::TreesBlock (TaxaBlock& tb) : ntrees(0), defaultTree(0), taxa(tb), NexusBlock()
+TreesBlock::TreesBlock (TaxaBlock& tb) : NexusBlock(), taxa(tb), ntrees(0), defaultTree(0)
 {
    id = "TREES";
 }
@@ -285,7 +285,7 @@ void TreesBlock::Read (NexusToken& token)
          ntrees++;
          treeName.push_back (skey);
          treeDescription.push_back (sval);
-         if (rooted.size() < ntrees)
+         if (rooted.size() < (unsigned) ntrees)
             rooted.push_back(false);
 		}
 		else if (token.Equals("END")) {
@@ -518,14 +518,14 @@ void TreesBlock::Report (ostream& out)
 
 	if (ntrees == 0) return;
 
-	for(llistsz_t k = 0; k < ntrees; k++) {
+	for(llistsz_t k = 0; k < (unsigned) ntrees; k++) {
 		out << '\t' << (k+1) << '\t' << treeName[k];
 		out << "\t(";
 		if (rooted[k])
 			out << "rooted";
 		else
 			out << "unrooted";
-		if (defaultTree == k)
+		if ((unsigned) defaultTree == k)
 			out << ",default tree)" << endl;
 		else
 			out << ')' << endl;

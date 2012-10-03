@@ -174,12 +174,12 @@ void TabDataReader::getData (DiscTraitMatrix& ioWrangler)
 void TabDataReader::getData (ContTraitMatrix& ioWrangler)
 {
 	// two choices: there's stuff in the wrangler already or not
-	int	theNumOldTraits = ioWrangler.countChars();
-	int   theNumNewTraits = mContColNames.size();
-	int   theTotalNumTraits = theNumOldTraits + theNumNewTraits;
-	int	theNumOldTaxa = ioWrangler.countTaxa();	
-	int   theNumNewTaxa = 0;    // calc later
-	int   theTotalNumTaxa = 0;  // calc later
+	uint	theNumOldTraits = ioWrangler.countChars();
+	uint   theNumNewTraits = mContColNames.size();
+	uint   theTotalNumTraits = theNumOldTraits + theNumNewTraits;
+	uint	theNumOldTaxa = ioWrangler.countTaxa();	
+	uint   theNumNewTaxa = 0;    // calc later
+	uint   theTotalNumTaxa = 0;  // calc later
 
 	// if there's none of the given datatype, get out of here
 	if (theNumNewTraits == 0)
@@ -197,14 +197,14 @@ void TabDataReader::getData (ContTraitMatrix& ioWrangler)
 	
 	// expand wrangler to fit new data, name new rows & cols
 	ioWrangler.resize (theTotalNumTaxa, theTotalNumTraits, 0);
-	for (int i = 0; i < theNumNewTaxa; i++)
+	for (uint i = 0; i < theNumNewTaxa; i++)
 	{
 		// DBG_MSG (theNumOldTaxa << " " << i << " " << ioWrangler.countRows() << " " <<  mRowNames[i].c_str());
 		assert ((theNumOldTaxa + i) < ioWrangler.countRows());
 		ioWrangler.setRowName (theNumOldTaxa + i, mRowNames[i].c_str());
 	}	
 
-	for (int i = 0; i < theNumNewTraits; i++)
+	for (uint i = 0; i < theNumNewTraits; i++)
 	{
 		assert ((theNumOldTraits + i) < ioWrangler.countCols());
 		if (mContColNames[i] != "")
@@ -213,7 +213,7 @@ void TabDataReader::getData (ContTraitMatrix& ioWrangler)
 	}	
 	
 	// stuff things into the the wrangler		
-	for (int i = 0 ; i < theNumNewTraits; i++)
+	for (uint i = 0 ; i < theNumNewTraits; i++)
 	{
 		for (uint j = 0; j < mContDataMatrix.size(); j++)
 		{

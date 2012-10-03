@@ -2177,7 +2177,7 @@ void AllelesBlock::Report( ostream& out )
 	if( charLabels.size() > 0 )
 	{
 		out << "  Locus and allele labels:" << endl;
-		for(llistsz_t k = 0; k < nchar; k++ ) { // PMA
+		for(llistsz_t k = 0; k < (unsigned) nchar; k++ ) { // PMA
 			if( charLabels[k].size() == 0 )
 				out << '\t' << ( 1 + GetOrigCharIndex(int (k)) ) << '\t' << "(no label provided for this locus)" << endl;
 			else
@@ -2187,7 +2187,7 @@ void AllelesBlock::Report( ostream& out )
          LabelListBag::const_iterator cib = charStates.find(int (k));
          if( cib != charStates.end() )
          {
-            int ns = int ((*cib).second.size());
+            unsigned int ns = int ((*cib).second.size());
             for(llistsz_t m = 0; m < ns; m++ ) {
          		out << "\t\t" << (*cib).second[m] << endl;
             }

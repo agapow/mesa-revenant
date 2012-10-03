@@ -71,7 +71,7 @@ posn_t StreamScanner::GetPosn ()
 // going to a position within the source. If the new posiiton is actually
 // beyond the end, end() will be set when the next read takes place,
 // which is the correct behaviour.
-posn_t StreamScanner::Goto (int iPosn)
+posn_t StreamScanner::Goto (posn_t iPosn)
 {
 	posn_t theOldPosn = GetPosn ();
 	mSrcStreamP->clear ();

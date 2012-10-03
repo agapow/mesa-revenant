@@ -42,8 +42,8 @@ public:
 	// LIFECYCLE
 	MesaModel (progcallback_t& ikProgressCb)
 		: mReporter (ikProgressCb)
-		, mProgressCb (ikProgressCb)
 		, mFilePath ("")
+		, mProgressCb (ikProgressCb)
 	{
 		// set up the access for actions & tasks
 		MesaGlobals::mDiscDataP = &mDiscData;

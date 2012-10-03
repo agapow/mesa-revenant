@@ -81,8 +81,8 @@ class PruneFraction: public BasicPrune
 public:
 	// LIFECYCLE
 	PruneFraction (double iKillFraction)
-		: mKillFraction (iKillFraction),
-		BasicPrune ("prune_fraction")
+		: BasicPrune ("prune_fraction")
+		, mKillFraction (iKillFraction)
 		{}
 	
 	// SERVICE
@@ -105,8 +105,8 @@ class PruneChance: public BasicPrune
 public:
 	// LIFECYCLE
 	PruneChance (double iKillChance)
-		: mKillChance (iKillChance),
-		BasicPrune ("prune_chance")
+		: BasicPrune ("prune_chance")
+		, mKillChance (iKillChance)
 		{}
 	
 	// SERVICE
@@ -130,8 +130,8 @@ class PruneCharacter: public BasicPrune
 public:
 	// LIFECYCLE
 	PruneCharacter (CharacterTest* iTestP)
-		: mTestP (iTestP),
-		BasicPrune ("prune_character")
+		: BasicPrune ("prune_character")
+		, mTestP (iTestP)
 		{}
 	~PruneCharacter ();
 		

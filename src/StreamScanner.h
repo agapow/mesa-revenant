@@ -51,7 +51,7 @@ public:
 // SERVICES
 	// low level, obligate overrides
 	posn_t	GetPosn 	();						// where	
-	posn_t	Goto 		(int iPosn);			// go to given posn
+	posn_t	Goto 		(posn_t iPosn);			// go to given posn
 	bool 		GetChar	(char& oCurrChar);	// get next char, return sucess
 
 

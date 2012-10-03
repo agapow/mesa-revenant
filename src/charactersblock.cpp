@@ -313,7 +313,7 @@ using std::endl;
  * </table>
  */
 CharactersBlock::CharactersBlock( TaxaBlock& tb, AssumptionsBlock& ab )
-	: taxa(tb), assumptionsBlock(ab), NexusBlock()
+	: NexusBlock(), assumptionsBlock(ab), taxa(tb)
 {
 	id = "CHARACTERS";
 
@@ -672,7 +672,7 @@ bool* CharactersBlock::GetActiveTaxonArray()
 nxsstring CharactersBlock::GetCharLabel( int i )
 {
 	nxsstring s = " ";
-   if( i < charLabels.size() )
+   if((unsigned int) i < charLabels.size() )
 		s = charLabels[llistsz_t (i)]; // PMA
    return s;
 }
@@ -1067,7 +1067,7 @@ nxsstring CharactersBlock::GetStateLabel( int i, int j )
 {
 	nxsstring s = " ";
    LabelListBag::const_iterator cib = charStates.find(i);
-   if( cib != charStates.end() && j < (*cib).second.size() )
+   if( cib != charStates.end() && (unsigned int) j < (*cib).second.size() )
 		s = (*cib).second[llistsz_t (j)]; // PMA
    return s;
 }
@@ -1335,7 +1335,7 @@ void CharactersBlock::HandleCharlabels( NexusToken& token )
 			// check to make sure user is not trying to read in more
 			// character labels than there are characters
 			//
-			if( num_labels_read > (unsigned)ncharTotal ) {
+			if( num_labels_read > ncharTotal ) {
 				errormsg = "Number of character labels exceeds NCHAR specified in DIMENSIONS command";
 				throw XNexus( errormsg, token.GetFilePosition(), token.GetFileLine(), token.GetFileColumn() );
 			}
@@ -1883,7 +1883,7 @@ void CharactersBlock::HandleFormat( NexusToken& token )
 			}
 
 			nxsstring t = token.GetToken();
-			int tlen = int (t.size()); // PMA
+			unsigned int tlen = t.size(); // PMA
 
 			// check to make sure user has not used any symbols already in the
 			// default symbols list for this data type
@@ -3030,7 +3030,7 @@ int CharactersBlock::PositionInSymbols( char ch )
 	assert( symbols != NULL );
 	size_t symbolsLength = std::strlen(symbols); // PMA
 	int found = 0;
-	int i;
+	size_t i;
 	for( i = 0; i < symbolsLength; i++ )
 	{
 		char char_in_symbols = ( respectingCase ? symbols[i] : (char) std::toupper(symbols[i]) );
@@ -3618,7 +3618,7 @@ void CharactersBlock::WriteStates( DiscreteDatum& d, char* s, int slen )
 
       if( numStates == 1 ) {
          int v = matrix->GetState( d );
-         assert( v < symbolListLen );
+         assert((unsigned) v < symbolListLen );
          s[0] = symbols[v];
          s[1] = '\0';
       }
@@ -3632,7 +3632,7 @@ void CharactersBlock::WriteStates( DiscreteDatum& d, char* s, int slen )
             s[i++] = '{';
          for( int k = 0; k < numStates; k++ ) {
             int v = matrix->GetState( d, k );
-            assert( v < symbolListLen );
+            assert((unsigned) v < symbolListLen );
             s[i++] = symbols[v];
             s[i] = '\0';
          }

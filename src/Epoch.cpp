@@ -182,7 +182,7 @@ void EpochMacro::sortRules ()
 	}
 	
 	// Postcondition:
-	assert (size() == (theLocalRules.size() + theGlobalRules.size() + theCondRules.size()));
+	assert ((unsigned) size() == (unsigned) (theLocalRules.size() + theGlobalRules.size() + theCondRules.size()));
 }
 
 

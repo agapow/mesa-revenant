@@ -24,6 +24,8 @@ Credits:
 class QueueElement
 {
 public:
+	virtual ~QueueElement() {};
+	
 	virtual const char*     describe ();
 	bool                    isEmpty ();
 	virtual int             size ();

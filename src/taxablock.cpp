@@ -57,7 +57,7 @@ using std::endl;
  *
  * Default constructor. Initializes id to "TAXA" and ntax to 0.
  */
-TaxaBlock::TaxaBlock() : ntax(0), NexusBlock()
+TaxaBlock::TaxaBlock() : NexusBlock(), ntax(0)
 {
    id = "TAXA";
 }

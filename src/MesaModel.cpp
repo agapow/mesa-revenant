@@ -41,6 +41,7 @@ To Do:
 #include "CaicReader.h"
 #include "NexusWriter.h"
 #include "CaicWriter.h"
+#include "SblTypes.h"
 #include <algorithm>
 
 using std::string;
@@ -205,7 +206,7 @@ void MesaModel::newContChar (double iNewVal)
 	{
 		// have to get names from trees
 		stringvec_t theTaxaNames;
-		for (long i = 0; i < mTreeData.size(); i++)
+		for (ulong i = 0; i < mTreeData.size(); i++)
 		{
 			mTreeData[i].getTaxaNames (theTaxaNames);
 		}
@@ -227,7 +228,7 @@ void MesaModel::newDiscChar (const char* iNewVal)
 	{
 		// have to get names from trees
 		stringvec_t theTaxaNames;
-		for (long i = 0; i < mTreeData.size(); i++)
+		for (ulong i = 0; i < mTreeData.size(); i++)
 		{
 			mTreeData[i].getTaxaNames (theTaxaNames);
 		}

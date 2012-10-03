@@ -129,7 +129,7 @@ rate_t XFlatRate::calculateRate (nodeiter_t iCurrNode)
 void XFlatRate::setDesc (std::string& ioDescStr)
 {
 	char theBuffer[16];
-	sprintf (theBuffer, "%d", mFlatRate);
+	sprintf (theBuffer, "%g", mFlatRate);
 	// DBG_MSG ("called setDesc in XFlatRate");
 	ioDescStr = theBuffer;
 }
