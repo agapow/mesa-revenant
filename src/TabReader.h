@@ -3,8 +3,8 @@ TabReader.h - imports data from tab-delimited stream
 
 Credits:
 - From SIBIL, the Silwood Biocomputing Library.
-- By Paul-Michael Agapow, 2002, Dept. Biology, Imperial College at
-  Silwood Park, Ascot, Berks, SL5 7PY, UNITED KINGDOM.
+- By Paul-Michael Agapow, 2000-2012, Health Protection Agency (UK)
+- <mail://pma@agapow.net>
 - <mail://mesa@agapow.net> <http://www.agapow.net/software/mesa/>
 
 About:

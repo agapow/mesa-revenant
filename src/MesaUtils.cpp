@@ -2,9 +2,9 @@
 MesaUtils.cpp - global utility functions
 
 Credits:
-- By Paul-Michael Agapow, 2002, Dept. Biology, Imperial College at
-  Silwood Park, Ascot, Berks, SL5 7PY, UNITED KINGDOM.
-- <mail://mesa@agapow.net> <http://www.agapow.net/software/mesa//>
+- By Paul-Michael Agapow, 2000-2012, Health Protection Agency (UK)
+- <mail://pma@agapow.net>
+- <http://www.agapow.net/software/mesa>
 
 **************************************************************************/
 

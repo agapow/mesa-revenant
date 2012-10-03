@@ -2,8 +2,8 @@
 QueueElement.cpp -  
 
 Credits:
-- By Paul-Michael Agapow, 2001, Dept. Biology, Imperial College at
-  Silwood Park, Ascot, Berks, SL5 7PY, UNITED KINGDOM.
+- By Paul-Michael Agapow, 2000-2012, Health Protection Agency (UK)
+- <mail://pma@agapow.net>
 - <mail://p.agapow@ic.ac.uk> <http://www.bio.ic.ac.uk/evolve>
 
 **************************************************************************/

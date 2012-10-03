@@ -2,10 +2,10 @@
 ConsoleApp - simple text console based application & UI functions
 
 Credits:
-- By Paul-Michael Agapow & Austin Burt, 1999, Dept. Biology, Imperial
-  College at Silwood Park, Ascot, Berks, SL5 7PY, UK.
-- <mail://mesa@agapow.net> <mail://a.burt@ic.ac.uk>
-  <http://www.agapow.net/software/mesa//>
+- By Paul-Michael Agapow, 2000-2012, Health Protection Agency (UK)
+- <mail://pma@agapow.net>
+- <mail://p.agapow@ic.ac.uk> <http://www.bio.ic.ac.uk/evolve>
+
 
 About:
 - Derive from this to make bog-standard, C++ apps.

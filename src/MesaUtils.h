@@ -3,7 +3,7 @@ MesaUtils.h - global utility functions
 
 Credits:
 - From SIBIL, the Silwood Biocomputing Library.
-- By Paul-Michael Agapow, 2002, Dept. Biology, Imperial College at Silwood
+- By Paul-Michael Agapow, 2000-2012, Health Protection Agency (UK) Silwood
   Park, Ascot, Berks, SL5 7PY, UNITED KINGDOM.
 - <mail://mesa@agapow.net> <http://www.agapow.net/software/mesa/>
 
