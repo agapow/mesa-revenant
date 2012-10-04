@@ -16,6 +16,8 @@ Contents
    :maxdepth: 2
 
    intro
+   credits
+   conventions
    install
    mentalmodel
    bymenu
