@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,7 +9,7 @@
     
     <title>About MeSA &mdash; MeSA manual 1.12 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -62,27 +61,20 @@
 <li>pruning or otherwise manipulating trees, in particular to simulate the results of extinction, conservation schemes or other taxa loss</li>
 <li>repetition and pipelining of the above functions over a population of trees, or over the same tree repeatedly, for statistical purposes</li>
 </ul>
-<p>The following papers give examples of its use:</p>
-<ul class="simple">
-<li>Andy Purvis, Aris Katzourakis and Paul-Michael Agapow (2002); &#8220;Evaluating phylogenetic tree shape: Two modifications to Fusco &amp; Cronk&#8217;s Method&#8221;, Journal of Theoretical Biology, 214:99-103.</li>
-<li>Paul-Michael Agapow and Andy Purvis (2002); &#8220;Power of eight tree shape statistics to detect non-random diversification: a comparison by simulation of two models of cladogenesis&#8221;, Systematic Biology, 51:866-872.</li>
-<li>Andy Purvis and Paul-Michael Agapow (2002); &#8220;Phylogeny imbalance: Taxonomic level matters&#8221;, Systematic Biology, 51:844-854.</li>
-<li>Andy Purvis, Paul-Michael Agapow, John L Gittleman, Georgina M Mace (2000); &#8220;Non-random extinction increases the loss of evolutionary history&#8221;, Science, 288:328-330.</li>
-</ul>
-<p><a class="reference internal" href="refs.html#id1">[agapow2005]</a>  <a class="reference internal" href="refs.html#purvis2002a">[purvis2002a]</a> <a class="reference internal" href="refs.html#purvis2000b">[purvis2000b]</a>  <a class="reference internal" href="refs.html#purvis2000">[purvis2000]</a></p>
+<p>The following papers give examples of its use: <a class="reference internal" href="refs.html#id1">[agapow2005]</a>  <a class="reference internal" href="refs.html#purvis2002a">[purvis2002a]</a> <a class="reference internal" href="refs.html#purvis2000b">[purvis2000b]</a>  <a class="reference internal" href="refs.html#purvis2000">[purvis2000]</a>.</p>
 </div>
 <div class="section" id="caveats-and-limitations">
 <h2>Caveats and limitations<a class="headerlink" href="#caveats-and-limitations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>MeSA does a lot. It is very powerful but conversely can be overwhelming.</li>
-<li>In places, difficult things have been made easy. But this sometimes has the side-effect of simpler things harder. This is a trade-off that has been consciously made.</li>
-<li>MeSA does not do summary statistics, in the sense of condensing a series of analysis results to an average or confidence limits. There are an infinite number of possible statistics and this is best left to a proper statistics program like R.</li>
+<li>I have tried to make many difficult things easy. But sometimes this has been at the cost of making simpler things harder. This is a conscious trade-off.</li>
+<li>MeSA does not do summary statistics, in the sense of condensing a series of analysis results to an average or confidence limits. There are an infinite number of possible statistics which are best left to a proper statistics program like R. Instead, MeSA concentrates on providing datasets that can be easily analyzed by such programs.</li>
 <li>It does not have a user-friendly GUI interface, but a menu-driven commandline one.</li>
 <li>Documentation is still an ongoing work.</li>
 <li>As it has been recently ported from an old architecture, some bugs may have been introduced.</li>
-<li>MeSA is currently distributed only as source code that requires compiling on a Unix-like system (including OSX), although it is possible to make to run on Windows and other systems.</li>
-<li>The simulation environment involves some simplifications and assumptions for efficient execution. These are noted later in this documentation.</li>
-<li>MeSA does not handle tree nets or meshes, i.e. situations in which a previously seperate taxa merge.</li>
+<li>MeSA is currently distributed only as source code that requires compiling on a Unix-like system (including OSX), although it is possible to make it to run on Windows and other systems.</li>
+<li>The simulation environment involves some simplifications and assumptions for efficient execution. These are noted later in the appropriate section.</li>
+<li>MeSA allows for non-bifurcating nodes, polytomies and singleton nodes (internal nodes with a single descendant). However it does not handle tree nets or meshes, i.e. situations in which previously seperate taxa merge.</li>
 </ul>
 </div>
 </div>
@@ -108,11 +100,6 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="credits.html"
                         title="next chapter">Credits &amp; acknowledgements</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/intro.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
