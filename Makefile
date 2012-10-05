@@ -7,7 +7,7 @@ all clean install $(PACKAGE):
 	$(MAKE) -C src $@
 
 doc docs:
-	$(MAKE) -C doc
+	$(MAKE) -C doc html
 
 dist: $(DIST_DIR).tar.gz
 

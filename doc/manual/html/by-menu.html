@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MeSA, menu by menu &mdash; MeSA manual 1.12 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MeSA manual 1.12 documentation" href="index.html" />
+    <link rel="next" title="Data and files" href="data-and-files.html" />
+    <link rel="prev" title="Overview and concepts" href="mental-model.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="data-and-files.html" title="Data and files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mental-model.html" title="Overview and concepts"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MeSA manual 1.12 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mesa-menu-by-menu">
+<h1>MeSA, menu by menu<a class="headerlink" href="#mesa-menu-by-menu" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-initial-file-menu">
+<h2>The initial File menu<a class="headerlink" href="#the-initial-file-menu" title="Permalink to this headline">¶</a></h2>
+<p>When you run MeSA, you&#8217;ll always be confronted with this menu:</p>
+<div class="highlight-python"><pre>File Menu:
+   o&gt; Open a Nexus or Caic file
+   n&gt; Create a new tree &amp; data file
+   t&gt; Distill results file
+   x&gt; Experimental
+   q&gt; Quit
+What is your command?                                          :</pre>
+</div>
+<div class="section" id="open-a-nexus-or-caic-file">
+<h3>Open a Nexus or Caic file<a class="headerlink" href="#open-a-nexus-or-caic-file" title="Permalink to this headline">¶</a></h3>
+<p>MeSA can read in data from Nexus (PAUP) and CAIC (or MacroCAIC) files. File type is detected from the file extension (<tt class="docutils literal"><span class="pre">nex</span></tt>, <tt class="docutils literal"><span class="pre">nexus</span></tt>, <tt class="docutils literal"><span class="pre">nxs</span></tt> for Nexus and <tt class="docutils literal"><span class="pre">blen</span></tt> for CAIC). Note that due to the wide variety of data that is stored in Nexus, not all possible variants can be read. In particular, the trees in BEAST output files are too heavily annotated for MeSA to parse.</p>
+<p>Example files are included with this manual.</p>
+</div>
+<div class="section" id="create-a-new-tree-data-file">
+<h3>Create a new tree &amp; data file<a class="headerlink" href="#create-a-new-tree-data-file" title="Permalink to this headline">¶</a></h3>
+<p>This creates a new, empty tree and saves it to disk. This is usually used in preparation for simulation.</p>
+</div>
+<div class="section" id="distill-results-file">
+<h3>Distill results file<a class="headerlink" href="#distill-results-file" title="Permalink to this headline">¶</a></h3>
+<p>Take a complicated results file and reduce it to columns of interest.</p>
+</div>
+<div class="section" id="experimental">
+<h3>Experimental<a class="headerlink" href="#experimental" title="Permalink to this headline">¶</a></h3>
+<p>Don&#8217;t go here.</p>
+</div>
+<div class="section" id="quit">
+<h3>Quit<a class="headerlink" href="#quit" title="Permalink to this headline">¶</a></h3>
+<p>End the program and flush all data. Make sure you&#8217;re saved before you do this.</p>
+</div>
+</div>
+<div class="section" id="file-menu-after-a-file-has-been-opened">
+<h2>File menu after a file has been opened<a class="headerlink" href="#file-menu-after-a-file-has-been-opened" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>::</dt>
+<dd>s&gt; Save the current file
+w&gt; Close the current file
+d&gt; Data Manipulation Menu ...
+a&gt; Instant Analysis Menu ...
+g&gt; Program and Run Queue Menu ...
+i&gt; Summarise file contents
+t&gt; Distill results file
+f&gt; Preferences Menu ...</dd>
+</dl>
+<div class="section" id="save-the-current-file">
+<h3>Save the current file<a class="headerlink" href="#save-the-current-file" title="Permalink to this headline">¶</a></h3>
+<p>Save the current data as a Nexus file.</p>
+</div>
+<div class="section" id="close-the-current-file">
+<h3>Close the current file<a class="headerlink" href="#close-the-current-file" title="Permalink to this headline">¶</a></h3>
+<p>Flush all the current data and return to the state of the program when it first opened.</p>
+</div>
+<div class="section" id="data-manipulation-menu">
+<h3>Data Manipulation Menu<a class="headerlink" href="#data-manipulation-menu" title="Permalink to this headline">¶</a></h3>
+<p>Transform the data in a variety of ways. See the relevant section below.</p>
+</div>
+<div class="section" id="instant-analysis-menu">
+<h3>Instant Analysis Menu<a class="headerlink" href="#instant-analysis-menu" title="Permalink to this headline">¶</a></h3>
+<p>Non-destrutively analyse the data in a variety of ways. See the relevant section below.</p>
+</div>
+<div class="section" id="program-and-run-queue-menu">
+<h3>Program and Run Queue Menu<a class="headerlink" href="#program-and-run-queue-menu" title="Permalink to this headline">¶</a></h3>
+<p>Run data analysis and manipulations across trees, including tree growth simulation. See the relevant section below.</p>
+</div>
+<div class="section" id="summarise-file-contents">
+<h3>Summarise file contents<a class="headerlink" href="#summarise-file-contents" title="Permalink to this headline">¶</a></h3>
+<p>Give a quick textual summary of what data you have loaded in memory: how many trees, the type of trait data etc. The oputput looks like:</p>
+<div class="highlight-python"><pre>There is no discrete data.
+There is no continuous data.
+There is 1 tree.
+The active tree has 18 nodes (10 leaves, 10 alive)
+There are no actions programmed in the queue.</pre>
+</div>
+</div>
+<div class="section" id="preferences-menu">
+<h3>Preferences Menu<a class="headerlink" href="#preferences-menu" title="Permalink to this headline">¶</a></h3>
+<p>Set various operational parameters of MeSA. See the relevant section below.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Data Manipulation Menu<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>2&gt; Duplicate the active tree
+4&gt; Add a new trait
+6&gt; Set branchlengths
+9&gt; Delete dead taxa
+11&gt; prune (fixed number of taxa)
+12&gt; prune (fixed fraction of taxa)
+13&gt; prune (fixed prob for each taxa)
+15&gt; prune (if taxa meets condition)
+16&gt; Collapse singletons
+17&gt; Summarise file contents
+18&gt; Report on the file contents
+r&gt; Return to main menu</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h2>Instant Analysis Menu<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>This allows you to quickly get a result or metric calculated about a tree. Note that nothing in this menu will change any of the data.</p>
+<blockquote>
+<div>s&gt; Set saving of analyses
+1&gt; Calculate number of extant taxa
+2&gt; Calculate total number of taxa
+3&gt; Calculate genetic diversity
+4&gt; Calculate phylogenetic diversity
+13&gt; Calculate tree information
+14&gt; Calculate information over nodes of tree
+15&gt; Calculate information over nodes (exp)
+16&gt; Calculate Fusco imbalance
+17&gt; Calculate Slowinski-Guyer imbalance
+18&gt; Calculate Shao&#8217;s N-bar imbalance
+19&gt; Calculate Shao&#8217;s Sigma-squared imbalance
+20&gt; Calculate Colless&#8217; C imbalance
+21&gt; Calculate Shao&#8217;s B1 balance
+22&gt; Calculate Shao&#8217;s B2 balance
+23&gt; Calculate stemminess
+24&gt; Calculate resolution
+25&gt; Calculate ultrametricity
+r&gt; Return to main menu</div></blockquote>
+<div class="section" id="set-saving-of-analyses">
+<h3>Set saving of analyses<a class="headerlink" href="#set-saving-of-analyses" title="Permalink to this headline">¶</a></h3>
+<p>Determine how analysis results are displayed or saved. By default they are sent to the screen.</p>
+</div>
+<div class="section" id="calculate-number-of-extant-taxa">
+<h3>Calculate number of extant taxa<a class="headerlink" href="#calculate-number-of-extant-taxa" title="Permalink to this headline">¶</a></h3>
+<p>How many living tips does the tree have? This will be like the total number of tips, except where extinction has been simulated and taxa have died.</p>
+</div>
+<div class="section" id="calculate-total-number-of-taxa">
+<h3>Calculate total number of taxa<a class="headerlink" href="#calculate-total-number-of-taxa" title="Permalink to this headline">¶</a></h3>
+<p>How many taxa does the tree have? This will be like the number of extant taxa, except where extinction has been simulated and taxa have died.</p>
+</div>
+<div class="section" id="calculate-genetic-diversity">
+<h3>Calculate genetic diversity<a class="headerlink" href="#calculate-genetic-diversity" title="Permalink to this headline">¶</a></h3>
+<p>Calculate GD after the manner of Crozier [REF]__. Note that this requires branch lengths to be allelic (i.e. expressed as a probability of alleles differing on either end of a branch).</p>
+</div>
+<div class="section" id="calculate-phylogenetic-diversity">
+<h3>Calculate phylogenetic diversity<a class="headerlink" href="#calculate-phylogenetic-diversity" title="Permalink to this headline">¶</a></h3>
+<p>Calculate PD after the manner of Faith [REF]__ and May/Nee [REF]__. Note that this is rooted PD.</p>
+</div>
+<div class="section" id="calculate-tree-information">
+<h3>Calculate tree information<a class="headerlink" href="#calculate-tree-information" title="Permalink to this headline">¶</a></h3>
+<p>Calculate a series of simple metrics for a tree. This can include the number of nodes, number of leaves (tips), the number of extant taxa, whether the tree is neoontological or paleontological and the tree&#8217;s phylogenetic age (distance from fartherest tip to root).</p>
+</div>
+<div class="section" id="calculate-information-over-nodes-of-tree">
+<h3>Calculate information over nodes of tree<a class="headerlink" href="#calculate-information-over-nodes-of-tree" title="Permalink to this headline">¶</a></h3>
+<p>Calculate simple information for all nodes of the tree, or just the leaves and internal nodes. This can include the ndoe age, the time (branchlength) to parent, the number of immediate children, the number of leaves (tips) ultimately subtended, the size of the total subtree subtended, the number of sibling nodes, the height of the node (i.e. the distance to the nearest subtended tip) and the time to root (i.e. the total distance to the root of the tree).</p>
+</div>
+<div class="section" id="calculate-information-over-nodes">
+<h3>Calculate information over nodes<a class="headerlink" href="#calculate-information-over-nodes" title="Permalink to this headline">¶</a></h3>
+<p>This is an experiemental variant of the above analysis, that allows for a more sophisticated selection of nodes, based on trait value, whether the node is extant or how many tips it subtends.</p>
+</div>
+<div class="section" id="calculate-fusco-imbalance">
+<h3>Calculate Fusco imbalance<a class="headerlink" href="#calculate-fusco-imbalance" title="Permalink to this headline">¶</a></h3>
+<p>Calculate Fusco&#8217;s I metric of tree imbalance for each applicable node in the tree [REF]__. (This metric may only be calcuated over bifurcating nodes.) The analysis may optionally use a column of continuous data as species richness, giving how many taxa each tip node actually represents. It may also return the size of the node with each result and use the extended I&#8217; calculation (see [fusco_mod]__).</p>
+</div>
+<div class="section" id="calculate-slowinski-guyer-imbalance">
+<h3>Calculate Slowinski-Guyer imbalance<a class="headerlink" href="#calculate-slowinski-guyer-imbalance" title="Permalink to this headline">¶</a></h3>
+<p>Calculate Slowinski-Guyer&#8217;s metric of imbalance for each applicable node in the tree [REF]__. (This metric may only be calcuated over bifurcating nodes.) The analysis may optionally use a column of continuous data as species richness, giving how many taxa each tip node actually represents. It may also return the size of the node with each result.</p>
+</div>
+<div class="section" id="calculate-shao-s-n-bar-imbalance">
+<h3>Calculate Shao&#8217;s N-bar imbalance<a class="headerlink" href="#calculate-shao-s-n-bar-imbalance" title="Permalink to this headline">¶</a></h3>
+<p>Calculate Shao &amp; Sokal&#8217;s Nbar metric of imbalance for the tree [REF]__. This returns observed and expected figures.</p>
+</div>
+<div class="section" id="calculate-shao-s-sigma-squared-imbalance">
+<h3>Calculate Shao&#8217;s Sigma-squared imbalance<a class="headerlink" href="#calculate-shao-s-sigma-squared-imbalance" title="Permalink to this headline">¶</a></h3>
+<p>Calculate Shao &amp; Sokal&#8217;s Sigma-squared metric of imbalance [REF]__.</p>
+</div>
+<div class="section" id="calculate-colless-c-imbalance">
+<h3>Calculate Colless&#8217; C imbalance<a class="headerlink" href="#calculate-colless-c-imbalance" title="Permalink to this headline">¶</a></h3>
+<p>Calculate Colless&#8217; C metric of imbalance [REF]__.  This metric can only be calculated for trees with more than 2 tips and no polytomies.</p>
+</div>
+<div class="section" id="calculate-shao-s-b1-balance">
+<h3>Calculate Shao&#8217;s B1 balance<a class="headerlink" href="#calculate-shao-s-b1-balance" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-shao-s-b2-balance">
+<h3>Calculate Shao&#8217;s B2 balance<a class="headerlink" href="#calculate-shao-s-b2-balance" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-stemminess">
+<h3>Calculate stemminess<a class="headerlink" href="#calculate-stemminess" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-resolution">
+<h3>Calculate resolution<a class="headerlink" href="#calculate-resolution" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-ultrametricity">
+<h3>Calculate ultrametricity<a class="headerlink" href="#calculate-ultrametricity" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>Program and Run Queue Menu<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>Preferences Menu<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MeSA, menu by menu</a><ul>
+<li><a class="reference internal" href="#the-initial-file-menu">The initial File menu</a><ul>
+<li><a class="reference internal" href="#open-a-nexus-or-caic-file">Open a Nexus or Caic file</a></li>
+<li><a class="reference internal" href="#create-a-new-tree-data-file">Create a new tree &amp; data file</a></li>
+<li><a class="reference internal" href="#distill-results-file">Distill results file</a></li>
+<li><a class="reference internal" href="#experimental">Experimental</a></li>
+<li><a class="reference internal" href="#quit">Quit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-menu-after-a-file-has-been-opened">File menu after a file has been opened</a><ul>
+<li><a class="reference internal" href="#save-the-current-file">Save the current file</a></li>
+<li><a class="reference internal" href="#close-the-current-file">Close the current file</a></li>
+<li><a class="reference internal" href="#data-manipulation-menu">Data Manipulation Menu</a></li>
+<li><a class="reference internal" href="#instant-analysis-menu">Instant Analysis Menu</a></li>
+<li><a class="reference internal" href="#program-and-run-queue-menu">Program and Run Queue Menu</a></li>
+<li><a class="reference internal" href="#summarise-file-contents">Summarise file contents</a></li>
+<li><a class="reference internal" href="#preferences-menu">Preferences Menu</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Data Manipulation Menu</a></li>
+<li><a class="reference internal" href="#id2">Instant Analysis Menu</a><ul>
+<li><a class="reference internal" href="#set-saving-of-analyses">Set saving of analyses</a></li>
+<li><a class="reference internal" href="#calculate-number-of-extant-taxa">Calculate number of extant taxa</a></li>
+<li><a class="reference internal" href="#calculate-total-number-of-taxa">Calculate total number of taxa</a></li>
+<li><a class="reference internal" href="#calculate-genetic-diversity">Calculate genetic diversity</a></li>
+<li><a class="reference internal" href="#calculate-phylogenetic-diversity">Calculate phylogenetic diversity</a></li>
+<li><a class="reference internal" href="#calculate-tree-information">Calculate tree information</a></li>
+<li><a class="reference internal" href="#calculate-information-over-nodes-of-tree">Calculate information over nodes of tree</a></li>
+<li><a class="reference internal" href="#calculate-information-over-nodes">Calculate information over nodes</a></li>
+<li><a class="reference internal" href="#calculate-fusco-imbalance">Calculate Fusco imbalance</a></li>
+<li><a class="reference internal" href="#calculate-slowinski-guyer-imbalance">Calculate Slowinski-Guyer imbalance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-n-bar-imbalance">Calculate Shao&#8217;s N-bar imbalance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-sigma-squared-imbalance">Calculate Shao&#8217;s Sigma-squared imbalance</a></li>
+<li><a class="reference internal" href="#calculate-colless-c-imbalance">Calculate Colless&#8217; C imbalance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-b1-balance">Calculate Shao&#8217;s B1 balance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-b2-balance">Calculate Shao&#8217;s B2 balance</a></li>
+<li><a class="reference internal" href="#calculate-stemminess">Calculate stemminess</a></li>
+<li><a class="reference internal" href="#calculate-resolution">Calculate resolution</a></li>
+<li><a class="reference internal" href="#calculate-ultrametricity">Calculate ultrametricity</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">Program and Run Queue Menu</a></li>
+<li><a class="reference internal" href="#id4">Preferences Menu</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mental-model.html"
+                        title="previous chapter">Overview and concepts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="data-and-files.html"
+                        title="next chapter">Data and files</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/by-menu.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="data-and-files.html" title="Data and files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mental-model.html" title="Overview and concepts"
+             >previous</a> |</li>
+        <li><a href="index.html">MeSA manual 1.12 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Paul Agapow.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

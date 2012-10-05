@@ -18,10 +18,12 @@ Contents
    intro
    credits
    conventions
-   install
-   mentalmodel
-   bymenu
+   installation
+   mental-model
+   by-menu
+   data-and-files
    recipes
+   refs
    history
    todo
 

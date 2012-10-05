@@ -2280,10 +2280,10 @@ BasicAction* MesaConsoleApp::newAction (cmdId_t iUserCmd)
 		{
 			theRichCol = askSppRichnessCol ();
 			bool theSizeListed = AskYesNoQuestion ("List the node size");
-			bool theExtendedTreatment = AskYesNoQuestion ("Use extended calculation");
+			// bool theExtendedTreatment = AskYesNoQuestion ("Use extended calculation");
 			bool theCorrection = AskYesNoQuestion ("Use I' correction");
 			theActionP =  (BasicAnalysis*) new FuscoAnalysis (theRichCol,
-				theSizeListed, theExtendedTreatment, theCorrection);
+				theSizeListed, false, theCorrection);
 			break;
 		}
 

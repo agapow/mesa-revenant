@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="MeSA manual 1.12 documentation" href="index.html" />
-    <link rel="next" title="Installation" href="install.html" />
+    <link rel="next" title="Credits &amp; acknowledgements" href="credits.html" />
     <link rel="prev" title="Welcome to MeSA manual’s documentation!" href="index.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="install.html" title="Installation"
+          <a href="credits.html" title="Credits &amp; acknowledgements"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to MeSA manual’s documentation!"
@@ -55,34 +55,35 @@
 <h1>About MeSA<a class="headerlink" href="#about-mesa" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="what-does-it-do">
 <h2>What does it do?<a class="headerlink" href="#what-does-it-do" title="Permalink to this headline">¶</a></h2>
-<p>MeSA is a program for exploring phylogenies and deep evolutionary history. To
-this end it offers tools and functions for:</p>
+<p>MeSA is a program for exploring phylogenies and wide expanses of evolutionary history, to analyse evolutionary tempo, mode and trends. To this end it offers tools and functions for:</p>
 <ul class="simple">
-<li>analysing the shape and other metrics of trees</li>
+<li>analysing the shape, topology and other metrics of phylogenetic trees</li>
 <li>simulating (&#8220;growing&#8221;) trees under complex evolutionary scenarios</li>
-<li>pruning or otherwise manipulating trees to simulate the results of extinction
-or conservation schemes</li>
-<li>repetition and pipelining of the above functions over a population of trees,
-or over the same tree repeatedly, for statistical purposes</li>
+<li>pruning or otherwise manipulating trees, in particular to simulate the results of extinction, conservation schemes or other taxa loss</li>
+<li>repetition and pipelining of the above functions over a population of trees, or over the same tree repeatedly, for statistical purposes</li>
 </ul>
+<p>The following papers give examples of its use:</p>
+<ul class="simple">
+<li>Andy Purvis, Aris Katzourakis and Paul-Michael Agapow (2002); &#8220;Evaluating phylogenetic tree shape: Two modifications to Fusco &amp; Cronk&#8217;s Method&#8221;, Journal of Theoretical Biology, 214:99-103.</li>
+<li>Paul-Michael Agapow and Andy Purvis (2002); &#8220;Power of eight tree shape statistics to detect non-random diversification: a comparison by simulation of two models of cladogenesis&#8221;, Systematic Biology, 51:866-872.</li>
+<li>Andy Purvis and Paul-Michael Agapow (2002); &#8220;Phylogeny imbalance: Taxonomic level matters&#8221;, Systematic Biology, 51:844-854.</li>
+<li>Andy Purvis, Paul-Michael Agapow, John L Gittleman, Georgina M Mace (2000); &#8220;Non-random extinction increases the loss of evolutionary history&#8221;, Science, 288:328-330.</li>
+</ul>
+<p><a class="reference internal" href="refs.html#id1">[agapow2005]</a>  <a class="reference internal" href="refs.html#purvis2002a">[purvis2002a]</a> <a class="reference internal" href="refs.html#purvis2000b">[purvis2000b]</a>  <a class="reference internal" href="refs.html#purvis2000">[purvis2000]</a></p>
 </div>
 <div class="section" id="caveats-and-limitations">
 <h2>Caveats and limitations<a class="headerlink" href="#caveats-and-limitations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>MeSA does a lot. It is very powerful but conversely can be overwhelming.</li>
+<li>In places, difficult things have been made easy. But this sometimes has the side-effect of simpler things harder. This is a trade-off that has been consciously made.</li>
+<li>MeSA does not do summary statistics, in the sense of condensing a series of analysis results to an average or confidence limits. There are an infinite number of possible statistics and this is best left to a proper statistics program like R.</li>
+<li>It does not have a user-friendly GUI interface, but a menu-driven commandline one.</li>
 <li>Documentation is still an ongoing work.</li>
-<li>Having been recently ported from an old architecture, some bugs may have been
-introduced.</li>
-<li>MeSA is currently distributed only as source code that requires compiling on
-a Unix-like system (including OSX).</li>
-<li>Interacting and using the analysis queue is admittedly awkward on the
-commandline.</li>
+<li>As it has been recently ported from an old architecture, some bugs may have been introduced.</li>
+<li>MeSA is currently distributed only as source code that requires compiling on a Unix-like system (including OSX), although it is possible to make to run on Windows and other systems.</li>
+<li>The simulation environment involves some simplifications and assumptions for efficient execution. These are noted later in this documentation.</li>
+<li>MeSA does not handle tree nets or meshes, i.e. situations in which a previously seperate taxa merge.</li>
 </ul>
-</div>
-<div class="section" id="credits">
-<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
-<p>MeSA was written by Paul Agapow (<a class="reference external" href="mailto:pma&#37;&#52;&#48;agapow&#46;net">pma<span>&#64;</span>agapow<span>&#46;</span>net</a>). It can be downloaded from
-<tt class="docutils literal"><span class="pre">http://www.agapow.net</span></tt>. It includes callback functions
-(written by Rich Hickey) and the Nexus Class Library (written by Paul Lewis).</p>
 </div>
 </div>
 
@@ -97,7 +98,6 @@ commandline.</li>
 <li><a class="reference internal" href="#">About MeSA</a><ul>
 <li><a class="reference internal" href="#what-does-it-do">What does it do?</a></li>
 <li><a class="reference internal" href="#caveats-and-limitations">Caveats and limitations</a></li>
-<li><a class="reference internal" href="#credits">Credits</a></li>
 </ul>
 </li>
 </ul>
@@ -106,8 +106,8 @@ commandline.</li>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Welcome to MeSA manual&#8217;s documentation!</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="install.html"
-                        title="next chapter">Installation</a></p>
+  <p class="topless"><a href="credits.html"
+                        title="next chapter">Credits &amp; acknowledgements</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/intro.txt"
@@ -137,7 +137,7 @@ commandline.</li>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="install.html" title="Installation"
+          <a href="credits.html" title="Credits &amp; acknowledgements"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="Welcome to MeSA manual’s documentation!"

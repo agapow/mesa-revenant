@@ -16,10 +16,14 @@ Contents
    :maxdepth: 2
 
    intro
-   install
-   mentalmodel
-   bymenu
+   credits
+   conventions
+   installation
+   mental-model
+   by-menu
+   data-and-files
    recipes
+   refs
    history
    todo
 
