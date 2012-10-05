@@ -84,7 +84,7 @@ Transform the data in a variety of ways. See the relevant section below.
 Instant Analysis Menu
 ~~~~~~~~~~~~~~~~~~~~~
 
-Non-destrutively analyse the data in a variety of ways. See the relevant section below.
+Non-destructively analyse the data in a variety of ways. See the relevant section below.
 
 
 Program and Run Queue Menu
