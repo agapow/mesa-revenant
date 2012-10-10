@@ -1,8 +1,6 @@
 References
 ==========
 
-refs to go here
-
 .. [agapow2005] Paul-Michael Agapow (2005); Recreating large scale evolutionary phenomena. In *Recent Advances in Artificial Life* (eds. HA Abbass, T Bossamaier and J Wiles), pp1-12. Singapore: World Scientific.
 
 .. [agapow2005] Andy Purvis, Aris Katzourakis and Paul-Michael Agapow (2002); "Evaluating phylogenetic tree shape: Two modifications to Fusco & Cronk's Method", Journal of Theoretical Biology, 214:99-103.
