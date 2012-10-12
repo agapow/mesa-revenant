@@ -18,6 +18,14 @@ Alternatively, it can be cloned from the development repository on Github::
 
 	% git clone git://github.com/agapow/mesa-revenant.git
 
+.. note::
+	
+	In some cases, Git may insist that you be identified to clone a remote repository and create a local one. In this case create ``.gitconfig`` in your home directory and populate with your name and email address::
+
+		[user]
+			name = Paul-Michael Agapow
+			email = pma@agapow.net
+
 
 Compilation
 -----------

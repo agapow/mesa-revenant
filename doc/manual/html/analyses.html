@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Analyses &mdash; MeSA manual 1.12 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MeSA manual 1.12 documentation" href="index.html" />
+    <link rel="next" title="Manipulations" href="manipulations.html" />
+    <link rel="prev" title="The Queue and Simulations" href="queue-and-simulation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="manipulations.html" title="Manipulations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="queue-and-simulation.html" title="The Queue and Simulations"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MeSA manual 1.12 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="analyses">
+<h1>Analyses<a class="headerlink" href="#analyses" title="Permalink to this headline">¶</a></h1>
+<p>Analyses calculate metrics or gather data on trees. This is always non-destructive: an analysis never alters a tree or tree data. Analyses can be carried out as part of the queue or from the top-level Instant Analysis menu. Unless otherwise stated or set by the manner of execution, analyses are always calculated upon the currrent or default tree.</p>
+<div class="section" id="calculate-number-of-extant-taxa">
+<h2>Calculate number of extant taxa<a class="headerlink" href="#calculate-number-of-extant-taxa" title="Permalink to this headline">¶</a></h2>
+<p>How many living tips does the tree have? This will be like the total number of tips, except where extinction has been simulated and taxa have died.</p>
+</div>
+<div class="section" id="calculate-total-number-of-taxa">
+<h2>Calculate total number of taxa<a class="headerlink" href="#calculate-total-number-of-taxa" title="Permalink to this headline">¶</a></h2>
+<p>How many taxa does the tree have? This will be like the number of extant taxa, except where extinction has been simulated and taxa have died.</p>
+</div>
+<div class="section" id="calculate-genetic-diversity">
+<h2>Calculate genetic diversity<a class="headerlink" href="#calculate-genetic-diversity" title="Permalink to this headline">¶</a></h2>
+<p>Calculate GD after the manner of Crozier <a class="reference internal" href="refs.html#ref">[REF]</a>. Note that this requires branch lengths to be allelic (i.e. expressed as a probability of alleles differing on either end of a branch).</p>
+</div>
+<div class="section" id="calculate-phylogenetic-diversity">
+<h2>Calculate phylogenetic diversity<a class="headerlink" href="#calculate-phylogenetic-diversity" title="Permalink to this headline">¶</a></h2>
+<p>Calculate PD after the manner of Faith <a class="reference internal" href="refs.html#ref">[REF]</a> and May/Nee <a class="reference internal" href="refs.html#ref">[REF]</a>. Note that this is rooted PD.</p>
+</div>
+<div class="section" id="calculate-tree-information">
+<h2>Calculate tree information<a class="headerlink" href="#calculate-tree-information" title="Permalink to this headline">¶</a></h2>
+<p>Calculate a series of simple metrics for a tree. This can include the number of nodes, number of leaves (tips), the number of extant taxa, whether the tree is neoontological or paleontological and the tree&#8217;s phylogenetic age (distance from fartherest tip to root).</p>
+</div>
+<div class="section" id="calculate-information-over-nodes-of-tree">
+<h2>Calculate information over nodes of tree<a class="headerlink" href="#calculate-information-over-nodes-of-tree" title="Permalink to this headline">¶</a></h2>
+<p>Calculate simple information for all nodes of the tree, or just the leaves and internal nodes. This can include the ndoe age, the time (branchlength) to parent, the number of immediate children, the number of leaves (tips) ultimately subtended, the size of the total subtree subtended, the number of sibling nodes, the height of the node (i.e. the distance to the nearest subtended tip) and the time to root (i.e. the total distance to the root of the tree).</p>
+</div>
+<div class="section" id="calculate-information-over-nodes">
+<h2>Calculate information over nodes<a class="headerlink" href="#calculate-information-over-nodes" title="Permalink to this headline">¶</a></h2>
+<p>This is an experiemental variant of the above analysis, that allows for a more sophisticated selection of nodes, based on trait value, whether the node is extant or how many tips it subtends.</p>
+</div>
+<div class="section" id="calculate-fusco-imbalance">
+<h2>Calculate Fusco imbalance<a class="headerlink" href="#calculate-fusco-imbalance" title="Permalink to this headline">¶</a></h2>
+<p>Calculate Fusco&#8217;s I metric of tree imbalance for each applicable node in the tree <a class="reference internal" href="refs.html#ref">[REF]</a>. (This metric may only be calcuated over bifurcating nodes.) The analysis may optionally use a column of continuous data as species richness, giving how many taxa each tip node actually represents. It may also return the size of the node with each result and use the extended I&#8217; calculation (see <a class="reference internal" href="refs.html#agapow2002">[agapow2002]</a>).</p>
+</div>
+<div class="section" id="calculate-slowinski-guyer-imbalance">
+<h2>Calculate Slowinski-Guyer imbalance<a class="headerlink" href="#calculate-slowinski-guyer-imbalance" title="Permalink to this headline">¶</a></h2>
+<p>Calculate Slowinski-Guyer&#8217;s metric of imbalance for each applicable node in the tree <a class="reference internal" href="refs.html#ref">[REF]</a>. (This metric may only be calcuated over bifurcating nodes.) The analysis may optionally use a column of continuous data as species richness, giving how many taxa each tip node actually represents. It may also return the size of the node with each result.</p>
+</div>
+<div class="section" id="calculate-shao-s-n-bar-imbalance">
+<h2>Calculate Shao&#8217;s N-bar imbalance<a class="headerlink" href="#calculate-shao-s-n-bar-imbalance" title="Permalink to this headline">¶</a></h2>
+<p>Calculate Shao &amp; Sokal&#8217;s Nbar metric of imbalance for the tree <a class="reference internal" href="refs.html#ref">[REF]</a>. This returns observed and expected figures.</p>
+</div>
+<div class="section" id="calculate-shao-s-sigma-squared-imbalance">
+<h2>Calculate Shao&#8217;s Sigma-squared imbalance<a class="headerlink" href="#calculate-shao-s-sigma-squared-imbalance" title="Permalink to this headline">¶</a></h2>
+<p>Calculate Shao &amp; Sokal&#8217;s Sigma-squared metric of imbalance <a class="reference internal" href="refs.html#ref">[REF]</a>.</p>
+</div>
+<div class="section" id="calculate-colless-c-imbalance">
+<h2>Calculate Colless&#8217; C imbalance<a class="headerlink" href="#calculate-colless-c-imbalance" title="Permalink to this headline">¶</a></h2>
+<p>Calculate Colless&#8217; C metric of imbalance <a class="reference internal" href="refs.html#ref">[REF]</a>.  This metric can only be calculated for trees with more than 2 tips and no polytomies.</p>
+</div>
+<div class="section" id="calculate-shao-s-b1-balance">
+<h2>Calculate Shao&#8217;s B1 balance<a class="headerlink" href="#calculate-shao-s-b1-balance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-shao-s-b2-balance">
+<h2>Calculate Shao&#8217;s B2 balance<a class="headerlink" href="#calculate-shao-s-b2-balance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-stemminess">
+<h2>Calculate stemminess<a class="headerlink" href="#calculate-stemminess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-resolution">
+<h2>Calculate resolution<a class="headerlink" href="#calculate-resolution" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+<div class="section" id="calculate-ultrametricity">
+<h2>Calculate ultrametricity<a class="headerlink" href="#calculate-ultrametricity" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Analyses</a><ul>
+<li><a class="reference internal" href="#calculate-number-of-extant-taxa">Calculate number of extant taxa</a></li>
+<li><a class="reference internal" href="#calculate-total-number-of-taxa">Calculate total number of taxa</a></li>
+<li><a class="reference internal" href="#calculate-genetic-diversity">Calculate genetic diversity</a></li>
+<li><a class="reference internal" href="#calculate-phylogenetic-diversity">Calculate phylogenetic diversity</a></li>
+<li><a class="reference internal" href="#calculate-tree-information">Calculate tree information</a></li>
+<li><a class="reference internal" href="#calculate-information-over-nodes-of-tree">Calculate information over nodes of tree</a></li>
+<li><a class="reference internal" href="#calculate-information-over-nodes">Calculate information over nodes</a></li>
+<li><a class="reference internal" href="#calculate-fusco-imbalance">Calculate Fusco imbalance</a></li>
+<li><a class="reference internal" href="#calculate-slowinski-guyer-imbalance">Calculate Slowinski-Guyer imbalance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-n-bar-imbalance">Calculate Shao&#8217;s N-bar imbalance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-sigma-squared-imbalance">Calculate Shao&#8217;s Sigma-squared imbalance</a></li>
+<li><a class="reference internal" href="#calculate-colless-c-imbalance">Calculate Colless&#8217; C imbalance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-b1-balance">Calculate Shao&#8217;s B1 balance</a></li>
+<li><a class="reference internal" href="#calculate-shao-s-b2-balance">Calculate Shao&#8217;s B2 balance</a></li>
+<li><a class="reference internal" href="#calculate-stemminess">Calculate stemminess</a></li>
+<li><a class="reference internal" href="#calculate-resolution">Calculate resolution</a></li>
+<li><a class="reference internal" href="#calculate-ultrametricity">Calculate ultrametricity</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="queue-and-simulation.html"
+                        title="previous chapter">The Queue and Simulations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="manipulations.html"
+                        title="next chapter">Manipulations</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="manipulations.html" title="Manipulations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="queue-and-simulation.html" title="The Queue and Simulations"
+             >previous</a> |</li>
+        <li><a href="index.html">MeSA manual 1.12 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Paul Agapow.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
