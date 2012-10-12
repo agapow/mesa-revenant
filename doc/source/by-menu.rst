@@ -1,6 +1,8 @@
 MeSA, menu by menu
 ==================
 
+You use MeSA by selecting menu choices from a (sometimes deeply nested) set of menus. As your data builds up and changes within MeSA, different choice may become visible or disappear. You should not see a menu choice that you cannot use at the current time.
+
 
 The initial File menu
 ---------------------

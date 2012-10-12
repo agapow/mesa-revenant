@@ -6,8 +6,7 @@
 Welcome to MeSA manual's documentation!
 =======================================
 
-In a sentence: *MeSA (Macroevolutionary simulation and analysis) is a software tool for exploring
-phylogenies and deep evolutionary history.*
+In a sentence: *MeSA (Macroevolutionary simulation and analysis) is a software tool for exploring phylogenies and deep evolutionary history.*
 
 Contents
 ========
@@ -21,6 +20,9 @@ Contents
    installation
    mental-model
    by-menu
+   queue-and-simulation
+   analyses
+   manipulations
    data-and-files
    recipes
    refs

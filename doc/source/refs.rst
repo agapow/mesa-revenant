@@ -10,3 +10,5 @@ References
 .. [purvis2000b] Andy Purvis and Paul-Michael Agapow (2002); "Phylogeny imbalance: Taxonomic level matters", Systematic Biology, 51:844-854.
 
 .. [purvis2000] Andy Purvis, Paul-Michael Agapow, John L Gittleman, Georgina M Mace (2000); "Non-random extinction increases the loss of evolutionary history", Science, 288:328-330.
+
+.. [REF] A dummy ref
