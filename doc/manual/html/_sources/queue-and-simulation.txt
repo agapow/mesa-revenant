@@ -20,8 +20,7 @@ MeSA provides the queue as a way a way of batching analyses and manipulations of
 
 * If our "sampling" of paleontological taxa is distorted and we tend to see more of some type of taxa than others, what might the real phylogenies look like?
 
-* If speciation rate is an evolvable characteristics, why isn't the world overwhelmed with "weed" species - taxa that speciate more rapidly than others? 
-
+* If speciation rate is an evolvable characteristics, why isn't the world overwhelmed with "weed" species - taxa that speciate more rapidly than others?
 
 Using the queue
 ---------------
@@ -40,13 +39,16 @@ Programming
 Running
 ~~~~~~~
 
-The queue can be executed in a number of ways. Note that none of these alters the content of the queue - a queue may be run and then run again. 
+The queue can be executed in a number of ways. Note that none of these alters
+the content of the queue - a queue may be run and then run again. Unless
+otherwise stated, execution is always upon the currrent or default tree.
 
 Go! (run the queue)
 	Execute the queue. Each elemnt in the queue is executed one-by-one.
 Go! (run the queue N times)
 	Repeatedly execute the queue a defined number of times, one after the other.
 Go! (run the queue & restore)
-	Repeatedly execute the queue a defined number of times, one after the other. After every iteration, restore all data (tree, categorical and continuous traits) to their original value.
+	Repeatedly execute the queue a defined number of times, one after the other.After every iteration, restore all data (tree, categorical and continuous traits) to their original value.
 Go! (run the queue across all trees)
 	Repeatedly execute the queue for every tree, one tree after the other.
+
