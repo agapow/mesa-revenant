@@ -1,0 +1,143 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Frequently asked questions &mdash; MeSA manual 1.12 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.12',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="MeSA manual 1.12 documentation" href="index.html" />
+    <link rel="next" title="References" href="refs.html" />
+    <link rel="prev" title="Recipes and common tasks" href="recipes.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="refs.html" title="References"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="recipes.html" title="Recipes and common tasks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MeSA manual 1.12 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently asked questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-units-of-time-does-mesa-use">
+<h2>What units of time does MeSA use?<a class="headerlink" href="#what-units-of-time-does-mesa-use" title="Permalink to this headline">¶</a></h2>
+<p>The time units are simply that - time units. They are what the rates and tree branch lengths and time are expressed as or against and could potentially be anything. Thousands of years, millions of years? Doesn&#8217;t matter - it&#8217;s all just a scale to apply things against. But note that tree-time has little to do with execution time. A short length of tree-time does not necessarily take a short time to simulate. See the following question.</p>
+</div>
+<div class="section" id="how-long-will-my-tree-take-to-grow-simulate">
+<h2>How long will my tree take to grow / simulate?<a class="headerlink" href="#how-long-will-my-tree-take-to-grow-simulate" title="Permalink to this headline">¶</a></h2>
+<p>This is tricky, because time can take a varying amount of time.</p>
+<p>Tree-time (branch length units) in MeSA is simulated evolutionary time. Execution time (how long it takes a simulation to run) is only poorly correlated with this. Growing bigger trees (with more tips) over longer periods of time (branch lengths) will generally take longer. But:</p>
+<ul class="simple">
+<li><em>More rules take longer to assess.</em> MeSA simulates tree growth by testing every rule in the epoch against every living taxa and seeing which rule will &#8220;fire off&#8221; next. So this assessment time increases as a product of the number of taxa and the rules.</li>
+<li><em>Evolution of continuous traits can be slow.</em> To ensure a smooth change in continuous traits, their evolution is discretized into a series of smaller, more frequent changes. This can mean that simulations of such scenarios are quite slow as these small changes are repeatedly applied, thousands of times.</li>
+<li><em>The rate of tree growth is unpredictable.</em> Consider a size-limited epoch with only one rule, speciation at a very low rate. The time until the first speciation can vary hugely. But once that first speciation takes place, the subsequent speciations will be much faster, due to there being two possible taxa that can speciate. The rate will exponentially increase with each subsequent speciation. This means that the tree-time can vary widely across simulated trees as those which speciate early race away from the others.</li>
+<li><em>Rules can interact in complex ways.</em> Consider a size-limited epoch with two rules: one speciation and one background extinction that are at nearly equal rates. Your epoch will take a long time to complete as the net rate of your tree growth will be very low. Some examples will even result in total extinction.</li>
+</ul>
+<p>In summary, it&#8217;s hard to predict how long your run will take. Generally it will be consistent between replicates of the same scenario, but even this can vary due to stochastic events early in the history of the tree.</p>
+</div>
+<div class="section" id="my-tree-or-simulation-never-finishes-is-mesa-broken">
+<h2>My tree or simulation never finishes. Is MeSA broken?<a class="headerlink" href="#my-tree-or-simulation-never-finishes-is-mesa-broken" title="Permalink to this headline">¶</a></h2>
+<p>Maybe. But it&#8217;s very easy to write a simulation that will never finish or run very slowly. Let&#8217;s consider that possibility first.</p>
+<p>Every epoch needs an end-condition and obviously has to fulfil that condition for the epoch to terminate. It is easy to accidentally create an epoch that never finishes, e.g. a time- or size-limited epoch that contains no speciation rules. More complex examples are possible, as are cases where the end condition could be reached but is unlikely to, e.g. a size-limited epoch with periodic mass-extinctions that keep it below that limit, speciation rates depending on a trait value that is unlikely to evolve, nearly balanced speciation and extinction rates.</p>
+<p>The variety of possible scenarios is such that there is no way for MeSA to detect whether they are never-ending or ultra-slow. If you think there is a problem, I suggest altering the rate of certain rules or lowering the end-condition for an epoch to see if the problem persists. Periodically dumping out the tree state and examining will also help determine if the tree is actually growing.</p>
+</div>
+<div class="section" id="i-don-t-understand-why-i-m-getting-these-simulated-trees">
+<h2>I don&#8217;t understand why I&#8217;m getting these simulated trees<a class="headerlink" href="#i-don-t-understand-why-i-m-getting-these-simulated-trees" title="Permalink to this headline">¶</a></h2>
+<p>First, don&#8217;t panic. This is a common situation, as a set of evolutionary rules can interact in unexpected and emergent ways, resulting in</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Frequently asked questions</a><ul>
+<li><a class="reference internal" href="#what-units-of-time-does-mesa-use">What units of time does MeSA use?</a></li>
+<li><a class="reference internal" href="#how-long-will-my-tree-take-to-grow-simulate">How long will my tree take to grow / simulate?</a></li>
+<li><a class="reference internal" href="#my-tree-or-simulation-never-finishes-is-mesa-broken">My tree or simulation never finishes. Is MeSA broken?</a></li>
+<li><a class="reference internal" href="#i-don-t-understand-why-i-m-getting-these-simulated-trees">I don&#8217;t understand why I&#8217;m getting these simulated trees</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="recipes.html"
+                        title="previous chapter">Recipes and common tasks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="refs.html"
+                        title="next chapter">References</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="refs.html" title="References"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="recipes.html" title="Recipes and common tasks"
+             >previous</a> |</li>
+        <li><a href="index.html">MeSA manual 1.12 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Paul Agapow.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

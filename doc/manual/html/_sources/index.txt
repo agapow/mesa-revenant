@@ -25,6 +25,7 @@ Contents
    manipulations
    data-and-files
    recipes
+   faq
    refs
    history
    todo

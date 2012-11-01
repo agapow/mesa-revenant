@@ -102,17 +102,19 @@ Tree shape metrics
 Calculate stemminess
 ~~~~~~~~~~~~~~~~~~~~
 
-~
+This is calculated as the sum of the every internal branchlength divided by the age of the parent. This requires a tree with a root and branchlengths.
 
 
 Calculate resolution
 ~~~~~~~~~~~~~~~~~~~~
 
-~
+Calculate the resolution of the tree using Colless' 1980 measure. This requires at least 3 internal branches for a rooted tree and 4 for an unrooted tree.
 
 
 Calculate ultrametricity
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-~
+An ultrametric tree is one in which the tips are all the same length from the root, and is usually neontological. This of course requires that the tree have at least one node in it.
+
+Given rounding errors, MeSA checks for ultrametricity in a pragmatic way, being that the distances are all the same, within a given tolerance. 
 

@@ -52,3 +52,28 @@ Go! (run the queue & restore)
 Go! (run the queue across all trees)
 	Repeatedly execute the queue for every tree, one tree after the other.
 
+
+
+Models of speciation
+
+There are many different possible models of speciation, the most common opf whihc are incorporated into MeSA as rules:
+
+* "markovian" (or equal rates) speciation is the same fixed rate for each taxa across time, i.e. every taxa at every point in time has the same rate of speciation
+
+* logistic or space-filling speciation tapers off in rate as it approaches a maximum capacity (number of taxa), i.e. for every taxa at the same point in time
+ 
+kCmd_RuleLogisticSp, "speciation (logistic)");
+kCmd_RuleLatentSp, "speciation (with latency)");
+kCmd_RuleBiasedSp, "speciation (biased by age)");
+kCmd_RuleBiasedTraitSp, "speciation (biased by cont trait)");
+kCmd_RuleBiasedTraitSp_New, "speciation (biased by trait, new)");
+
+
+kCmd_RuleSymSpecTraitEv, "trait evol (symmetrical at speciation)");
+(kCmd_RuleAsymSpecTraitEv, "trait evol (asymmetrical at speciation)");
+
+
+Models of extinction
+
+Models of trait evolution
+
